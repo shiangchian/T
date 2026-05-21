@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>操作成功 - 漢堡王 Burger King</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Noto Sans TC', sans-serif;
+            /* 與 login.html 相同的漸層背景 */
+            background: linear-gradient(135deg, #87CEEB 0%, #4682B4 100%);
+            overflow: hidden;
+        }
+
+        /* 背景漂浮物特效 */
+        .background-pattern { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.1; background-image: radial-gradient(circle at 20% 80%, #ffffff 0%, transparent 50%), radial-gradient(circle at 80% 20%, #ffffff 0%, transparent 50%); z-index: 0; }
+        .floating-element { position: absolute; border-radius: 50%; background: rgba(255, 255, 255, 0.15); animation: float 6s ease-in-out infinite; z-index: 0; }
+        .floating-element:nth-child(1) { width: 120px; height: 120px; top: 15%; left: 15%; animation-delay: 0s; }
+        .floating-element:nth-child(2) { width: 80px; height: 80px; top: 65%; right: 10%; animation-delay: 2s; }
+        .floating-element:nth-child(3) { width: 60px; height: 60px; bottom: 20%; left: 25%; animation-delay: 4s; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+
+        /* 毛玻璃外層卡片 */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 40px;
+            width: 90%;
+            max-width: 650px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            text-align: center;
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        /* 教授要求的紅框區塊 (質感升級版) */
+        .professor-box {
+            border: 3px solid #FF4757; /* 鮮豔的紅色邊框 */
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 50px 30px 40px 30px;
+            position: relative;
+            box-shadow: inset 0 0 20px rgba(255, 71, 87, 0.05);
+        }
+
+        /* 頂部打勾圖示 */
+        .success-icon {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            border-radius: 50%;
+            color: #2ED573;
+            font-size: 70px;
+            text-shadow: 0 10px 20px rgba(46, 213, 115, 0.3);
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s backwards;
+        }
+        @keyframes popIn { 0% { transform: translateX(-50%) scale(0); } 100% { transform: translateX(-50%) scale(1); } }
+
+        /* 教授要求的：綠字標題 */
+        .msg-title {
+            color: #2ED573;
+            font-size: 38px;
+            font-weight: 900;
+            margin: 10px 0 15px 0;
+            letter-spacing: 2px;
+        }
+
+        /* 教授要求的：紅字副標題 */
+        .msg-welcome {
+            color: #FF4757;
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 0 35px 0;
+        }
+
+        /* 教授要求的：黑框雙按鈕 (圓角膠囊美化版) */
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-custom {
+            border: 2px solid #2F4F4F; /* 深色黑框 */
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-size: 18px;
+            font-weight: 800;
+            text-decoration: none;
+            color: #2F4F4F;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        /* 左邊藍色系按鈕 */
+        .btn-home { background: #E0F6FF; }
+        .btn-home:hover {
+            background: #5DADE2; color: white; border-color: #5DADE2;
+            transform: translateY(-3px); box-shadow: 0 10px 20px rgba(93, 173, 226, 0.3);
+        }
+
+        /* 右邊綠色系按鈕 */
+        .btn-action { background: #E8F8F5; }
+        .btn-action:hover {
+            background: #48C9B0; color: white; border-color: #48C9B0;
+            transform: translateY(-3px); box-shadow: 0 10px 20px rgba(72, 201, 176, 0.3);
+        }
+
+        /* 倒數計時文字 */
+        .timer-text {
+            margin-top: 25px;
+            color: #888;
+            font-size: 15px;
+            font-weight: 500;
+        }
+        .timer-text span {
+            color: #5DADE2;
+            font-size: 22px;
+            font-weight: 900;
+            margin: 0 5px;
+        }
+
+        @media (max-width: 600px) {
+            .glass-card { padding: 25px; }
+            .professor-box { padding: 40px 15px 30px 15px; }
+            .msg-title { font-size: 30px; }
+            .msg-welcome { font-size: 22px; }
+            .btn-group { flex-direction: column; gap: 15px; }
+        }
+    
+    /* --- BURGER KING PREMIUM DESIGN SYSTEM OVERRIDE --- */
+    :root {
+        --bk-red: #D62300;
+        --bk-orange: #F2A900;
+        --bk-dark: #3C2415;
+        --bk-cream: #F7EFE9;
+        --bk-brown: #502C1E;
+        --text-light: #F7EFE9;
+        --text-muted-light: #c1a89c;
+    }
+    
+    /* Global Color System */
+    body {
+        background: linear-gradient(135deg, #1b0c07 0%, #0d0604 100%) !important;
+        color: var(--text-light) !important;
+    }
+    
+    .navbar, .navbar-custom {
+        background: var(--bk-dark) !important;
+        border-bottom: 3px solid var(--bk-red) !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+    }
+    
+    .navbar-logo, .navbar-logo span, .navbar-brand {
+        color: var(--bk-orange) !important;
+        font-family: 'Outfit', 'Noto Sans TC', sans-serif !important;
+    }
+    
+    .navbar-menu a {
+        color: var(--text-light) !important;
+    }
+    
+    .navbar-menu a:hover {
+        color: var(--bk-orange) !important;
+    }
+    
+    .navbar-toggle {
+        color: var(--bk-orange) !important;
+    }
+    
+    /* Menu / Home / Section Styles */
+    .menu-section {
+        background: #170d0a !important;
+    }
+    
+    .menu-section:nth-of-type(even) {
+        background: #110806 !important;
+    }
+    
+    .menu-title {
+        color: var(--text-light) !important;
+        border-bottom-color: var(--bk-red) !important;
+        font-family: 'Outfit', 'Noto Sans TC', sans-serif !important;
+    }
+    
+    .menu-subtitle {
+        color: var(--text-muted-light) !important;
+    }
+    
+    .menu-item {
+        background: #251610 !important;
+        border: 1px solid rgba(242, 169, 0, 0.15) !important;
+        color: var(--text-light) !important;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.3) !important;
+    }
+    
+    .menu-item-name {
+        color: var(--text-light) !important;
+    }
+    
+    .menu-item-price {
+        color: var(--bk-orange) !important;
+    }
+    
+    .menu-button.buy {
+        background: linear-gradient(135deg, var(--bk-red) 0%, #ff6f00 100%) !important;
+        border: none !important;
+        color: white !important;
+    }
+    
+    .menu-button.buy:hover {
+        background: linear-gradient(135deg, #b31c00 0%, #e65100 100%) !important;
+        transform: translateY(-2px) !important;
+    }
+    
+    .menu-button.learn-more {
+        background: transparent !important;
+        color: var(--bk-orange) !important;
+        border-color: var(--bk-orange) !important;
+    }
+    
+    .menu-button.learn-more:hover {
+        background: rgba(242, 169, 0, 0.1) !important;
+        color: white !important;
+        border-color: white !important;
+    }
+    
+    /* Footer Overrides */
+    .footer {
+        background: linear-gradient(135deg, #251610 0%, #170d0a 100%) !important;
+        border-top: 3px solid var(--bk-red) !important;
+        color: var(--text-muted-light) !important;
+    }
+    
+    .footer::before {
+        display: none !important;
+    }
+    
+    .footer-section h3 {
+        color: var(--bk-orange) !important;
+    }
+    
+    .footer-section h3::after {
+        background: var(--bk-red) !important;
+    }
+    
+    .footer-section p, .footer-section ul li, .footer-section ul li a {
+        color: var(--text-muted-light) !important;
+    }
+    
+    .footer-section ul li:hover, .footer-section ul li a:hover {
+        color: var(--bk-orange) !important;
+    }
+    
+    .social-links a {
+        background: rgba(242, 169, 0, 0.1) !important;
+        color: var(--bk-orange) !important;
+    }
+    
+    .social-links a:hover {
+        background: linear-gradient(135deg, var(--bk-red) 0%, var(--bk-orange) 100%) !important;
+        color: white !important;
+        transform: translateY(-2px) !important;
+    }
+    
+    /* Product Detail page */
+    .product-detail-container {
+        background: #251610 !important;
+        border: 1px solid rgba(242, 169, 0, 0.15) !important;
+        color: var(--text-light) !important;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.4) !important;
+    }
+    
+    .image-section {
+        background: linear-gradient(135deg, #3c2415 0%, #251610 100%) !important;
+    }
+    
+    .info-section {
+        color: var(--text-light) !important;
+    }
+    
+    .pd-title {
+        color: var(--text-light) !important;
+    }
+    
+    .pd-desc {
+        color: var(--text-muted-light) !important;
+    }
+    
+    .pd-price {
+        color: var(--bk-orange) !important;
+    }
+    
+    .option-title {
+        color: var(--bk-orange) !important;
+    }
+    
+    .pill {
+        border-color: var(--bk-brown) !important;
+        color: var(--text-muted-light) !important;
+    }
+    
+    .pill:hover {
+        border-color: var(--bk-orange) !important;
+        color: var(--bk-orange) !important;
+    }
+    
+    .pill.active {
+        background: linear-gradient(135deg, var(--bk-red) 0%, var(--bk-orange) 100%) !important;
+        color: white !important;
+        box-shadow: 0 4px 10px rgba(214, 35, 0, 0.3) !important;
+        border-color: transparent !important;
+    }
+    
+    .qty-btn {
+        background: var(--bk-brown) !important;
+        color: var(--text-light) !important;
+    }
+    
+    .qty-btn:hover {
+        background: var(--bk-red) !important;
+        color: white !important;
+    }
+    
+    .qty-input {
+        border-color: var(--bk-brown) !important;
+        background: #170d0a !important;
+        color: var(--text-light) !important;
+    }
+    
+    .btn-add-cart {
+        background: linear-gradient(135deg, var(--bk-red) 0%, #ff6f00 100%) !important;
+        box-shadow: 0 10px 20px rgba(214, 35, 0, 0.3) !important;
+    }
+    
+    .btn-add-cart:hover {
+        box-shadow: 0 15px 25px rgba(214, 35, 0, 0.4) !important;
+        transform: translateY(-3px) !important;
+    }
+    
+    .breadcrumb, .breadcrumb a {
+        color: var(--text-muted-light) !important;
+    }
+    
+    /* Cart / Checkout Overrides */
+    .card, .list-card, .table-card {
+        background-color: #251610 !important;
+        border: 1px solid rgba(242, 169, 0, 0.15) !important;
+        color: var(--text-light) !important;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.3) !important;
+    }
+    
+    .cart-item {
+        background-color: #1c0f0a !important;
+        border: 1px solid rgba(242, 169, 0, 0.08) !important;
+        color: var(--text-light) !important;
+    }
+    
+    .trash-btn {
+        color: #ff6b6b !important;
+        background: transparent !important;
+        border: none !important;
+    }
+    
+    .btn-checkout, .btn-primary, .btn-gradient, .btn-login, .btn-signup {
+        background: linear-gradient(135deg, var(--bk-red) 0%, #ff6f00 100%) !important;
+        border: none !important;
+        color: white !important;
+        box-shadow: 0 4px 15px rgba(214, 35, 0, 0.3) !important;
+    }
+    
+    .btn-checkout:hover, .btn-primary:hover, .btn-gradient:hover {
+        background: linear-gradient(135deg, #b31c00 0%, #e65100 100%) !important;
+        color: white !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 8px 20px rgba(214, 35, 0, 0.4) !important;
+    }
+    
+    .text-primary, .fs-5.text-primary, #subtotal, #final-total {
+        color: var(--bk-orange) !important;
+    }
+    
+    /* Leaderboard / Ranking */
+    .leaderboard-header h1 {
+        color: var(--bk-orange) !important;
+    }
+    
+    .leaderboard-header p {
+        color: var(--text-muted-light) !important;
+    }
+    
+    .rank-card {
+        background-color: #251610 !important;
+        border: 1px solid rgba(242, 169, 0, 0.15) !important;
+        color: var(--text-light) !important;
+    }
+    
+    .rank-name {
+        color: var(--text-light) !important;
+    }
+    
+    .rank-desc {
+        color: var(--text-muted-light) !important;
+    }
+    
+    .rank-price {
+        color: var(--bk-orange) !important;
+    }
+    
+    .btn-rank.btn-cart {
+        background: linear-gradient(135deg, var(--bk-red) 0%, #ff6f00 100%) !important;
+        color: white !important;
+    }
+    
+    .btn-rank.btn-more {
+        border-color: var(--bk-orange) !important;
+        color: var(--bk-orange) !important;
+        background: transparent !important;
+    }
+    
+    .btn-rank.btn-more:hover {
+        background: rgba(242, 169, 0, 0.1) !important;
+        color: white !important;
+    }
+    
+    /* Database Demo / Dashboard Panel */
+    .page-title {
+        color: var(--bk-orange) !important;
+    }
+    
+    .page-subtitle {
+        color: var(--text-muted-light) !important;
+    }
+    
+    .kpi-card {
+        background-color: #251610 !important;
+        border: 1px solid rgba(242, 169, 0, 0.15) !important;
+        color: var(--text-light) !important;
+    }
+    
+    .kpi-card h3 {
+        color: var(--text-muted-light) !important;
+    }
+    
+    .kpi-value {
+        color: var(--text-light) !important;
+    }
+    
+    .table-responsive {
+        border-color: rgba(242, 169, 0, 0.1) !important;
+    }
+    
+    .table {
+        color: var(--text-light) !important;
+    }
+    
+    .table th {
+        background-color: rgba(60, 36, 21, 0.6) !important;
+        color: var(--bk-orange) !important;
+    }
+    
+    .table td {
+        border-bottom-color: rgba(242, 169, 0, 0.1) !important;
+        color: var(--text-light) !important;
+    }
+    
+    .table tbody tr:hover {
+        background-color: rgba(242, 169, 0, 0.05) !important;
+    }
+    
+    .pwd-input {
+        background: #170d0a !important;
+        border-color: var(--bk-brown) !important;
+        color: var(--text-light) !important;
+    }
+    
+    /* Dialog / Alerts */
+    .toast-container .toast {
+        background-color: #251610 !important;
+        border-color: var(--bk-orange) !important;
+        color: var(--text-light) !important;
+    }
+
+    </style>
+</head>
+<body>
+
+    <div class="background-pattern"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+
+    <div class="glass-card">
+        <div class="professor-box">
+            <i class="fa-solid fa-circle-check success-icon"></i>
+            
+            <h1 class="msg-title" id="display-title">會員註冊成功</h1>
+            <h2 class="msg-welcome" id="display-welcome">歡迎 <span id="user-name">薛翔謙</span> 成為會員</h2>
+            
+            <div class="btn-group" id="btn-container">
+                <a href="index.html" class="btn-custom btn-home"><i class="fa-solid fa-house"></i> 點選回首頁</a>
+                <a href="login.html" class="btn-custom btn-action" id="action-link"><i class="fa-solid fa-arrow-right-to-bracket"></i> 點選立即登入</a>
+            </div>
+
+            <div class="timer-text" id="timer-container">
+                系統將在 <span id="sec">3</span> 秒後自動導向主頁面...
+            </div>
+            
+            <div id="review-container" style="display:none; margin-top: 25px; border-top: 2px dashed #eee; padding-top: 20px;">
+                <h3 style="color:#2F4F4F; font-weight:800; font-size:1.4rem; margin-bottom:15px;">請為本次購物體驗評分</h3>
+                <div class="stars" id="star-rating" style="font-size: 2.2rem; color: #ddd; cursor: pointer; margin-bottom: 15px; transition: 0.3s;">
+                    <i class="fa-solid fa-star" data-value="1"></i>
+                    <i class="fa-solid fa-star" data-value="2"></i>
+                    <i class="fa-solid fa-star" data-value="3"></i>
+                    <i class="fa-solid fa-star" data-value="4"></i>
+                    <i class="fa-solid fa-star" data-value="5"></i>
+                </div>
+                <textarea id="review-text" rows="3" placeholder="留下您的寶貴意見..." style="width:100%; padding:12px; border-radius:15px; border:2px solid #E0F6FF; margin-bottom:15px; font-family:inherit; resize:none; outline:none; transition:0.3s;"></textarea>
+                <button id="btn-submit-review" class="btn-custom btn-action" style="width:100%; justify-content:center; border:none; background:linear-gradient(90deg, #2ED573, #28b463); color:white; font-size:1.2rem; box-shadow: 0 4px 15px rgba(46, 213, 115, 0.4);">送出評價</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 抓取網址參數
+        const params = new URLSearchParams(window.location.search);
+        const type = params.get('type');
+        const name = params.get('name') || '薛翔謙';
+
+        const titleEl = document.getElementById('display-title');
+        const welcomeEl = document.getElementById('display-welcome');
+        const actionLink = document.getElementById('action-link');
+
+        // 根據來源變更顯示內容
+        let isCheckout = false;
+        if (type === 'login') {
+            titleEl.innerText = "會員登入成功";
+            welcomeEl.innerHTML = `歡迎 <span style="color:#2F4F4F;">${name}</span> 回來`;
+            actionLink.innerHTML = `<i class="fa-solid fa-cart-shopping"></i> 前往購物車`;
+            actionLink.href = "cart.html";
+        } else if (type === 'checkout') {
+            isCheckout = true;
+            titleEl.innerText = "訂單完成";
+            welcomeEl.innerHTML = `感謝 <span style="color:#2F4F4F;">${name}</span> 的購買`;
+            document.getElementById('btn-container').style.display = 'none';
+            document.getElementById('timer-container').style.display = 'none';
+            document.getElementById('review-container').style.display = 'block';
+        } else {
+            titleEl.innerText = "會員註冊成功";
+            welcomeEl.innerHTML = `歡迎 <span style="color:#2F4F4F;">${name}</span> 成為會員`;
+            actionLink.innerHTML = `<i class="fa-solid fa-arrow-right-to-bracket"></i> 點選立即登入`;
+            actionLink.href = "login.html";
+        }
+
+        // 星星評分邏輯
+        let selectedRating = 0;
+        const stars = document.querySelectorAll('#star-rating i');
+        stars.forEach(star => {
+            star.addEventListener('mouseover', function() {
+                let val = this.getAttribute('data-value');
+                stars.forEach(s => {
+                    s.style.color = s.getAttribute('data-value') <= val ? '#FFD700' : '#ddd';
+                });
+            });
+            star.addEventListener('mouseout', function() {
+                stars.forEach(s => {
+                    s.style.color = s.getAttribute('data-value') <= selectedRating ? '#FFD700' : '#ddd';
+                });
+            });
+            star.addEventListener('click', function() {
+                selectedRating = this.getAttribute('data-value');
+            });
+        });
+
+        // 評價送出邏輯
+        document.getElementById('btn-submit-review').addEventListener('click', () => {
+            if (selectedRating == 0) {
+                alert('請選擇星級評分！');
+                return;
+            }
+            const reviewText = document.getElementById('review-text').value;
+            const review = {
+                name: name,
+                rating: parseInt(selectedRating),
+                comment: reviewText,
+                timestamp: new Date().getTime()
+            };
+            
+            let reviews = JSON.parse(localStorage.getItem('burgerking_reviews')) || [];
+            reviews.push(review);
+            localStorage.setItem('burgerking_reviews', JSON.stringify(reviews));
+            
+            document.getElementById('review-container').innerHTML = '<h3 style="color:#2ED573; font-weight:bold; margin-top:20px;"><i class="fa-solid fa-heart"></i> 感謝您的評價！</h3>';
+            
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 2000);
+        });
+
+        // 自動跳轉倒數邏輯 (僅非 checkout 時)
+        if (!isCheckout) {
+            let count = 3;
+            const secEl = document.getElementById('sec');
+            const timer = setInterval(() => {
+                count--;
+                secEl.innerText = count;
+                if (count <= 0) {
+                    clearInterval(timer);
+                    window.location.href = "index.html";
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
