@@ -3,397 +3,271 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>會員中心 - 漢堡王 Burger King</title>
+    <title>會員中心 - 得正 3C</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         body { 
-            background: linear-gradient(135deg, #f4f6f8 0%, #e0e8f0 100%); 
+            background: radial-gradient(circle at 10% 20%, rgba(28, 43, 90, 0.05) 0%, rgba(244, 246, 248, 1) 90.1%); 
             font-family: 'Noto Sans TC', sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            color: #334155;
         }
         
-        .navbar { background: #B0E0E6; padding: 10px 20px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); }
-        .navbar-brand { font-size: 1.5rem; font-weight: bold; color: #2F4F4F; text-decoration: none; display: flex; align-items: center; gap: 10px; }
-        .navbar-brand img { width: 40px; height: 40px; }
+        /* Navbar Glassmorphism */
+        .navbar { 
+            background: rgba(28, 43, 90, 0.95); 
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 15px 20px; 
+            border-bottom: 2px solid #C5A880;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .navbar .container {
+            display: flex !important;
+            flex-direction: row !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            flex-wrap: nowrap !important;
+        }
+        .navbar-brand { 
+            font-size: 1.45rem; 
+            font-weight: 800; 
+            color: white; 
+            text-decoration: none; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        .navbar-brand img { 
+            width: 38px; 
+            height: 38px; 
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-nav-action {
+            font-weight: 600;
+            border-radius: 50px;
+            padding: 10px 24px;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        
+        .btn-home {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #C5A880;
+            color: #C5A880;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(197, 168, 128, 0.2);
+        }
+        
+        .btn-logout {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+        
+        .btn-logout:hover {
+            background: #ef4444;
+            color: #ffffff;
+            border-color: #ef4444;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(239, 68, 68, 0.2);
+        }
+
+        @media (max-width: 576px) {
+            .navbar {
+                padding: 10px 15px;
+            }
+            .navbar-brand {
+                font-size: 1.15rem;
+                gap: 8px;
+            }
+            .navbar-brand img {
+                width: 32px;
+                height: 32px;
+            }
+            .btn-nav-action {
+                padding: 8px 14px;
+                font-size: 0.85rem;
+                gap: 5px;
+            }
+            .profile-container {
+                padding: 20px 15px !important;
+                border-radius: 16px !important;
+            }
+            .order-card .card-body {
+                padding: 15px !important;
+            }
+        }
         
         .profile-container {
-            max-width: 600px;
-            margin: 50px auto;
-            background: #fff;
+            background: rgba(255, 255, 255, 0.95);
             padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            flex-grow: 1;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            margin-bottom: 30px;
+            transition: box-shadow 0.3s ease;
+        }
+        .profile-container:hover {
+            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.05);
         }
 
-        .profile-header { text-align: center; margin-bottom: 30px; }
-        .profile-icon { font-size: 4rem; color: #4682B4; margin-bottom: 15px; }
+        .profile-header { text-align: center; margin-bottom: 35px; }
+        .profile-icon { 
+            font-size: 3.5rem; 
+            color: #C5A880; 
+            margin-bottom: 15px; 
+            background: rgba(28, 43, 90, 0.05);
+            padding: 15px;
+            border-radius: 50%;
+            display: inline-block;
+            line-height: 1;
+            box-shadow: 0 6px 15px rgba(197, 168, 128, 0.1);
+        }
         
-        .form-group { margin-bottom: 20px; }
-        .form-label { font-weight: 600; color: #2F4F4F; }
-        .form-control { border-radius: 10px; padding: 12px; background: #f4f6f8; border: 1px solid #dee2e6; }
-        .form-control:focus { border-color: #4682B4; box-shadow: 0 0 0 0.25rem rgba(70, 130, 180, 0.2); background: #ffffff; }
+        .form-group { margin-bottom: 24px; }
+        .form-label { font-weight: 600; color: #475569; font-size: 0.92rem; margin-bottom: 8px; display: block; }
+        .form-control { 
+            border-radius: 12px; 
+            padding: 12px 16px; 
+            background: #f8fafc; 
+            border: 1px solid #e2e8f0; 
+            color: #334155;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+        .form-control:disabled {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+        .form-control:focus { 
+            border-color: #1C2B5A; 
+            box-shadow: 0 0 0 4px rgba(28, 43, 90, 0.15); 
+            background: #ffffff; 
+        }
 
-        .btn-gradient { background: linear-gradient(135deg, #5DADE2 0%, #4682B4 100%); border: none; color: white; padding: 12px; font-weight: 700; border-radius: 50px; transition: 0.3s; width: 100%; margin-top: 10px; }
-        .btn-gradient:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(93, 173, 226, 0.3); color: white; }
-    
-    /* --- BURGER KING PREMIUM DESIGN SYSTEM OVERRIDE --- */
-    :root {
-        --bk-red: #D62300;
-        --bk-orange: #F2A900;
-        --bk-dark: #3C2415;
-        --bk-cream: #F7EFE9;
-        --bk-brown: #502C1E;
-        --text-light: #F7EFE9;
-        --text-muted-light: #c1a89c;
-    }
-    
-    /* Global Color System */
-    body {
-        background: linear-gradient(135deg, #1b0c07 0%, #0d0604 100%) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .navbar, .navbar-custom {
-        background: var(--bk-dark) !important;
-        border-bottom: 3px solid var(--bk-red) !important;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
-    }
-    
-    .navbar-logo, .navbar-logo span, .navbar-brand {
-        color: var(--bk-orange) !important;
-        font-family: 'Outfit', 'Noto Sans TC', sans-serif !important;
-    }
-    
-    .navbar-menu a {
-        color: var(--text-light) !important;
-    }
-    
-    .navbar-menu a:hover {
-        color: var(--bk-orange) !important;
-    }
-    
-    .navbar-toggle {
-        color: var(--bk-orange) !important;
-    }
-    
-    /* Menu / Home / Section Styles */
-    .menu-section {
-        background: #170d0a !important;
-    }
-    
-    .menu-section:nth-of-type(even) {
-        background: #110806 !important;
-    }
-    
-    .menu-title {
-        color: var(--text-light) !important;
-        border-bottom-color: var(--bk-red) !important;
-        font-family: 'Outfit', 'Noto Sans TC', sans-serif !important;
-    }
-    
-    .menu-subtitle {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .menu-item {
-        background: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.3) !important;
-    }
-    
-    .menu-item-name {
-        color: var(--text-light) !important;
-    }
-    
-    .menu-item-price {
-        color: var(--bk-orange) !important;
-    }
-    
-    .menu-button.buy {
-        background: linear-gradient(135deg, var(--bk-red) 0%, #ff6f00 100%) !important;
-        border: none !important;
-        color: white !important;
-    }
-    
-    .menu-button.buy:hover {
-        background: linear-gradient(135deg, #b31c00 0%, #e65100 100%) !important;
-        transform: translateY(-2px) !important;
-    }
-    
-    .menu-button.learn-more {
-        background: transparent !important;
-        color: var(--bk-orange) !important;
-        border-color: var(--bk-orange) !important;
-    }
-    
-    .menu-button.learn-more:hover {
-        background: rgba(242, 169, 0, 0.1) !important;
-        color: white !important;
-        border-color: white !important;
-    }
-    
-    /* Footer Overrides */
-    .footer {
-        background: linear-gradient(135deg, #251610 0%, #170d0a 100%) !important;
-        border-top: 3px solid var(--bk-red) !important;
-        color: var(--text-muted-light) !important;
-    }
-    
-    .footer::before {
-        display: none !important;
-    }
-    
-    .footer-section h3 {
-        color: var(--bk-orange) !important;
-    }
-    
-    .footer-section h3::after {
-        background: var(--bk-red) !important;
-    }
-    
-    .footer-section p, .footer-section ul li, .footer-section ul li a {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .footer-section ul li:hover, .footer-section ul li a:hover {
-        color: var(--bk-orange) !important;
-    }
-    
-    .social-links a {
-        background: rgba(242, 169, 0, 0.1) !important;
-        color: var(--bk-orange) !important;
-    }
-    
-    .social-links a:hover {
-        background: linear-gradient(135deg, var(--bk-red) 0%, var(--bk-orange) 100%) !important;
-        color: white !important;
-        transform: translateY(-2px) !important;
-    }
-    
-    /* Product Detail page */
-    .product-detail-container {
-        background: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-        box-shadow: 0 15px 35px rgba(0,0,0,0.4) !important;
-    }
-    
-    .image-section {
-        background: linear-gradient(135deg, #3c2415 0%, #251610 100%) !important;
-    }
-    
-    .info-section {
-        color: var(--text-light) !important;
-    }
-    
-    .pd-title {
-        color: var(--text-light) !important;
-    }
-    
-    .pd-desc {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .pd-price {
-        color: var(--bk-orange) !important;
-    }
-    
-    .option-title {
-        color: var(--bk-orange) !important;
-    }
-    
-    .pill {
-        border-color: var(--bk-brown) !important;
-        color: var(--text-muted-light) !important;
-    }
-    
-    .pill:hover {
-        border-color: var(--bk-orange) !important;
-        color: var(--bk-orange) !important;
-    }
-    
-    .pill.active {
-        background: linear-gradient(135deg, var(--bk-red) 0%, var(--bk-orange) 100%) !important;
-        color: white !important;
-        box-shadow: 0 4px 10px rgba(214, 35, 0, 0.3) !important;
-        border-color: transparent !important;
-    }
-    
-    .qty-btn {
-        background: var(--bk-brown) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .qty-btn:hover {
-        background: var(--bk-red) !important;
-        color: white !important;
-    }
-    
-    .qty-input {
-        border-color: var(--bk-brown) !important;
-        background: #170d0a !important;
-        color: var(--text-light) !important;
-    }
-    
-    .btn-add-cart {
-        background: linear-gradient(135deg, var(--bk-red) 0%, #ff6f00 100%) !important;
-        box-shadow: 0 10px 20px rgba(214, 35, 0, 0.3) !important;
-    }
-    
-    .btn-add-cart:hover {
-        box-shadow: 0 15px 25px rgba(214, 35, 0, 0.4) !important;
-        transform: translateY(-3px) !important;
-    }
-    
-    .breadcrumb, .breadcrumb a {
-        color: var(--text-muted-light) !important;
-    }
-    
-    /* Cart / Checkout Overrides */
-    .card, .list-card, .table-card {
-        background-color: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-        box-shadow: 0 8px 30px rgba(0,0,0,0.3) !important;
-    }
-    
-    .cart-item {
-        background-color: #1c0f0a !important;
-        border: 1px solid rgba(242, 169, 0, 0.08) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .trash-btn {
-        color: #ff6b6b !important;
-        background: transparent !important;
-        border: none !important;
-    }
-    
-    .btn-checkout, .btn-primary, .btn-gradient, .btn-login, .btn-signup {
-        background: linear-gradient(135deg, var(--bk-red) 0%, #ff6f00 100%) !important;
-        border: none !important;
-        color: white !important;
-        box-shadow: 0 4px 15px rgba(214, 35, 0, 0.3) !important;
-    }
-    
-    .btn-checkout:hover, .btn-primary:hover, .btn-gradient:hover {
-        background: linear-gradient(135deg, #b31c00 0%, #e65100 100%) !important;
-        color: white !important;
-        transform: translateY(-2px) !important;
-        box-shadow: 0 8px 20px rgba(214, 35, 0, 0.4) !important;
-    }
-    
-    .text-primary, .fs-5.text-primary, #subtotal, #final-total {
-        color: var(--bk-orange) !important;
-    }
-    
-    /* Leaderboard / Ranking */
-    .leaderboard-header h1 {
-        color: var(--bk-orange) !important;
-    }
-    
-    .leaderboard-header p {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .rank-card {
-        background-color: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .rank-name {
-        color: var(--text-light) !important;
-    }
-    
-    .rank-desc {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .rank-price {
-        color: var(--bk-orange) !important;
-    }
-    
-    .btn-rank.btn-cart {
-        background: linear-gradient(135deg, var(--bk-red) 0%, #ff6f00 100%) !important;
-        color: white !important;
-    }
-    
-    .btn-rank.btn-more {
-        border-color: var(--bk-orange) !important;
-        color: var(--bk-orange) !important;
-        background: transparent !important;
-    }
-    
-    .btn-rank.btn-more:hover {
-        background: rgba(242, 169, 0, 0.1) !important;
-        color: white !important;
-    }
-    
-    /* Database Demo / Dashboard Panel */
-    .page-title {
-        color: var(--bk-orange) !important;
-    }
-    
-    .page-subtitle {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .kpi-card {
-        background-color: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .kpi-card h3 {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .kpi-value {
-        color: var(--text-light) !important;
-    }
-    
-    .table-responsive {
-        border-color: rgba(242, 169, 0, 0.1) !important;
-    }
-    
-    .table {
-        color: var(--text-light) !important;
-    }
-    
-    .table th {
-        background-color: rgba(60, 36, 21, 0.6) !important;
-        color: var(--bk-orange) !important;
-    }
-    
-    .table td {
-        border-bottom-color: rgba(242, 169, 0, 0.1) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .table tbody tr:hover {
-        background-color: rgba(242, 169, 0, 0.05) !important;
-    }
-    
-    .pwd-input {
-        background: #170d0a !important;
-        border-color: var(--bk-brown) !important;
-        color: var(--text-light) !important;
-    }
-    
-    /* Dialog / Alerts */
-    .toast-container .toast {
-        background-color: #251610 !important;
-        border-color: var(--bk-orange) !important;
-        color: var(--text-light) !important;
-    }
+        .btn-gradient { 
+            background: #1C2B5A; 
+            border: none; 
+            color: white; 
+            padding: 14px; 
+            font-weight: 700; 
+            font-size: 1rem;
+            border-radius: 50px; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            width: 100%; 
+            margin-top: 10px; 
+            box-shadow: 0 4px 12px rgba(28, 43, 90, 0.2);
+        }
+        .btn-gradient:hover { 
+            background: #2E4A7D;
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 20px rgba(28, 43, 90, 0.3); 
+            color: white; 
+        }
+        .btn-gradient:active {
+            transform: translateY(0);
+        }
 
+        /* 美化歷史訂單與滾動條 */
+        .profile-container::-webkit-scrollbar {
+            width: 6px;
+        }
+        .profile-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        .profile-container::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .profile-container::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .order-card {
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border-left: 5px solid #1C2B5A !important;
+            animation: slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+        .order-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08) !important;
+            border-left-color: #C5A880 !important;
+        }
+
+        /* 訂單明細橫幅與圖片 */
+        .section-banner {
+            background: linear-gradient(135deg, #1C2B5A 0%, #2E4A7D 100%);
+            color: white;
+            padding: 14px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            text-align: center;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(28, 43, 90, 0.2);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .section-banner.details {
+            background: linear-gradient(135deg, #C5A880 0%, #1C2B5A 100%);
+            box-shadow: 0 4px 15px rgba(197, 168, 128, 0.2);
+        }
+        .details-img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .btn-outline-gold {
+            border: 1px solid #C5A880;
+            color: #C5A880;
+            transition: all 0.3s;
+        }
+        .btn-outline-gold:hover {
+            background-color: #C5A880;
+            color: white !important;
+        }
     </style>
 </head>
 <body>
@@ -401,37 +275,100 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <img src="image/logo.jpeg" alt="Logo"> 漢堡王 Burger King
+                <img src="image/logo.jpeg" alt="Logo"> 得正 3C
             </a>
             <div class="d-flex align-items-center">
-                <a href="index.html" class="btn btn-outline-dark rounded-pill px-4"><i class="fa-solid fa-house"></i> 回首頁</a>
-                <button id="btn-logout" class="btn btn-outline-danger rounded-pill px-4 ms-3" style="display:none;">登出</button>
+                <a href="index.html" class="btn-nav-action btn-home"><i class="fa-solid fa-house"></i> 回首頁</a>
+                <button id="btn-logout" class="btn-nav-action btn-logout ms-3" style="display:none;"><i class="fa-solid fa-right-from-bracket"></i> 登出</button>
             </div>
         </div>
     </nav>
 
-    <div class="container d-flex flex-column align-items-center">
-        <div class="profile-container w-100">
-            <div class="profile-header">
-                <i class="fa-solid fa-circle-user profile-icon"></i>
-                <h2 style="color: #2F4F4F; font-weight: 800;">會員中心</h2>
-                <p class="text-muted">管理您的帳號與密碼</p>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label">登入信箱 (Email)</label>
-                <input type="text" id="user-email" class="form-control" disabled value="讀取中...">
+    <div class="container py-5">
+        <div class="row g-4">
+            <!-- 左側/上方：會員中心密碼修改 -->
+            <div class="col-lg-5">
+                <div class="profile-container w-100">
+                    <div class="profile-header">
+                        <i class="fa-solid fa-circle-user profile-icon"></i>
+                        <h2 style="color: #1C2B5A; font-weight: 800;">會員中心</h2>
+                        <p class="text-muted">管理您的帳號與密碼</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">登入信箱 (Email)</label>
+                        <input type="text" id="user-email" class="form-control" disabled value="讀取中...">
+                    </div>
+
+                    <hr class="my-4">
+                    <h4 style="color: #1C2B5A; font-weight: 700; margin-bottom: 20px;">修改密碼</h4>
+
+                    <div class="form-group">
+                        <label class="form-label">新密碼</label>
+                        <input type="password" id="new-password" class="form-control" placeholder="請輸入至少 6 位數新密碼">
+                    </div>
+
+                    <button id="btn-update-pwd" class="btn btn-gradient">確認修改密碼</button>
+                </div>
             </div>
 
-            <hr class="my-4">
-            <h4 style="color: #2F4F4F; font-weight: 700; margin-bottom: 20px;">修改密碼</h4>
+            <!-- 右側/下方：歷史購買紀錄 -->
+            <div class="col-lg-7">
+                <div class="profile-container w-100" style="max-height: 80vh; overflow-y: auto;">
+                    <!-- 歷史購買紀錄檢視 -->
+                    <div id="order-history-view">
+                        <h3 style="color: #1C2B5A; font-weight: 800; margin-bottom: 25px;">
+                            <i class="fa-solid fa-clock-rotate-left me-2" style="color: #C5A880;"></i>歷史購買紀錄
+                        </h3>
+                        <div id="order-history-list">
+                            <div class="text-center py-5 text-muted">
+                                <i class="fa-solid fa-spinner fa-spin fa-2x mb-3"></i>
+                                <p>載入訂單紀錄中...</p>
+                            </div>
+                        </div>
+                    </div>
 
-            <div class="form-group">
-                <label class="form-label">新密碼</label>
-                <input type="password" id="new-password" class="form-control" placeholder="請輸入至少 6 位數新密碼">
+                    <!-- 訂單明細檢視 -->
+                    <div id="order-detail-view" style="display: none;">
+                        <div class="section-banner details mb-4">
+                            <i class="fa-solid fa-file-invoice fs-4"></i> 訂單明細
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-6 mb-3">
+                                <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-info-circle me-1" style="color: #C5A880;"></i>訂單資訊</h5>
+                                <div class="mb-2"><strong>訂單流水號：</strong><span id="detail-order-id" class="badge bg-secondary text-white text-start" style="font-size:0.95rem; white-space: normal; display: inline-block; word-break: break-all;">ORD...</span></div>
+                                <div><strong>建立時間：</strong><span id="detail-order-time" class="text-muted">2026-05-28 12:00:00</span></div>
+                            </div>
+                            <div class="col-md-6 mb-3 text-md-end">
+                                <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-credit-card me-1" style="color: #C5A880;"></i>付款與狀態</h5>
+                                <div class="mb-2"><strong>付款金額：</strong><span id="detail-payment-total" class="fw-bold text-danger fs-5">NT$ 0</span></div>
+                                <div class="mb-2"><strong>付款方式：</strong><span id="detail-payment-method" class="badge text-white" style="background-color: #C5A880;">信用卡付款</span></div>
+                                <div><strong>訂單狀態：</strong><span id="detail-order-status" class="badge bg-warning">待出貨</span></div>
+                            </div>
+                        </div>
+                        <div class="table-responsive mb-4">
+                            <table class="table table-bordered align-middle text-center" style="border-color: #e2e8f0;">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>商品名稱</th>
+                                        <th style="width: 100px;">圖片</th>
+                                        <th style="width: 100px;">單價</th>
+                                        <th style="width: 80px;">數量</th>
+                                        <th style="width: 120px;">小計</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="detail-items-body">
+                                    <!-- 動態生成 -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="d-flex gap-3 justify-content-center mt-4">
+                            <a href="index.html" class="btn text-white rounded-pill px-4 py-2" style="background-color: #1C2B5A; border: 1px solid #C5A880; font-weight: bold;"><i class="fa-solid fa-house me-1"></i> 返回首頁</a>
+                            <button class="btn text-white rounded-pill px-4 py-2" style="background-color: #C5A880; font-weight: bold;" onclick="hideOrderDetail()"><i class="fa-solid fa-arrow-left me-1"></i> 返回訂單列表</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <button id="btn-update-pwd" class="btn btn-gradient">確認修改密碼</button>
         </div>
     </div>
 
@@ -447,15 +384,315 @@
             if (user) {
                 document.getElementById('user-email').value = user.email;
                 document.getElementById('btn-logout').style.display = 'inline-block';
+                renderPurchaseHistory(user);
             } else {
                 alert('您尚未登入，請先登入！');
                 window.location.href = 'login.html';
             }
         });
 
+        function renderPurchaseHistory(user) {
+            const historyList = document.getElementById('order-history-list');
+            if (!historyList) return;
+
+            const memberName = user.displayName || user.email.split('@')[0];
+            const orders = JSON.parse(localStorage.getItem('dejeng3c_orders')) || [];
+            
+            // Filter orders for this user
+            const userOrders = orders.filter(order => {
+                if (!order.customer) return false;
+                const custLower = order.customer.toLowerCase().trim();
+                const memberLower = memberName.toLowerCase().trim();
+                const emailLower = user.email.toLowerCase().trim();
+                
+                return custLower === memberLower || 
+                       custLower === emailLower || 
+                       custLower.includes(memberLower) ||
+                       custLower.includes(emailLower.split('@')[0]);
+            });
+
+            // Sort orders by timestamp descending
+            userOrders.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+
+            if (userOrders.length === 0) {
+                historyList.innerHTML = `
+                    <div class="text-center py-5">
+                        <i class="fa-solid fa-receipt text-muted mb-3" style="font-size: 3.5rem; opacity: 0.5;"></i>
+                        <p class="text-muted mb-3">您目前尚無購買紀錄</p>
+                        <a href="index.html" class="btn btn-outline-gold rounded-pill px-4 btn-sm" style="font-weight: 500;">前去選購</a>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            userOrders.forEach((order, index) => {
+                const dateStr = order.timestamp ? new Date(order.timestamp).toLocaleString('zh-TW', { hour12: false }) : '未知時間';
+                const itemsHtml = order.items.map(item => {
+                    const lastXIdx = item.lastIndexOf(' x');
+                    let nameAndSpec = item;
+                    let qty = 1;
+                    if (lastXIdx !== -1) {
+                        nameAndSpec = item.substring(0, lastXIdx);
+                        qty = item.substring(lastXIdx + 2).trim();
+                    }
+                    return `
+                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 py-2" style="background: transparent; font-size: 0.95rem; border-bottom: 1px dashed rgba(0,0,0,0.05) !important;">
+                            <span class="text-secondary">
+                                <i class="fa-solid fa-laptop me-2" style="font-size: 0.85rem; color: #C5A880;"></i>
+                                <strong>${nameAndSpec}</strong>
+                            </span>
+                            <span class="badge bg-light text-dark rounded-pill border fw-bold px-2 py-1">x${qty}</span>
+                        </li>
+                    `;
+                }).join('');
+
+                const orderNum = userOrders.length - index;
+                const ordDate = new Date(order.timestamp);
+                const ordDateStr = ordDate.getFullYear() + 
+                                   String(ordDate.getMonth() + 1).padStart(2, '0') + 
+                                   String(ordDate.getDate()).padStart(2, '0') +
+                                   String(ordDate.getHours()).padStart(2, '0') +
+                                   String(ordDate.getMinutes()).padStart(2, '0') +
+                                   String(ordDate.getSeconds()).padStart(2, '0');
+                const serialNo = order.orderId || `ORD${ordDateStr}`;
+                html += `
+                    <div class="card border-0 shadow-sm mb-3 order-card" style="border-radius: 15px; overflow: hidden; background: #fafbfc; animation-delay: ${index * 0.08}s;">
+                        <div class="card-body p-4">
+                            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-2 mb-3">
+                                <div>
+                                    <span class="text-muted small d-block mb-1"><i class="fa-regular fa-clock me-1"></i>${dateStr}</span>
+                                    <span class="badge rounded-pill text-start" style="font-size: 0.8rem; background-color: #E8F8F5; color: #117A65; padding: 4px 10px; white-space: normal; display: inline-block; word-break: break-all;">訂單流水號：${serialNo}</span>
+                                </div>
+                                <div class="text-start text-sm-end mt-1 mt-sm-0">
+                                    <span class="text-muted small d-block">消費金額</span>
+                                    <span class="fw-bold" style="color: #1C2B5A; font-size: 1.25rem; white-space: nowrap;">NT$ ${order.total}</span>
+                                </div>
+                            </div>
+                            <ul class="list-group list-group-flush mb-0 pt-2 border-top border-light-subtle">
+                                ${itemsHtml}
+                            </ul>
+                            <div class="text-end mt-3 pt-2 border-top border-light-subtle">
+                                <button class="btn btn-sm btn-outline-gold rounded-pill px-3" onclick="showOrderDetail('${serialNo}')">
+                                    <i class="fa-solid fa-file-invoice me-1"></i>查看訂單明細
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            historyList.innerHTML = html;
+        }
+
+        const productsDB = {
+            "tea01": { name: "iPhone 15 Pro Max", price: 44900, img: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500&auto=format&fit=crop&q=60" },
+            "tea02": { name: "Samsung Galaxy S24 Ultra", price: 43900, img: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500&auto=format&fit=crop&q=60" },
+            "tea03": { name: "iPad Pro M4", price: 34900, img: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=500&auto=format&fit=crop&q=60" },
+            "tea04": { name: "Google Pixel 8 Pro", price: 33900, img: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=500&auto=format&fit=crop&q=60" },
+            "tea05": { name: "ASUS ROG Phone 8 Pro", price: 38990, img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60" },
+            "tea06": { name: "Xiaomi 14 Ultra", price: 34999, img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60" },
+            "tea07": { name: "Sony Xperia 1 VI", price: 39990, img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60" },
+            "tea08": { name: "iPad Air 6", price: 19900, img: "https://images.unsplash.com/photo-1589739900243-4b52cd9b104e?w=500&auto=format&fit=crop&q=60" },
+            "tea09": { name: "Samsung Galaxy Tab S9", price: 23990, img: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=500&auto=format&fit=crop&q=60" },
+            "tea10": { name: "iPhone 15", price: 29900, img: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500&auto=format&fit=crop&q=60" },
+            "tea11": { name: "Google Pixel 8a", price: 16490, img: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=500&auto=format&fit=crop&q=60" },
+            "tea12": { name: "Xiaomi Redmi Note 13 Pro", price: 9999, img: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=500&auto=format&fit=crop&q=60" },
+            "tea13": { name: "ASUS Zenfone 11 Ultra", price: 29990, img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60" },
+            "tea27": { name: "OPPO Reno11 Pro", price: 16990, img: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=500&auto=format&fit=crop&q=60" },
+            "tea28": { name: "Sony Xperia 10 VI", price: 13990, img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60" },
+            "tea31": { name: "Samsung Galaxy Fold 5", price: 56888, img: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500&auto=format&fit=crop&q=60" },
+            "tea32": { name: "iPhone 15 Plus", price: 32900, img: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500&auto=format&fit=crop&q=60" },
+            "tea33": { name: "iPad 10th Gen", price: 11900, img: "https://images.unsplash.com/photo-1589739900243-4b52cd9b104e?w=500&auto=format&fit=crop&q=60" },
+            
+            "donut01": { name: "Logitech MX Master 3S", price: 3290, img: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500&auto=format&fit=crop&q=60" },
+            "donut02": { name: "Keychron K2 機械鍵盤", price: 2580, img: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500&auto=format&fit=crop&q=60" },
+            "donut03": { name: "MacBook Pro M3", price: 54900, img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&auto=format&fit=crop&q=60" },
+            "donut04": { name: "ASUS RT-AX88U Pro 路由器", price: 8888, img: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=500&auto=format&fit=crop&q=60" },
+            "donut05": { name: "WD Black SN850X 2TB SSD", price: 5290, img: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=500&auto=format&fit=crop&q=60" },
+            "donut06": { name: "ROG Swift PG32UCDM 螢幕", price: 42900, img: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500&auto=format&fit=crop&q=60" },
+            "donut07": { name: "Sony WH-1000XM5 耳機", price: 9900, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=60" },
+
+            "fruit01": { name: "Apple Watch Series 9", price: 13500, img: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500&auto=format&fit=crop&q=60" },
+            "fruit02": { name: "Garmin Venu 3", price: 14990, img: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=500&auto=format&fit=crop&q=60" },
+            "fruit03": { name: "AirPods Pro 2", price: 7490, img: "https://images.unsplash.com/photo-1588449668365-d15e397f6787?w=500&auto=format&fit=crop&q=60" },
+            "fruit04": { name: "Google Nest Hub 2", price: 3180, img: "https://images.unsplash.com/photo-1543512214-318c7553f230?w=500&auto=format&fit=crop&q=60" },
+            "fruit05": { name: "Dyson Purifier Cool", price: 18900, img: "https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=500&auto=format&fit=crop&q=60" },
+            "fruit06": { name: "Philips Hue 智慧燈泡", price: 4990, img: "https://images.unsplash.com/photo-1550985616-10810253b84d?w=500&auto=format&fit=crop&q=60" },
+            "fruit07": { name: "Nintendo Switch OLED", price: 10480, img: "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=500&auto=format&fit=crop&q=60" },
+            "fruit08": { name: "DJI Mini 4 Pro 空拍機", price: 22090, img: "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?w=500&auto=format&fit=crop&q=60" },
+            "fruit09": { name: "GoPro HERO12 Black", price: 14900, img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&auto=format&fit=crop&q=60" },
+            "fruit10": { name: "HomePod 智慧音箱", price: 9300, img: "https://images.unsplash.com/photo-1543512214-318c7553f230?w=500&auto=format&fit=crop&q=60" },
+            "fruit11": { name: "Xiaomi 智慧攝影機 C400", price: 1095, img: "https://images.unsplash.com/photo-1558002038-1055907df827?w=500&auto=format&fit=crop&q=60" },
+            "fruit12": { name: "Dyson V15 Detect", price: 24900, img: "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=500&auto=format&fit=crop&q=60" }
+        };
+
+        function parseOrderItem(itemStr) {
+            let name = '';
+            let code = '';
+            let specs = '';
+            let qty = 1;
+
+            const lastX = itemStr.lastIndexOf(' x');
+            let baseStr = itemStr;
+            if (lastX !== -1) {
+                baseStr = itemStr.substring(0, lastX).trim();
+                qty = parseInt(itemStr.substring(lastX + 2).trim(), 10) || 1;
+            }
+
+            const parenMatch = baseStr.match(/\(([^)]+)\)/);
+            if (parenMatch) {
+                name = baseStr.replace(/\s*\([^)]+\)/g, '').trim();
+                const inner = parenMatch[1];
+                const parts = inner.split('/');
+                code = parts[0];
+                if (parts.length > 1) {
+                    specs = parts.slice(1).join(' / ');
+                }
+            } else {
+                name = baseStr;
+            }
+
+            return { name, code, specs, qty };
+        }
+
+        function findProductDetails(name) {
+            for (const key in productsDB) {
+                if (productsDB[key].name === name) {
+                    return productsDB[key];
+                }
+            }
+            return null;
+        }
+
+        window.showOrderDetail = function(orderId) {
+            const orders = JSON.parse(localStorage.getItem('dejeng3c_orders')) || [];
+            const order = orders.find(o => {
+                if (o.orderId === orderId) return true;
+                const ordDate = new Date(o.timestamp);
+                const ordDateStr = ordDate.getFullYear() + 
+                                   String(ordDate.getMonth() + 1).padStart(2, '0') + 
+                                   String(ordDate.getDate()).padStart(2, '0') +
+                                   String(ordDate.getHours()).padStart(2, '0') +
+                                   String(ordDate.getMinutes()).padStart(2, '0') +
+                                   String(ordDate.getSeconds()).padStart(2, '0');
+                const fallbackId = `ORD${ordDateStr}`;
+                return fallbackId === orderId;
+            });
+
+            if (!order) {
+                alert('找不到該筆訂單明細！');
+                return;
+            }
+
+            document.getElementById('detail-order-id').innerText = order.orderId || orderId;
+            document.getElementById('detail-order-time').innerText = order.timestamp ? new Date(order.timestamp).toLocaleString('zh-TW', { hour12: false }) : '未知時間';
+            document.getElementById('detail-payment-total').innerText = `NT$ ${order.total.toLocaleString()}`;
+            document.getElementById('detail-payment-method').innerText = order.paymentMethod || '線上付款';
+            
+            const pmBadge = document.getElementById('detail-payment-method');
+            if (order.paymentMethod === '貨到付款') {
+                pmBadge.className = 'badge bg-success text-white';
+            } else if (order.paymentMethod === 'Line Pay') {
+                pmBadge.className = 'badge text-white';
+                pmBadge.style.backgroundColor = '#06c755';
+            } else {
+                pmBadge.className = 'badge bg-info text-dark';
+                pmBadge.style.backgroundColor = '';
+            }
+
+            const statusBadge = document.getElementById('detail-order-status');
+            const isCompleted = order.status === 'completed';
+            statusBadge.innerText = isCompleted ? '已出貨' : '待出貨';
+            statusBadge.className = isCompleted ? 'badge bg-success' : 'badge bg-warning text-dark';
+
+            const tbody = document.getElementById('detail-items-body');
+            let itemsHtml = '';
+            const statusSettings = JSON.parse(localStorage.getItem('dejeng3c_product_settings')) || {};
+
+            order.items.forEach(itemStr => {
+                const parsed = parseOrderItem(itemStr);
+                const p = findProductDetails(parsed.name);
+                
+                const img = p ? p.img : 'image/logo.jpeg';
+                let unitPrice = p ? p.price : 0;
+                if (p) {
+                    const promoPrice = statusSettings[p.name]?.promoPrice;
+                    if (promoPrice && promoPrice < p.price) {
+                        unitPrice = promoPrice;
+                    }
+                }
+                
+                const subtotal = unitPrice * parsed.qty;
+                
+                let specSpan = '';
+                if (parsed.specs) {
+                    specSpan = `<span class="badge bg-secondary text-white ms-1" style="font-size:0.75rem;">${parsed.specs}</span>`;
+                }
+
+                itemsHtml += `
+                    <tr>
+                        <td class="text-start ps-3">
+                            <div class="fw-bold text-dark fs-6">${parsed.name} ${specSpan}</div>
+                            ${parsed.code ? `<div class="text-muted small mt-1">${parsed.code}</div>` : ''}
+                        </td>
+                        <td>
+                            <img src="${img}" alt="${parsed.name}" class="details-img">
+                        </td>
+                        <td class="fw-bold text-primary">$${unitPrice}</td>
+                        <td class="fw-bold">${parsed.qty}</td>
+                        <td class="fw-bold text-danger">$${subtotal.toLocaleString()}</td>
+                    </tr>
+                `;
+            });
+
+            let itemsSum = 0;
+            order.items.forEach(itemStr => {
+                const parsed = parseOrderItem(itemStr);
+                const p = findProductDetails(parsed.name);
+                let unitPrice = p ? p.price : 0;
+                if (p) {
+                    const promoPrice = statusSettings[p.name]?.promoPrice;
+                    if (promoPrice && promoPrice < p.price) {
+                        unitPrice = promoPrice;
+                    }
+                }
+                itemsSum += unitPrice * parsed.qty;
+            });
+
+            if (order.discount > 0 || itemsSum !== order.total) {
+                const discountVal = order.discount || (itemsSum - order.total);
+                if (discountVal > 0) {
+                    itemsHtml += `
+                        <tr class="table-light">
+                            <td colspan="4" class="text-end fw-bold">折扣</td>
+                            <td class="fw-bold text-success">-$${discountVal.toLocaleString()}</td>
+                        </tr>
+                    `;
+                }
+            }
+
+            itemsHtml += `
+                <tr class="table-light">
+                    <td colspan="4" class="text-end fw-bold fs-6">付款總額</td>
+                    <td class="fw-bold text-danger fs-6">$${order.total.toLocaleString()}</td>
+                </tr>
+            `;
+
+            tbody.innerHTML = itemsHtml;
+
+            document.getElementById('order-history-view').style.display = 'none';
+            document.getElementById('order-detail-view').style.display = 'block';
+        };
+
+        window.hideOrderDetail = function() {
+            document.getElementById('order-detail-view').style.display = 'none';
+            document.getElementById('order-history-view').style.display = 'block';
+        };
+
         document.getElementById('btn-logout').addEventListener('click', () => {
             if(confirm("確定要登出嗎？")) { 
-                localStorage.removeItem('burgerking_cart'); 
+                localStorage.removeItem('dejeng3c_cart'); 
                 signOut(auth).then(() => { window.location.href = 'index.html'; }); 
             }
         });

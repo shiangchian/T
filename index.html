@@ -4,450 +4,206 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>漢堡王 Burger King - 漢堡 x 配餐 x 飲料</title>
+    <title>得正 3C - 智慧手機 x 電腦週邊 x 智慧家居</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; overflow-x: hidden; padding-top: 60px; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: radial-gradient(circle at 10% 20%, rgba(28, 43, 90, 0.05) 0%, rgba(244, 246, 248, 1) 90.1%); min-height: 100vh; overflow-x: hidden; padding-top: 60px; }
 
         /* Navbar Styles */
-        .navbar { background: #B0E0E6; padding: 10px 20px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; }
+        .navbar { background: #1C2B5A; padding: 10px 20px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15); position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; border-bottom: 2px solid #C5A880; }
         .navbar-container { display: flex; justify-content: space-between; align-items: center; gap: 15px; }
-        .navbar-logo { display: flex; align-items: center; font-size: 1.5rem; font-weight: bold; color: #2F4F4F; text-decoration: none; }
-        .navbar-logo .logo { width: 40px; height: 40px; margin-right: 10px; }
+        .navbar-brand-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .navbar-brand-link:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.1);
+        }
+        .navbar-brand-logo-img {
+            height: 38px;
+            width: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        .navbar-brand-text {
+            font-weight: bold;
+            color: white;
+            font-size: 1.15rem;
+            white-space: nowrap;
+        }
+        .navbar-left-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.05rem;
+            font-weight: bold;
+            color: white !important;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .navbar-logo:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.2);
+            color: #C5A880 !important;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+        #logo-cart-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #e74c3c;
+            color: white !important;
+            border-radius: 50%;
+            min-width: 18px;
+            height: 18px;
+            line-height: 15px;
+            text-align: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+            border: 1.5px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            padding: 0 2px;
+            box-sizing: border-box;
+        }
         .navbar-search-container { flex-grow: 1; display: flex; justify-content: center; }
-        .navbar-search { padding: 8px 15px; border: 1px solid #ccc; border-radius: 20px; font-size: 0.9rem; width: 100%; max-width: 400px; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
-        .navbar-search:focus { outline: none; border-color: #4682B4; box-shadow: 0 0 0 2px rgba(70, 130, 180, 0.2); }
+        .navbar-search { padding: 8px 15px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; font-size: 0.9rem; width: 100%; max-width: 400px; transition: all 0.3s ease; background-color: rgba(255, 255, 255, 0.1); color: white; }
+        .navbar-search::placeholder { color: rgba(255, 255, 255, 0.5); }
+        .navbar-search:focus { outline: none; border-color: #C5A880; box-shadow: 0 0 0 2px rgba(197, 168, 128, 0.25); background-color: white; color: #1C2B5A; }
         .navbar-menu { display: flex; list-style: none; gap: 15px; align-items: center; margin: 0; padding: 0; }
         .navbar-menu li { position: relative; }
-        .navbar-menu a { text-decoration: none; color: #2F4F4F; font-weight: 500; transition: color 0.3s ease; font-size: 0.95rem; }
-        .navbar-menu a:hover { color: #4682B4; }
-        .navbar-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #2F4F4F; }
+        .navbar-menu a { text-decoration: none; color: rgba(255, 255, 255, 0.85); font-weight: 500; transition: color 0.3s ease; font-size: 0.95rem; }
+        .navbar-menu a:hover { color: #C5A880; }
+        .navbar-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: white; }
 
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
         
         /* 菜單區塊樣式 */
-        .menu-section { background: #f4f6f8; padding: 3rem 1rem 4rem; text-align: center; }
-        .menu-title { color: #333; font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; margin-bottom: 1rem; opacity: 0; animation: fadeInUp 1s ease-out forwards; border-bottom: 3px solid #5DADE2; display: inline-block; padding-bottom: 10px; }
-        .menu-subtitle { color: #666; margin-bottom: 3rem; font-size: 1.1rem; }
+        .menu-section { background: transparent; padding: 3rem 1rem 4rem; text-align: center; }
+        .menu-title { color: #1C2B5A; font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; margin-bottom: 1rem; opacity: 0; animation: fadeInUp 1s ease-out forwards; border-bottom: 3px solid #C5A880; display: inline-block; padding-bottom: 10px; }
+        .menu-subtitle { color: #505965; margin-bottom: 3rem; font-size: 1.1rem; }
         .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
-        .menu-item { background: #ffffff; border-radius: 15px; padding: 1.5rem; text-align: center; color: #333; opacity: 0; transform: translateY(50px); transition: all 0.6s ease, box-shadow 0.3s ease, transform 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.08); display: flex; flex-direction: column; align-items: center; }
+        .menu-item { background: #ffffff; border-radius: 15px; padding: 1.5rem; text-align: center; color: #333; opacity: 0; transform: translateY(50px); transition: all 0.6s ease, box-shadow 0.3s ease, transform 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.06); display: flex; flex-direction: column; align-items: center; border: 1px solid rgba(0, 0, 0, 0.03); }
         .menu-item.visible { opacity: 1; transform: translateY(0); }
-        .menu-item:hover { transform: translateY(-8px); box-shadow: 0 8px 25px rgba(0,0,0,0.12); }
+        .menu-item:hover { transform: translateY(-8px); box-shadow: 0 8px 25px rgba(0,0,0,0.12); border-color: rgba(28, 43, 90, 0.1); }
         .menu-item-image { width: 150px; height: 150px; border-radius: 15px; margin: 0 auto 1.5rem; overflow: hidden; }
         .menu-item-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
         .menu-item:hover .menu-item-image img { transform: scale(1.1); }
-        .menu-item-name { font-size: 1.15rem; font-weight: 600; margin-bottom: 0.5rem; color: #333; }
-        .menu-item-price { font-size: 1.05rem; font-weight: 500; color: #1a73e8; margin-bottom: 1rem; }
+        .menu-item-name { font-size: 1.15rem; font-weight: 600; margin-bottom: 0.5rem; color: #1C2B5A; }
+        .menu-item-price { font-size: 1.05rem; font-weight: 700; color: #C5A880; margin-bottom: 1rem; }
         .menu-item-actions { display: flex; gap: 0.5rem; margin-top: auto; justify-content: center; width: 100%; }
         .menu-button { padding: 0.75rem 1rem; font-size: 0.95rem; border-radius: 25px; flex: 1; text-align: center; transition: all 0.3s ease; cursor: pointer; border: 1px solid transparent; font-weight: bold; }
-        .menu-button.buy { background-color: #1a73e8; color: white; }
-        .menu-button.buy:hover { background-color: #125abc; transform: translateY(-2px); }
-        .menu-button.learn-more { background-color: white; color: #1a73e8; border-color: #1a73e8; text-decoration: none; }
-        .menu-button.learn-more:hover { background-color: #e8f0fe; transform: translateY(-2px); }
+        .menu-button.buy { background-color: #1C2B5A; color: white; }
+        .menu-button.buy:hover { background-color: #2E4A7D; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(28, 43, 90, 0.2); }
+        .menu-button.learn-more { background-color: white; color: #1C2B5A; border-color: #1C2B5A; text-decoration: none; }
+        .menu-button.learn-more:hover { background-color: rgba(28, 43, 90, 0.05); transform: translateY(-2px); }
 
         /* Footer Styles */
-        .footer { background: linear-gradient(135deg, #E8F8F5 0%, #D1F2EB 100%); padding: 4rem 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; position: relative; overflow: hidden; border-top: none; }
-        .footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #48C9B0, #1ABC9C); }
+        .footer { background: #1C2B5A; padding: 4rem 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; position: relative; overflow: hidden; border-top: 2px solid #C5A880; }
         .footer-section { display: flex; flex-direction: column; gap: 1.2rem; min-width: 0; }
-        .footer-section h3 { color: #2F4F4F; font-size: 1.3rem; font-weight: 600; position: relative; padding-bottom: 0.8rem; margin-bottom: 0.5rem; }
-        .footer-section h3::after { content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background: linear-gradient(90deg, #48C9B0, #1ABC9C); border-radius: 2px; }
-        .footer-section p, .footer-section ul li { color: #505965; font-size: 0.95rem; line-height: 1.6; margin: 0; }
+        .footer-section h3 { color: white; font-size: 1.3rem; font-weight: 600; position: relative; padding-bottom: 0.8rem; margin-bottom: 0.5rem; }
+        .footer-section h3::after { content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background: #C5A880; border-radius: 2px; }
+        .footer-section p, .footer-section ul li { color: rgba(255, 255, 255, 0.7); font-size: 0.95rem; line-height: 1.6; margin: 0; }
         .footer-section ul { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 0.8rem; }
         .footer-section ul li { display: flex; align-items: center; transition: transform 0.3s ease; white-space: nowrap; }
         .footer-section ul li a { text-decoration: none; color: inherit; width: 100%; display: inline-block; }
-        .footer-section ul li:hover { transform: translateX(5px); color: #4682B4; }
+        .footer-section ul li:hover { transform: translateX(5px); color: #C5A880; }
         .social-links { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 0.5rem; }
-        .social-links a { text-decoration: none; color: #505965; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; transition: all 0.3s ease; background: rgba(72, 201, 176, 0.1); display: inline-flex; align-items: center; white-space: nowrap; }
-        .social-links a:hover { background: linear-gradient(135deg, #48C9B0 0%, #1ABC9C 100%); color: white; transform: translateY(-2px); }
+        .social-links a { text-decoration: none; color: rgba(255, 255, 255, 0.8); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; transition: all 0.3s ease; background: rgba(255, 255, 255, 0.08); display: inline-flex; align-items: center; white-space: nowrap; }
+        .social-links a:hover { background: #C5A880; color: white; transform: translateY(-2px); }
         .social-logo { width: 20px; height: 20px; margin-right: 8px; }
         
+        .mobile-member-display {
+            display: none;
+            font-size: 0.95rem;
+            font-weight: bold;
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            white-space: nowrap;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            height: 38px;
+        }
+        .mobile-member-display:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            color: #C5A880;
+        }
+
         @media (max-width: 768px) {
-            .navbar-menu { display: none; flex-direction: column; background: #B0E0E6; position: absolute; top: 100%; left: 0; right: 0; width: 100%; padding: 10px 0; }
+            .navbar-menu { display: none; flex-direction: column; background: #1C2B5A; position: absolute; top: 100%; left: 0; right: 0; width: 100%; padding: 10px 0; border-top: 1px solid rgba(255, 255, 255, 0.1); }
             .navbar-menu.active { display: flex; } .navbar-toggle { display: block; }
             .footer { padding: 3rem 1.5rem; grid-template-columns: 1fr; text-align: center; gap: 3rem; }
             .footer-section h3::after { left: 50%; transform: translateX(-50%); } .social-links { justify-content: center; }
+            
+            .navbar.logged-in .navbar-search-container {
+                display: none !important;
+            }
+            .navbar.logged-in .mobile-member-display {
+                display: flex !important;
+            }
         }
-    
-    /* --- BURGER KING PREMIUM DESIGN SYSTEM OVERRIDE --- */
-    :root {
-        --bk-red: #D62300;
-        --bk-orange: #F2A900;
-        --bk-dark: #3C2415;
-        --bk-cream: #F7EFE9;
-        --bk-brown: #502C1E;
-        --text-light: #F7EFE9;
-        --text-muted-light: #c1a89c;
-    }
-    
-    /* Global Color System */
-    body {
-        background: linear-gradient(135deg, #1b0c07 0%, #0d0604 100%) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .navbar, .navbar-custom {
-        background: var(--bk-dark) !important;
-        border-bottom: 3px solid var(--bk-red) !important;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
-    }
-    
-    .navbar-logo, .navbar-logo span, .navbar-brand {
-        color: var(--bk-orange) !important;
-        font-family: 'Outfit', 'Noto Sans TC', sans-serif !important;
-    }
-    
-    .navbar-menu a {
-        color: var(--text-light) !important;
-    }
-    
-    .navbar-menu a:hover {
-        color: var(--bk-orange) !important;
-    }
-    
-    .navbar-toggle {
-        color: var(--bk-orange) !important;
-    }
-    
-    /* Menu / Home / Section Styles */
-    .menu-section {
-        background: #170d0a !important;
-    }
-    
-    .menu-section:nth-of-type(even) {
-        background: #110806 !important;
-    }
-    
-    .menu-title {
-        color: var(--text-light) !important;
-        border-bottom-color: var(--bk-red) !important;
-        font-family: 'Outfit', 'Noto Sans TC', sans-serif !important;
-    }
-    
-    .menu-subtitle {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .menu-item {
-        background: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.3) !important;
-    }
-    
-    .menu-item-name {
-        color: var(--text-light) !important;
-    }
-    
-    .menu-item-price {
-        color: var(--bk-orange) !important;
-    }
-    
-    .menu-button.buy {
-        background: linear-gradient(135deg, var(--bk-red) 0%, #ff6f00 100%) !important;
-        border: none !important;
-        color: white !important;
-    }
-    
-    .menu-button.buy:hover {
-        background: linear-gradient(135deg, #b31c00 0%, #e65100 100%) !important;
-        transform: translateY(-2px) !important;
-    }
-    
-    .menu-button.learn-more {
-        background: transparent !important;
-        color: var(--bk-orange) !important;
-        border-color: var(--bk-orange) !important;
-    }
-    
-    .menu-button.learn-more:hover {
-        background: rgba(242, 169, 0, 0.1) !important;
-        color: white !important;
-        border-color: white !important;
-    }
-    
-    /* Footer Overrides */
-    .footer {
-        background: linear-gradient(135deg, #251610 0%, #170d0a 100%) !important;
-        border-top: 3px solid var(--bk-red) !important;
-        color: var(--text-muted-light) !important;
-    }
-    
-    .footer::before {
-        display: none !important;
-    }
-    
-    .footer-section h3 {
-        color: var(--bk-orange) !important;
-    }
-    
-    .footer-section h3::after {
-        background: var(--bk-red) !important;
-    }
-    
-    .footer-section p, .footer-section ul li, .footer-section ul li a {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .footer-section ul li:hover, .footer-section ul li a:hover {
-        color: var(--bk-orange) !important;
-    }
-    
-    .social-links a {
-        background: rgba(242, 169, 0, 0.1) !important;
-        color: var(--bk-orange) !important;
-    }
-    
-    .social-links a:hover {
-        background: linear-gradient(135deg, var(--bk-red) 0%, var(--bk-orange) 100%) !important;
-        color: white !important;
-        transform: translateY(-2px) !important;
-    }
-    
-    /* Product Detail page */
-    .product-detail-container {
-        background: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-        box-shadow: 0 15px 35px rgba(0,0,0,0.4) !important;
-    }
-    
-    .image-section {
-        background: linear-gradient(135deg, #3c2415 0%, #251610 100%) !important;
-    }
-    
-    .info-section {
-        color: var(--text-light) !important;
-    }
-    
-    .pd-title {
-        color: var(--text-light) !important;
-    }
-    
-    .pd-desc {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .pd-price {
-        color: var(--bk-orange) !important;
-    }
-    
-    .option-title {
-        color: var(--bk-orange) !important;
-    }
-    
-    .pill {
-        border-color: var(--bk-brown) !important;
-        color: var(--text-muted-light) !important;
-    }
-    
-    .pill:hover {
-        border-color: var(--bk-orange) !important;
-        color: var(--bk-orange) !important;
-    }
-    
-    .pill.active {
-        background: linear-gradient(135deg, var(--bk-red) 0%, var(--bk-orange) 100%) !important;
-        color: white !important;
-        box-shadow: 0 4px 10px rgba(214, 35, 0, 0.3) !important;
-        border-color: transparent !important;
-    }
-    
-    .qty-btn {
-        background: var(--bk-brown) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .qty-btn:hover {
-        background: var(--bk-red) !important;
-        color: white !important;
-    }
-    
-    .qty-input {
-        border-color: var(--bk-brown) !important;
-        background: #170d0a !important;
-        color: var(--text-light) !important;
-    }
-    
-    .btn-add-cart {
-        background: linear-gradient(135deg, var(--bk-red) 0%, #ff6f00 100%) !important;
-        box-shadow: 0 10px 20px rgba(214, 35, 0, 0.3) !important;
-    }
-    
-    .btn-add-cart:hover {
-        box-shadow: 0 15px 25px rgba(214, 35, 0, 0.4) !important;
-        transform: translateY(-3px) !important;
-    }
-    
-    .breadcrumb, .breadcrumb a {
-        color: var(--text-muted-light) !important;
-    }
-    
-    /* Cart / Checkout Overrides */
-    .card, .list-card, .table-card {
-        background-color: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-        box-shadow: 0 8px 30px rgba(0,0,0,0.3) !important;
-    }
-    
-    .cart-item {
-        background-color: #1c0f0a !important;
-        border: 1px solid rgba(242, 169, 0, 0.08) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .trash-btn {
-        color: #ff6b6b !important;
-        background: transparent !important;
-        border: none !important;
-    }
-    
-    .btn-checkout, .btn-primary, .btn-gradient, .btn-login, .btn-signup {
-        background: linear-gradient(135deg, var(--bk-red) 0%, #ff6f00 100%) !important;
-        border: none !important;
-        color: white !important;
-        box-shadow: 0 4px 15px rgba(214, 35, 0, 0.3) !important;
-    }
-    
-    .btn-checkout:hover, .btn-primary:hover, .btn-gradient:hover {
-        background: linear-gradient(135deg, #b31c00 0%, #e65100 100%) !important;
-        color: white !important;
-        transform: translateY(-2px) !important;
-        box-shadow: 0 8px 20px rgba(214, 35, 0, 0.4) !important;
-    }
-    
-    .text-primary, .fs-5.text-primary, #subtotal, #final-total {
-        color: var(--bk-orange) !important;
-    }
-    
-    /* Leaderboard / Ranking */
-    .leaderboard-header h1 {
-        color: var(--bk-orange) !important;
-    }
-    
-    .leaderboard-header p {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .rank-card {
-        background-color: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .rank-name {
-        color: var(--text-light) !important;
-    }
-    
-    .rank-desc {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .rank-price {
-        color: var(--bk-orange) !important;
-    }
-    
-    .btn-rank.btn-cart {
-        background: linear-gradient(135deg, var(--bk-red) 0%, #ff6f00 100%) !important;
-        color: white !important;
-    }
-    
-    .btn-rank.btn-more {
-        border-color: var(--bk-orange) !important;
-        color: var(--bk-orange) !important;
-        background: transparent !important;
-    }
-    
-    .btn-rank.btn-more:hover {
-        background: rgba(242, 169, 0, 0.1) !important;
-        color: white !important;
-    }
-    
-    /* Database Demo / Dashboard Panel */
-    .page-title {
-        color: var(--bk-orange) !important;
-    }
-    
-    .page-subtitle {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .kpi-card {
-        background-color: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .kpi-card h3 {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .kpi-value {
-        color: var(--text-light) !important;
-    }
-    
-    .table-responsive {
-        border-color: rgba(242, 169, 0, 0.1) !important;
-    }
-    
-    .table {
-        color: var(--text-light) !important;
-    }
-    
-    .table th {
-        background-color: rgba(60, 36, 21, 0.6) !important;
-        color: var(--bk-orange) !important;
-    }
-    
-    .table td {
-        border-bottom-color: rgba(242, 169, 0, 0.1) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .table tbody tr:hover {
-        background-color: rgba(242, 169, 0, 0.05) !important;
-    }
-    
-    .pwd-input {
-        background: #170d0a !important;
-        border-color: var(--bk-brown) !important;
-        color: var(--text-light) !important;
-    }
-    
-    /* Dialog / Alerts */
-    .toast-container .toast {
-        background-color: #251610 !important;
-        border-color: var(--bk-orange) !important;
-        color: var(--text-light) !important;
-    }
-
+        @media (max-width: 480px) {
+            .navbar-brand-text { display: none; }
+        }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
         <div class="navbar-container">
-            <a href="index.html" class="navbar-logo">
-                <img src="image/logo.jpeg" alt="漢堡王 Burger King" class="logo">
-                <span>漢堡王 Burger King</span>
-            </a>
-            <div class="navbar-search-container">
-                <input type="search" id="searchInput" class="navbar-search" placeholder="搜尋漢堡、配餐、飲料...">
+            <div class="navbar-left-container">
+                <a href="index.html" class="navbar-brand-link">
+                    <img src="image/logo.jpeg" alt="得正 3C" class="navbar-brand-logo-img">
+                    <span class="navbar-brand-text">得正 3C</span>
+                </a>
+                <a href="cart.html" class="navbar-logo">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span id="logo-cart-badge" style="display: none;">0</span>
+                </a>
             </div>
+            <div class="navbar-search-container">
+                <input type="search" id="searchInput" class="navbar-search" placeholder="搜尋手機、筆電、智慧配件...">
+            </div>
+            <a href="profile.html" id="mobile-member-display" class="mobile-member-display"></a>
             <button class="navbar-toggle" id="navbarToggle">☰</button>
             <ul class="navbar-menu" id="navbarMenu">
-                <li><a href="#drinks"><i class="fa-solid fa-burger"></i> 漢堡區</a></li>
-                <li><a href="#donuts"><i class="fa-solid fa-cheese"></i> 配餐區</a></li>
-                <li><a href="#fruits"><i class="fa-solid fa-glass-water"></i> 飲料區</a></li>
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> 首頁</a></li>
+                <li><a href="#drinks"><i class="fa-solid fa-mobile-screen-button"></i> 手機平板</a></li>
+                <li><a href="#donuts"><i class="fa-solid fa-keyboard"></i> 電腦週邊</a></li>
+                <li><a href="#fruits"><i class="fa-solid fa-house-laptop"></i> 智慧家居</a></li>
                 <li><a href="leaderboard.html"><i class="fa-solid fa-crown"></i> 排行榜</a></li>
                 <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i> 購物車 <span id="cart-badge" style="background: #e74c3c; color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.75rem; vertical-align: top; display: none;">0</span></a></li>
                 
                 <li><a href="database_demo.html" style="color: #e74c3c; font-weight: bold;"><i class="fa-solid fa-database"></i> 資料庫</a></li>
 
                 <li id="nav-login"><a href="login.html"><i class="fa-solid fa-user"></i> 登入/註冊</a></li>
-                <li id="nav-user" style="display:none;"><a href="profile.html" id="user-display" style="color:#1a73e8; font-weight:bold;"></a></li>
+                <li id="nav-user" style="display:none;"><a href="profile.html" id="user-display" style="color:#C5A880; font-weight:bold;"></a></li>
                 <li id="nav-logout" style="display:none;"><a href="#" id="btn-logout" style="color:#e74c3c;">登出</a></li>
             </ul>
         </div>
@@ -458,67 +214,67 @@
     </div>
 
     <section id="drinks" class="menu-section">
-        <h2 class="menu-title">🍔 經典漢堡</h2>
-        <p class="menu-subtitle">Classic Flame-Broiled Burgers</p>
+        <h2 class="menu-title">📱 智慧手機與平板</h2>
+        <p class="menu-subtitle">Smart Phones & Tablets</p>
         <div class="menu-grid">
-            <div class="menu-item"><div class="menu-item-image"><img src="image/crispy_chicken.jpg" alt="蜂蜜芥末脆雞堡"></div><div class="menu-item-name">蜂蜜芥末脆雞堡</div><div class="menu-item-price">NT$ 65</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea01')">加入購物車</button><a href="product.html?id=tea01" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/double_cheese.jpg" alt="雙層起司牛肉堡"></div><div class="menu-item-name">雙層起司牛肉堡</div><div class="menu-item-price">NT$ 55</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea02')">加入購物車</button><a href="product.html?id=tea02" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/whopper.jpg" alt="經典華堡"></div><div class="menu-item-name">經典華堡</div><div class="menu-item-price">NT$ 75</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea03')">加入購物車</button><a href="product.html?id=tea03" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/whopper.jpg" alt="雙層華堡"></div><div class="menu-item-name">雙層華堡</div><div class="menu-item-price">NT$ 80</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea04')">加入購物車</button><a href="product.html?id=tea04" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/double_cheese.jpg" alt="花生香脆牛肉堡"></div><div class="menu-item-name">花生香脆牛肉堡</div><div class="menu-item-price">NT$ 70</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea05')">加入購物車</button><a href="product.html?id=tea05" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/crispy_chicken.jpg" alt="經典鱈魚堡"></div><div class="menu-item-name">經典鱈魚堡</div><div class="menu-item-price">NT$ 65</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea06')">加入購物車</button><a href="product.html?id=tea06" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/whopper.jpg" alt="小華堡"></div><div class="menu-item-name">小華堡</div><div class="menu-item-price">NT$ 55</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea07')">加入購物車</button><a href="product.html?id=tea07" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/crispy_chicken.jpg" alt="美式辣味雞腿堡"></div><div class="menu-item-name">美式辣味雞腿堡</div><div class="menu-item-price">NT$ 65</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea08')">加入購物車</button><a href="product.html?id=tea08" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/crispy_chicken.jpg" alt="培根起司脆雞堡"></div><div class="menu-item-name">培根起司脆雞堡</div><div class="menu-item-price">NT$ 85</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea09')">加入購物車</button><a href="product.html?id=tea09" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/double_cheese.jpg" alt="重磅雙層牛肉堡"></div><div class="menu-item-name">重磅雙層牛肉堡</div><div class="menu-item-price">NT$ 75</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea10')">加入購物車</button><a href="product.html?id=tea10" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/crispy_chicken.jpg" alt="華鱈魚堡特仕版"></div><div class="menu-item-name">華鱈魚堡特仕版</div><div class="menu-item-price">NT$ 80</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea11')">加入購物車</button><a href="product.html?id=tea11" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/crispy_chicken.jpg" alt="燻烤燒肉堡"></div><div class="menu-item-name">燻烤燒肉堡</div><div class="menu-item-price">NT$ 85</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea12')">加入購物車</button><a href="product.html?id=tea12" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/crispy_chicken.jpg" alt="金沙雙起司雞堡"></div><div class="menu-item-name">金沙雙起司雞堡</div><div class="menu-item-price">NT$ 90</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea13')">加入購物車</button><a href="product.html?id=tea13" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/double_cheese.jpg" alt="焙燒起司牛肉堡"></div><div class="menu-item-name">焙燒起司牛肉堡</div><div class="menu-item-price">NT$ 70</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea27')">加入購物車</button><a href="product.html?id=tea27" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/crispy_chicken.jpg" alt="柚香脆雞堡"></div><div class="menu-item-name">柚香脆雞堡</div><div class="menu-item-price">NT$ 65</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea28')">加入購物車</button><a href="product.html?id=tea28" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/crispy_chicken.jpg" alt="蜜桃BBQ豬排堡"></div><div class="menu-item-name">蜜桃BBQ豬排堡</div><div class="menu-item-price">NT$ 75</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea31')">加入購物車</button><a href="product.html?id=tea31" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/double_cheese.jpg" alt="芝士厚切牛排堡"></div><div class="menu-item-name">芝士厚切牛排堡</div><div class="menu-item-price">NT$ 70</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea32')">加入購物車</button><a href="product.html?id=tea32" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/crispy_chicken.jpg" alt="桂花蜜汁雞排堡"></div><div class="menu-item-name">桂花蜜汁雞排堡</div><div class="menu-item-price">NT$ 65</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea33')">加入購物車</button><a href="product.html?id=tea33" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500&auto=format&fit=crop&q=60" alt="iPhone 15 Pro Max"></div><div class="menu-item-name">iPhone 15 Pro Max</div><div class="menu-item-price">NT$ 44,900</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea01')">加入購物車</button><a href="product.html?id=tea01" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500&auto=format&fit=crop&q=60" alt="Samsung Galaxy S24 Ultra"></div><div class="menu-item-name">Samsung Galaxy S24 Ultra</div><div class="menu-item-price">NT$ 43,900</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea02')">加入購物車</button><a href="product.html?id=tea02" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=500&auto=format&fit=crop&q=60" alt="iPad Pro M4"></div><div class="menu-item-name">iPad Pro M4</div><div class="menu-item-price">NT$ 34,900</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea03')">加入購物車</button><a href="product.html?id=tea03" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=500&auto=format&fit=crop&q=60" alt="Google Pixel 8 Pro"></div><div class="menu-item-name">Google Pixel 8 Pro</div><div class="menu-item-price">NT$ 33,900</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea04')">加入購物車</button><a href="product.html?id=tea04" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60" alt="ASUS ROG Phone 8 Pro"></div><div class="menu-item-name">ASUS ROG Phone 8 Pro</div><div class="menu-item-price">NT$ 38,990</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea05')">加入購物車</button><a href="product.html?id=tea05" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60" alt="Xiaomi 14 Ultra"></div><div class="menu-item-name">Xiaomi 14 Ultra</div><div class="menu-item-price">NT$ 34,999</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea06')">加入購物車</button><a href="product.html?id=tea06" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60" alt="Sony Xperia 1 VI"></div><div class="menu-item-name">Sony Xperia 1 VI</div><div class="menu-item-price">NT$ 39,990</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea07')">加入購物車</button><a href="product.html?id=tea07" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1589739900243-4b52cd9b104e?w=500&auto=format&fit=crop&q=60" alt="iPad Air 6"></div><div class="menu-item-name">iPad Air 6</div><div class="menu-item-price">NT$ 19,900</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea08')">加入購物車</button><a href="product.html?id=tea08" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=500&auto=format&fit=crop&q=60" alt="Samsung Galaxy Tab S9"></div><div class="menu-item-name">Samsung Galaxy Tab S9</div><div class="menu-item-price">NT$ 23,990</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea09')">加入購物車</button><a href="product.html?id=tea09" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500&auto=format&fit=crop&q=60" alt="iPhone 15"></div><div class="menu-item-name">iPhone 15</div><div class="menu-item-price">NT$ 29,900</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea10')">加入購物車</button><a href="product.html?id=tea10" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=500&auto=format&fit=crop&q=60" alt="Google Pixel 8a"></div><div class="menu-item-name">Google Pixel 8a</div><div class="menu-item-price">NT$ 16,490</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea11')">加入購物車</button><a href="product.html?id=tea11" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=500&auto=format&fit=crop&q=60" alt="Xiaomi Redmi Note 13 Pro"></div><div class="menu-item-name">Xiaomi Redmi Note 13 Pro</div><div class="menu-item-price">NT$ 9,999</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea12')">加入購物車</button><a href="product.html?id=tea12" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60" alt="ASUS Zenfone 11 Ultra"></div><div class="menu-item-name">ASUS Zenfone 11 Ultra</div><div class="menu-item-price">NT$ 29,990</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea13')">加入購物車</button><a href="product.html?id=tea13" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=500&auto=format&fit=crop&q=60" alt="OPPO Reno11 Pro"></div><div class="menu-item-name">OPPO Reno11 Pro</div><div class="menu-item-price">NT$ 16,990</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea27')">加入購物車</button><a href="product.html?id=tea27" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60" alt="Sony Xperia 10 VI"></div><div class="menu-item-name">Sony Xperia 10 VI</div><div class="menu-item-price">NT$ 13,990</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea28')">加入購物車</button><a href="product.html?id=tea28" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500&auto=format&fit=crop&q=60" alt="Samsung Galaxy Fold 5"></div><div class="menu-item-name">Samsung Galaxy Fold 5</div><div class="menu-item-price">NT$ 56,888</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea31')">加入購物車</button><a href="product.html?id=tea31" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500&auto=format&fit=crop&q=60" alt="iPhone 15 Plus"></div><div class="menu-item-name">iPhone 15 Plus</div><div class="menu-item-price">NT$ 32,900</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea32')">加入購物車</button><a href="product.html?id=tea32" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1589739900243-4b52cd9b104e?w=500&auto=format&fit=crop&q=60" alt="iPad 10th Gen"></div><div class="menu-item-name">iPad 10th Gen</div><div class="menu-item-price">NT$ 11,900</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea33')">加入購物車</button><a href="product.html?id=tea33" class="menu-button learn-more">詳細</a></div></div>
         </div>
     </section>
 
-    <section id="donuts" class="menu-section" style="background: #fff8f8;">
-        <h2 class="menu-title" style="border-color: #FF6B6B;">🍟 經典配餐</h2>
-        <p class="menu-subtitle">Classic Sides & Desserts</p>
+    <section id="donuts" class="menu-section" style="background: rgba(28, 43, 90, 0.02);">
+        <h2 class="menu-title" style="border-color: #C5A880;">💻 電腦週邊與配件</h2>
+        <p class="menu-subtitle">Computers & Accessories</p>
         <div class="menu-grid">
-            <div class="menu-item"><div class="menu-item-image"><img src="image/fries.jpg" alt="薯條(大)"></div><div class="menu-item-name">薯條(大)</div><div class="menu-item-price">NT$ 45</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('donut01')">加入購物車</button><a href="product.html?id=donut01" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/sundae.jpg" alt="巧克力聖代"></div><div class="menu-item-name">巧克力聖代</div><div class="menu-item-price">NT$ 50</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('donut02')">加入購物車</button><a href="product.html?id=donut02" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/onion_rings.jpg" alt="洋蔥圈(大)"></div><div class="menu-item-name">洋蔥圈(大)</div><div class="menu-item-price">NT$ 50</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('donut03')">加入購物車</button><a href="product.html?id=donut03" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/nuggets.jpg" alt="雞塊(8塊)"></div><div class="menu-item-name">雞塊(8塊)</div><div class="menu-item-price">NT$ 45</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('donut04')">加入購物車</button><a href="product.html?id=donut04" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/nuggets.jpg" alt="辣味雞翅(4塊)"></div><div class="menu-item-name">辣味雞翅(4塊)</div><div class="menu-item-price">NT$ 55</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('donut05')">加入購物車</button><a href="product.html?id=donut05" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/fries.jpg" alt="芝司起司球"></div><div class="menu-item-name">芝司起司球</div><div class="menu-item-price">NT$ 55</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('donut06')">加入購物車</button><a href="product.html?id=donut06" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/sundae.jpg" alt="抹茶布朗尼聖代"></div><div class="menu-item-name">抹茶布朗尼聖代</div><div class="menu-item-price">NT$ 55</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('donut07')">加入購物車</button><a href="product.html?id=donut07" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500&auto=format&fit=crop&q=60" alt="Logitech MX Master 3S"></div><div class="menu-item-name">Logitech MX Master 3S</div><div class="menu-item-price">NT$ 3,290</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('donut01')">加入購物車</button><a href="product.html?id=donut01" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500&auto=format&fit=crop&q=60" alt="Keychron K2 機械鍵盤"></div><div class="menu-item-name">Keychron K2 機械鍵盤</div><div class="menu-item-price">NT$ 2,580</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('donut02')">加入購物車</button><a href="product.html?id=donut02" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&auto=format&fit=crop&q=60" alt="MacBook Pro M3"></div><div class="menu-item-name">MacBook Pro M3</div><div class="menu-item-price">NT$ 54,900</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('donut03')">加入購物車</button><a href="product.html?id=donut03" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=500&auto=format&fit=crop&q=60" alt="ASUS RT-AX88U Pro 路由器"></div><div class="menu-item-name">ASUS RT-AX88U Pro 路由器</div><div class="menu-item-price">NT$ 8,888</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('donut04')">加入購物車</button><a href="product.html?id=donut04" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=500&auto=format&fit=crop&q=60" alt="WD Black SN850X 2TB SSD"></div><div class="menu-item-name">WD Black SN850X 2TB SSD</div><div class="menu-item-price">NT$ 5,290</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('donut05')">加入購物車</button><a href="product.html?id=donut05" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500&auto=format&fit=crop&q=60" alt="ROG Swift PG32UCDM 螢幕"></div><div class="menu-item-name">ROG Swift PG32UCDM 螢幕</div><div class="menu-item-price">NT$ 42,900</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('donut06')">加入購物車</button><a href="product.html?id=donut06" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=60" alt="Sony WH-1000XM5 耳機"></div><div class="menu-item-name">Sony WH-1000XM5 耳機</div><div class="menu-item-price">NT$ 9,900</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('donut07')">加入購物車</button><a href="product.html?id=donut07" class="menu-button learn-more">詳細</a></div></div>
         </div>
     </section>
 
-    <section id="fruits" class="menu-section" style="background: #f4fff8;">
-        <h2 class="menu-title" style="border-color: #2ECC71;">🥤 沁涼飲料</h2>
-        <p class="menu-subtitle">Refreshing Drinks</p>
+    <section id="fruits" class="menu-section" style="background: rgba(28, 43, 90, 0.04);">
+        <h2 class="menu-title" style="border-color: #C5A880;">🏠 智慧穿戴與智能家居</h2>
+        <p class="menu-subtitle">Smart Wearables & Smart Home</p>
         <div class="menu-grid">
-            <div class="menu-item"><div class="menu-item-image"><img src="image/cola.jpg" alt="百事可樂(大)"></div><div class="menu-item-name">百事可樂(大)</div><div class="menu-item-price">NT$ 100</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit01')">加入購物車</button><a href="product.html?id=fruit01" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/cola.jpg" alt="七喜汽水(大)"></div><div class="menu-item-name">七喜汽水(大)</div><div class="menu-item-price">NT$ 80</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit02')">加入購物車</button><a href="product.html?id=fruit02" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/cola.jpg" alt="激浪汽水"></div><div class="menu-item-name">激浪汽水</div><div class="menu-item-price">NT$ 50</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit03')">加入購物車</button><a href="product.html?id=fruit03" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/tea.jpg" alt="檸檬紅茶(大)"></div><div class="menu-item-name">檸檬紅茶(大)</div><div class="menu-item-price">NT$ 150</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit04')">加入購物車</button><a href="product.html?id=fruit04" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/coffee.jpg" alt="美式咖啡(熱)"></div><div class="menu-item-name">美式咖啡(熱)</div><div class="menu-item-price">NT$ 40</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit05')">加入購物車</button><a href="product.html?id=fruit05" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/coffee.jpg" alt="拿鐵咖啡(冰)"></div><div class="menu-item-name">拿鐵咖啡(冰)</div><div class="menu-item-price">NT$ 85</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit06')">加入購物車</button><a href="product.html?id=fruit06" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/tea.jpg" alt="熱鮮奶茶"></div><div class="menu-item-name">熱鮮奶茶</div><div class="menu-item-price">NT$ 120</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit07')">加入購物車</button><a href="product.html?id=fruit07" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/tea.jpg" alt="無糖綠茶(大)"></div><div class="menu-item-name">無糖綠茶(大)</div><div class="menu-item-price">NT$ 70</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit08')">加入購物車</button><a href="product.html?id=fruit08" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/cola.jpg" alt="柳橙汁"></div><div class="menu-item-name">柳橙汁</div><div class="menu-item-price">NT$ 90</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit09')">加入購物車</button><a href="product.html?id=fruit09" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/cola.jpg" alt="巧克力奶昔"></div><div class="menu-item-name">巧克力奶昔</div><div class="menu-item-price">NT$ 65</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit10')">加入購物車</button><a href="product.html?id=fruit10" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/tea.jpg" alt="鮮磨豆漿"></div><div class="menu-item-name">鮮磨豆漿</div><div class="menu-item-price">NT$ 55</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit11')">加入購物車</button><a href="product.html?id=fruit11" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="image/tea.jpg" alt="伯爵奶茶(冰)"></div><div class="menu-item-name">伯爵奶茶(冰)</div><div class="menu-item-price">NT$ 85</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit12')">加入購物車</button><a href="product.html?id=fruit12" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500&auto=format&fit=crop&q=60" alt="Apple Watch Series 9"></div><div class="menu-item-name">Apple Watch Series 9</div><div class="menu-item-price">NT$ 13,500</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit01')">加入購物車</button><a href="product.html?id=fruit01" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=500&auto=format&fit=crop&q=60" alt="Garmin Venu 3"></div><div class="menu-item-name">Garmin Venu 3</div><div class="menu-item-price">NT$ 14,990</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit02')">加入購物車</button><a href="product.html?id=fruit02" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1588449668365-d15e397f6787?w=500&auto=format&fit=crop&q=60" alt="AirPods Pro 2"></div><div class="menu-item-name">AirPods Pro 2</div><div class="menu-item-price">NT$ 7,490</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit03')">加入購物車</button><a href="product.html?id=fruit03" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1543512214-318c7553f230?w=500&auto=format&fit=crop&q=60" alt="Google Nest Hub 2"></div><div class="menu-item-name">Google Nest Hub 2</div><div class="menu-item-price">NT$ 3,180</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit04')">加入購物車</button><a href="product.html?id=fruit04" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=500&auto=format&fit=crop&q=60" alt="Dyson Purifier Cool"></div><div class="menu-item-name">Dyson Purifier Cool</div><div class="menu-item-price">NT$ 18,900</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit05')">加入購物車</button><a href="product.html?id=fruit05" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1550985616-10810253b84d?w=500&auto=format&fit=crop&q=60" alt="Philips Hue 智慧燈泡"></div><div class="menu-item-name">Philips Hue 智慧燈泡</div><div class="menu-item-price">NT$ 4,990</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit06')">加入購物車</button><a href="product.html?id=fruit06" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=500&auto=format&fit=crop&q=60" alt="Nintendo Switch OLED"></div><div class="menu-item-name">Nintendo Switch OLED</div><div class="menu-item-price">NT$ 10,480</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit07')">加入購物車</button><a href="product.html?id=fruit07" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?w=500&auto=format&fit=crop&q=60" alt="DJI Mini 4 Pro 空拍機"></div><div class="menu-item-name">DJI Mini 4 Pro 空拍機</div><div class="menu-item-price">NT$ 22,090</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit08')">加入購物車</button><a href="product.html?id=fruit08" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&auto=format&fit=crop&q=60" alt="GoPro HERO12 Black"></div><div class="menu-item-name">GoPro HERO12 Black</div><div class="menu-item-price">NT$ 14,900</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit09')">加入購物車</button><a href="product.html?id=fruit09" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1543512214-318c7553f230?w=500&auto=format&fit=crop&q=60" alt="HomePod 智慧音箱"></div><div class="menu-item-name">HomePod 智慧音箱</div><div class="menu-item-price">NT$ 9,300</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit10')">加入購物車</button><a href="product.html?id=fruit10" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1558002038-1055907df827?w=500&auto=format&fit=crop&q=60" alt="Xiaomi 智慧攝影機 C400"></div><div class="menu-item-name">Xiaomi 智慧攝影機 C400</div><div class="menu-item-price">NT$ 1,095</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit11')">加入購物車</button><a href="product.html?id=fruit11" class="menu-button learn-more">詳細</a></div></div>
+            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1558317374-067fb5f30001?w=500&auto=format&fit=crop&q=60" alt="Dyson V15 Detect"></div><div class="menu-item-name">Dyson V15 Detect</div><div class="menu-item-price">NT$ 24,900</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit12')">加入購物車</button><a href="product.html?id=fruit12" class="menu-button learn-more">詳細</a></div></div>
         </div>
     </section>
 
     <footer class="footer">
         <div class="footer-section">
             <h3>品牌區塊</h3>
-            <p>漢堡王 Burger King - 漢堡 x 配餐 x 飲料</p>
+            <p>得正 3C - 手機平板 x 電腦週邊 x 智慧家居</p>
             <div class="social-links">
                 <a href="https://instagram.com" target="_blank"><img src="image/Instagram-logo.png" alt="Instagram Logo" class="social-logo"> Instagram</a>
                 <a href="https://line.me" target="_blank"><img src="image/line-logo.png" alt="LINE Logo" class="social-logo"> LINE</a>
@@ -527,11 +283,11 @@
         <div class="footer-section">
             <h3>BUSINESS 商業區塊</h3>
             <ul>
-                <li><a href="#drinks">🍔 經典漢堡</a></li>
-                <li><a href="#donuts">🍟 經典配餐</a></li>
-                <li><a href="#fruits">🥤 沁涼飲料</a></li>
+                <li><a href="#drinks">📱 智慧手機與平板</a></li>
+                <li><a href="#donuts">💻 電腦週邊與配件</a></li>
+                <li><a href="#fruits">🏠 智慧穿戴與智能家居</a></li>
                 <li><a href="leaderboard.html">⭐ 熱銷排行</a></li>
-                <li><a href="database_demo.html" style="color:#1a73e8; font-weight:bold;">📦 資料庫展示頁</a></li>
+                <li><a href="database_demo.html" style="color:#C5A880; font-weight:bold;">📦 資料庫展示頁</a></li>
             </ul>
         </div>
         <div class="footer-section">
@@ -542,7 +298,7 @@
         </div>
         <div class="footer-section">
             <h3>版權資訊</h3>
-            <p>© 2026 漢堡王 Burger King. All rights reserved.</p>
+            <p>© 2026 得正 3C. All rights reserved.</p>
             <p>設計製作者：薛翔謙</p>
         </div>
     </footer>
@@ -559,44 +315,83 @@
             const navUser = document.getElementById('nav-user');
             const navLogout = document.getElementById('nav-logout');
             const userDisplay = document.getElementById('user-display');
+            const navbar = document.querySelector('.navbar');
+            const mobileMemberDisplay = document.getElementById('mobile-member-display');
 
             if (user) {
                 navLogin.style.display = 'none';
                 navUser.style.display = 'block';
                 navLogout.style.display = 'block';
-                userDisplay.innerHTML = `<i class="fa-solid fa-user-check"></i> 會員 ${user.displayName || user.email.split('@')[0]}`;
+                const memberName = user.displayName || user.email.split('@')[0];
+                userDisplay.innerHTML = `<i class="fa-solid fa-user-check"></i> 會員 ${memberName}`;
+                if (mobileMemberDisplay) {
+                    mobileMemberDisplay.innerHTML = `<i class="fa-solid fa-user-check" style="color: #C5A880;"></i> 會員:${memberName}`;
+                }
+                if (navbar) {
+                    navbar.classList.add('logged-in');
+                }
             } else {
                 navLogin.style.display = 'block';
                 navUser.style.display = 'none';
                 navLogout.style.display = 'none';
+                if (navbar) {
+                    navbar.classList.remove('logged-in');
+                }
             }
         });
 
         document.getElementById('btn-logout').addEventListener('click', (e) => {
             e.preventDefault();
-            if(confirm("確定要登出嗎？")) { localStorage.removeItem('burgerking_cart'); signOut(auth).then(() => { window.location.reload(); }); }
+            if(confirm("確定要登出嗎？")) { localStorage.removeItem('dejeng3c_cart'); signOut(auth).then(() => { window.location.reload(); }); }
         });
     </script>
 
     <script>
         function addToCart(itemId) {
-            let cart = JSON.parse(localStorage.getItem('burgerking_cart')) || [];
-            let defSugar = itemId.startsWith('tea') ? '正常醬' : '--';
-            let defIce = itemId.startsWith('tea') ? '正常配料' : '--';
-            let alertMsg = itemId.startsWith('tea') ? '(預設正常醬、正常配料)' : '';
+            let cart = JSON.parse(localStorage.getItem('dejeng3c_cart')) || [];
+            let defSugar = itemId.startsWith('tea') ? '256GB' : '--';
+            let defIce = itemId.startsWith('tea') ? '鈦灰色' : '--';
+            let alertMsg = itemId.startsWith('tea') ? '(預設256GB、鈦灰色)' : '';
 
+            // Find product name in DOM
+            let pName = "";
+            const items = document.querySelectorAll('.menu-item');
+            for (let item of items) {
+                const btn = item.querySelector('.buy');
+                if (btn) {
+                    const match = btn.getAttribute('onclick').match(/'([^']+)'/);
+                    if (match && match[1] === itemId) {
+                        const nameNode = item.querySelector('.menu-item-name');
+                        if (nameNode) {
+                            pName = nameNode.innerText.trim();
+                            break;
+                        }
+                    }
+                }
+            }
+
+            // Verify stock
+            const inventory = syncInventory();
+            const stock = (pName && inventory[pName] !== undefined) ? inventory[pName] : 100;
             const existingIndex = cart.findIndex(item => item.id === itemId && item.sugar === defSugar && item.ice === defIce);
+            let currentQtyInCart = existingIndex > -1 ? cart[existingIndex].qty : 0;
+            
+            if (currentQtyInCart + 1 > stock) {
+                alert(`抱歉，【${pName || itemId}】已無足夠庫存！目前庫存剩餘 ${stock} 件，您的購物車中已有 ${currentQtyInCart} 件。`);
+                return;
+            }
+
             if (existingIndex > -1) { cart[existingIndex].qty += 1; } 
             else { cart.push({ id: itemId, qty: 1, sugar: defSugar, ice: defIce }); }
             
-            localStorage.setItem('burgerking_cart', JSON.stringify(cart));
+            localStorage.setItem('dejeng3c_cart', JSON.stringify(cart));
             updateCartBadge();
             alert(`商品已加入購物車！${alertMsg}`);
             window.location.href = "cart.html";
         }
 
         function updateCartBadge() {
-            let cart = JSON.parse(localStorage.getItem('burgerking_cart')) || [];
+            let cart = JSON.parse(localStorage.getItem('dejeng3c_cart')) || [];
             let totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
             let badge = document.getElementById('cart-badge');
             if(badge) {
@@ -607,11 +402,79 @@
                     badge.style.display = 'none';
                 }
             }
+            let logoBadge = document.getElementById('logo-cart-badge');
+            if(logoBadge) {
+                if(totalQty > 0) {
+                    logoBadge.style.display = 'inline-block';
+                    logoBadge.innerText = totalQty;
+                } else {
+                    logoBadge.style.display = 'none';
+                }
+            }
+        }
+        
+        function syncInventory() {
+            let baseInventory = JSON.parse(localStorage.getItem('dejeng3c_base_inventory')) || {};
+            let baseInvUpdated = false;
+            
+            const allProducts = [
+                "iPhone 15 Pro Max", "Samsung Galaxy S24 Ultra", "iPad Pro M4", "Google Pixel 8 Pro", "ASUS ROG Phone 8 Pro", 
+                "Xiaomi 14 Ultra", "Sony Xperia 1 VI", "iPad Air 6", "Samsung Galaxy Tab S9", "iPhone 15", 
+                "Google Pixel 8a", "Xiaomi Redmi Note 13 Pro", "ASUS Zenfone 11 Ultra", "OPPO Reno11 Pro", "Sony Xperia 10 VI", 
+                "Samsung Galaxy Fold 5", "iPhone 15 Plus", "iPad 10th Gen", "Logitech MX Master 3S", "Keychron K2 機械鍵盤", 
+                "MacBook Pro M3", "ASUS RT-AX88U Pro 路由器", "WD Black SN850X 2TB SSD", "ROG Swift PG32UCDM 螢幕", "Sony WH-1000XM5 耳機", 
+                "Apple Watch Series 9", "Garmin Venu 3", "AirPods Pro 2", "Google Nest Hub 2", "Dyson Purifier Cool", 
+                "Philips Hue 智慧燈泡", "Nintendo Switch OLED", "DJI Mini 4 Pro 空拍機", "GoPro HERO12 Black", "HomePod 智慧音箱", 
+                "Xiaomi 智慧攝影機 C400", "Dyson V15 Detect"
+            ];
+            
+            allProducts.forEach(name => {
+                if (baseInventory[name] === undefined) {
+                    baseInventory[name] = Math.floor(Math.random() * 101) + 20; // 隨機庫存 20-120
+                    baseInvUpdated = true;
+                }
+            });
+            
+            if (baseInvUpdated) {
+                localStorage.setItem('dejeng3c_base_inventory', JSON.stringify(baseInventory));
+            }
+            
+            const orders = JSON.parse(localStorage.getItem('dejeng3c_orders')) || [];
+            const computedInventory = {};
+            for (let name in baseInventory) {
+                computedInventory[name] = baseInventory[name];
+            }
+            
+            orders.forEach(order => {
+                if (order.items && Array.isArray(order.items)) {
+                    order.items.forEach(itemStr => {
+                        const match = itemStr.match(/(.*?)(?:\s*\(.*?\))?\s*x(\d+)/);
+                        if (match) {
+                            const pName = match[1].trim();
+                            const pQty = parseInt(match[2]);
+                            if (computedInventory[pName] !== undefined) {
+                                computedInventory[pName] -= pQty;
+                            } else {
+                                baseInventory[pName] = Math.floor(Math.random() * 101) + 20;
+                                baseInvUpdated = true;
+                                computedInventory[pName] = baseInventory[pName] - pQty;
+                            }
+                        }
+                    });
+                }
+            });
+            
+            if (baseInvUpdated) {
+                localStorage.setItem('dejeng3c_base_inventory', JSON.stringify(baseInventory));
+            }
+            
+            localStorage.setItem('dejeng3c_computed_inventory', JSON.stringify(computedInventory));
+            return computedInventory;
         }
         
         function updateProductStatus() {
-            const inventory = JSON.parse(localStorage.getItem('burgerking_computed_inventory')) || {};
-            const statusSettings = JSON.parse(localStorage.getItem('burgerking_product_settings')) || {};
+            const inventory = syncInventory();
+            const statusSettings = JSON.parse(localStorage.getItem('dejeng3c_product_settings')) || {};
             
             document.querySelectorAll('.menu-item').forEach(item => {
                 const btn = item.querySelector('.buy');
@@ -655,6 +518,136 @@
                     btn.style.cursor = 'not-allowed';
                     btn.innerText = '已完售';
                 }
+
+                // New remaining stock badge display logic
+                let stock = inventory[pName] !== undefined ? inventory[pName] : 100;
+                let stockEl = item.querySelector('.menu-item-stock');
+                if (!stockEl) {
+                    stockEl = document.createElement('div');
+                    stockEl.className = 'menu-item-stock';
+                    stockEl.style.fontSize = '0.8rem';
+                    stockEl.style.fontWeight = '600';
+                    stockEl.style.marginBottom = '10px';
+                    stockEl.style.padding = '4px 10px';
+                    stockEl.style.borderRadius = '12px';
+                    stockEl.style.display = 'inline-flex';
+                    stockEl.style.alignItems = 'center';
+                    stockEl.style.gap = '5px';
+                    
+                    const priceEl = item.querySelector('.menu-item-price');
+                    if (priceEl) {
+                        priceEl.parentNode.insertBefore(stockEl, priceEl.nextSibling);
+                    } else {
+                        item.appendChild(stockEl);
+                    }
+                }
+                
+                if (isDelisted) {
+                    stockEl.style.color = '#7f8c8d';
+                    stockEl.style.backgroundColor = '#f0f3f4';
+                    stockEl.innerHTML = `<i class="fa-solid fa-box-archive"></i> 庫存: --`;
+                } else if (stock <= 0) {
+                    stockEl.style.color = '#e74c3c';
+                    stockEl.style.backgroundColor = '#fdedec';
+                    stockEl.innerHTML = `<i class="fa-solid fa-box-archive"></i> 庫存剩下: 0`;
+                } else if (stock <= 10) {
+                    stockEl.style.color = '#e67e22';
+                    stockEl.style.backgroundColor = '#fdf2e9';
+                    stockEl.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> 僅剩: ${stock}`;
+                } else {
+                    stockEl.style.color = '#27ae60';
+                    stockEl.style.backgroundColor = '#e8f8f5';
+                    stockEl.innerHTML = `<i class="fa-solid fa-box-open"></i> 庫存剩下: ${stock}`;
+                }
+
+                // 促銷特價顯示邏輯
+                const priceEl = item.querySelector('.menu-item-price');
+                if (priceEl) {
+                    if (!priceEl.dataset.originalPrice) {
+                        const origText = priceEl.innerText.trim();
+                        const numMatch = origText.match(/\d+/);
+                        if (numMatch) {
+                            priceEl.dataset.originalPrice = numMatch[0];
+                        }
+                    }
+                    const originalPrice = parseInt(priceEl.dataset.originalPrice, 10);
+                    const promoPrice = statusSettings[pName]?.promoPrice;
+                    
+                    let saleBadge = imageContainer.querySelector('.sale-badge');
+                    if (promoPrice && promoPrice < originalPrice) {
+                        priceEl.innerHTML = `<span style="text-decoration: line-through; color: #95a5a6; font-size: 0.9rem; margin-right: 5px;">NT$ ${originalPrice}</span><span style="color: #e74c3c; font-weight: bold; font-size: 1.15rem;">NT$ ${promoPrice}</span>`;
+                        
+                        if (!saleBadge && !isDelisted && !isSoldOut) {
+                            saleBadge = document.createElement('div');
+                            saleBadge.className = 'sale-badge';
+                            saleBadge.style = 'position: absolute; top: 10px; right: 10px; background: linear-gradient(135deg, #ff416c, #ff4b2b); color: white; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; z-index: 5; box-shadow: 0 4px 8px rgba(255, 65, 108, 0.4); border: 1px solid rgba(255,255,255,0.2); pointer-events: none; animation: pulse-sale 2s infinite;';
+                            saleBadge.innerHTML = `<i class="fa-solid fa-fire"></i> SALE`;
+                            imageContainer.style.position = 'relative';
+                            imageContainer.appendChild(saleBadge);
+                        }
+                    } else {
+                        priceEl.innerHTML = `NT$ ${originalPrice}`;
+                        if (saleBadge) saleBadge.remove();
+                    }
+                    
+                    // 如果商品已下架或已完售，應移除 SALE 徽章以免干擾畫面
+                    if ((isDelisted || isSoldOut) && saleBadge) {
+                        saleBadge.remove();
+                    }
+                }
+            });
+
+            // 將特價商品排列在最上面
+            document.querySelectorAll('.menu-grid').forEach(grid => {
+                const items = Array.from(grid.querySelectorAll('.menu-item'));
+                
+                // 先給每個 item 標記一個初始 index，便於穩定排序
+                items.forEach((item, index) => {
+                    if (item.dataset.originalIndex === undefined) {
+                        item.dataset.originalIndex = index;
+                    }
+                });
+
+                items.sort((a, b) => {
+                    const nameA = a.querySelector('.menu-item-name')?.innerText.trim() || '';
+                    const nameB = b.querySelector('.menu-item-name')?.innerText.trim() || '';
+                    
+                    const priceElA = a.querySelector('.menu-item-price');
+                    const priceElB = b.querySelector('.menu-item-price');
+                    const origA = priceElA ? (parseInt(priceElA.dataset.originalPrice, 10) || 0) : 0;
+                    const origB = priceElB ? (parseInt(priceElB.dataset.originalPrice, 10) || 0) : 0;
+                    
+                    const promoA = parseInt(statusSettings[nameA]?.promoPrice, 10) || 0;
+                    const promoB = parseInt(statusSettings[nameB]?.promoPrice, 10) || 0;
+                    
+                    const isDelistedA = statusSettings[nameA] && statusSettings[nameA].status === 'delisted';
+                    const isDelistedB = statusSettings[nameB] && statusSettings[nameB].status === 'delisted';
+                    const stockA = inventory[nameA] !== undefined ? inventory[nameA] : 100;
+                    const stockB = inventory[nameB] !== undefined ? inventory[nameB] : 100;
+                    const isSoldOutA = stockA <= 0;
+                    const isSoldOutB = stockB <= 0;
+                    
+                    // 只有未下架且未售罄的促銷特價才是「有效特價」
+                    const isSaleActiveA = (promoA && promoA < origA && !isDelistedA && !isSoldOutA) ? 1 : 0;
+                    const isSaleActiveB = (promoB && promoB < origB && !isDelistedB && !isSoldOutB) ? 1 : 0;
+                    
+                    if (isSaleActiveA !== isSaleActiveB) {
+                        return isSaleActiveB - isSaleActiveA; // 特價商品排前面
+                    }
+                    
+                    // 如果兩者特價狀態相同，則再判斷是否可售 (未下架且未售罄的排在前面)
+                    const isAvailableA = (!isDelistedA && !isSoldOutA) ? 1 : 0;
+                    const isAvailableB = (!isDelistedB && !isSoldOutB) ? 1 : 0;
+                    if (isAvailableA !== isAvailableB) {
+                        return isAvailableB - isAvailableA;
+                    }
+                    
+                    // 最後保持原有順序
+                    return parseInt(a.dataset.originalIndex, 10) - parseInt(b.dataset.originalIndex, 10);
+                });
+                
+                // 重新放入 DOM
+                items.forEach(item => grid.appendChild(item));
             });
         }
         

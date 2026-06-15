@@ -4,53 +4,156 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>商品介紹 - 漢堡王 Burger King</title>
+    <title>商品介紹 - 得正 3C</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f4f6f8; min-height: 100vh; display: flex; flex-direction: column; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: radial-gradient(circle at 10% 20%, rgba(28, 43, 90, 0.05) 0%, rgba(244, 246, 248, 1) 90.1%); min-height: 100vh; display: flex; flex-direction: column; }
         
-        .navbar { background: #B0E0E6; padding: 10px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        .navbar { background: #1C2B5A; padding: 10px 20px; border-bottom: 2px solid #C5A880; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
         .navbar-container { display: flex; justify-content: space-between; align-items: center; gap: 15px; }
-        .navbar-logo { display: flex; align-items: center; font-size: 1.5rem; font-weight: bold; color: #2F4F4F; text-decoration: none; }
-        .navbar-logo .logo { width: 40px; height: 40px; margin-right: 10px; }
-        .navbar-menu { display: flex; list-style: none; gap: 20px; align-items: center; }
-        .navbar-menu a { text-decoration: none; color: #2F4F4F; font-weight: 500; transition: color 0.3s ease; font-size: 0.95rem; }
-        .navbar-menu a:hover { color: #4682B4; }
+        .navbar-brand-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .navbar-brand-link:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.05);
+        }
+        .navbar-brand-logo-img {
+            height: 38px;
+            width: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .navbar-brand-text {
+            font-weight: bold;
+            color: white;
+            font-size: 1.15rem;
+            white-space: nowrap;
+        }
+        .navbar-left-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.05rem;
+            font-weight: bold;
+            color: white !important;
+            background: #C5A880;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(197, 168, 128, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .navbar-logo:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(197, 168, 128, 0.5);
+            filter: brightness(1.1);
+        }
+        #logo-cart-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #C5A880;
+            color: white !important;
+            border-radius: 50%;
+            min-width: 18px;
+            height: 18px;
+            line-height: 15px;
+            text-align: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+            border: 1.5px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            padding: 0 2px;
+            box-sizing: border-box;
+        }
+        .navbar-menu { display: flex; list-style: none; gap: 20px; align-items: center; margin: 0; padding: 0; }
+        .navbar-menu li { position: relative; }
+        .navbar-menu a { text-decoration: none; color: white; font-weight: 500; transition: color 0.3s ease; font-size: 0.95rem; }
+        .navbar-menu a:hover { color: #C5A880; }
+        .navbar-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: white; }
+
+        .mobile-member-display {
+            display: none;
+            font-size: 0.95rem;
+            font-weight: bold;
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            white-space: nowrap;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            height: 38px;
+        }
+        .mobile-member-display:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            color: #C5A880;
+        }
 
         .product-page-wrapper { flex: 1; padding: 4rem 2rem; display: flex; justify-content: center; align-items: center; }
         .product-detail-container { 
             background: white; max-width: 1000px; width: 100%; border-radius: 20px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.08); display: flex; overflow: hidden; position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.06); display: flex; overflow: hidden; position: relative;
         }
         .breadcrumb { position: absolute; top: 20px; left: 30px; font-size: 0.9rem; color: #888; }
-        .breadcrumb a { color: #48C9B0; text-decoration: none; }
+        .breadcrumb a { color: #C5A880; text-decoration: none; }
         
-        .image-section { flex: 1; background: linear-gradient(135deg, #E0F6FF 0%, #B0E0E6 100%); padding: 4rem; display: flex; justify-content: center; align-items: center; }
-        .image-section img { width: 100%; max-width: 350px; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); transition: transform 0.3s ease; }
+        .image-section { flex: 1; background: linear-gradient(135deg, rgba(28, 43, 90, 0.05) 0%, rgba(197, 168, 128, 0.15) 100%); padding: 4rem; display: flex; justify-content: center; align-items: center; }
+        .image-section img { width: 100%; max-width: 350px; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.12); transition: transform 0.3s ease; }
         .image-section img:hover { transform: scale(1.03); }
 
         .info-section { flex: 1; padding: 4rem 3rem; display: flex; flex-direction: column; justify-content: center; }
         .badge { display: inline-block; background: #FF6B6B; color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; margin-bottom: 15px; letter-spacing: 1px; }
-        .pd-title { font-size: 2.5rem; color: #2F4F4F; font-weight: 700; margin-bottom: 15px; }
+        .pd-title { font-size: 2.5rem; color: #1C2B5A; font-weight: 700; margin-bottom: 15px; }
         .pd-desc { font-size: 1rem; color: #666; line-height: 1.8; margin-bottom: 25px; }
-        .pd-price { font-size: 2.2rem; font-weight: 700; color: #1a73e8; margin-bottom: 25px; }
+        .pd-price { font-size: 2.2rem; font-weight: 700; color: #1C2B5A; margin-bottom: 25px; }
         
         .option-group { margin-bottom: 20px; }
-        .option-title { font-weight: 600; color: #4682B4; margin-bottom: 10px; font-size: 1.1rem; }
+        .option-title { font-weight: 600; color: #1C2B5A; margin-bottom: 10px; font-size: 1.1rem; }
         .pill-container { display: flex; flex-wrap: wrap; gap: 10px; }
-        .pill { padding: 8px 18px; border: 2px solid #B0E0E6; border-radius: 30px; color: #4682B4; font-size: 0.95rem; font-weight: 500; cursor: pointer; transition: all 0.3s ease; }
-        .pill:hover { border-color: #48C9B0; color: #48C9B0; }
-        .pill.active { background: linear-gradient(135deg, #48C9B0 0%, #1ABC9C 100%); color: white; border-color: transparent; box-shadow: 0 4px 10px rgba(72, 201, 176, 0.3); }
+        .pill { padding: 8px 18px; border: 2px solid #1C2B5A; border-radius: 30px; color: #1C2B5A; font-size: 0.95rem; font-weight: 500; cursor: pointer; transition: all 0.3s ease; }
+        .pill:hover { border-color: #C5A880; color: #C5A880; }
+        .pill.active { background: #1C2B5A; color: white; border-color: transparent; box-shadow: 0 4px 10px rgba(28, 43, 90, 0.2); }
 
         .qty-container { display: flex; align-items: center; gap: 15px; }
-        .qty-btn { background: #B0E0E6; color: #2F4F4F; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: 0.3s; display: flex; justify-content: center; align-items: center; }
-        .qty-btn:hover { background: #48C9B0; color: white; transform: scale(1.1); }
-        .qty-input { width: 60px; height: 40px; text-align: center; border: 2px solid #B0E0E6; border-radius: 10px; font-size: 1.2rem; font-weight: bold; color: #2F4F4F; outline: none; }
+        .qty-btn { background: #1C2B5A; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: 0.3s; display: flex; justify-content: center; align-items: center; }
+        .qty-btn:hover { background: #2E4A7D; color: white; transform: scale(1.1); }
+        .qty-input { width: 60px; height: 40px; text-align: center; border: 2px solid #1C2B5A; border-radius: 10px; font-size: 1.2rem; font-weight: bold; color: #1C2B5A; outline: none; }
 
-        .btn-add-cart { background: linear-gradient(135deg, #5DADE2 0%, #4682B4 100%); color: white; border: none; padding: 18px; border-radius: 50px; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease; margin-top: 20px; box-shadow: 0 10px 20px rgba(93, 173, 226, 0.3); display: flex; justify-content: center; align-items: center; gap: 10px; }
-        .btn-add-cart:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(93, 173, 226, 0.4); }
+        .btn-add-cart { background: #1C2B5A; color: white; border: none; padding: 18px; border-radius: 50px; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease; margin-top: 20px; box-shadow: 0 10px 20px rgba(28, 43, 90, 0.2); display: flex; justify-content: center; align-items: center; gap: 10px; }
+        .btn-add-cart:hover { background: #2E4A7D; transform: translateY(-3px); box-shadow: 0 15px 25px rgba(28, 43, 90, 0.3); }
+
+        .pd-stock {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 30px;
+            width: fit-content;
+        }
 
         @media (max-width: 900px) {
             .product-detail-container { flex-direction: column; }
@@ -58,404 +161,69 @@
             .info-section { padding: 3rem 2rem; } .pd-title { font-size: 2rem; }
         }
 
+        @media (max-width: 768px) {
+            .navbar-menu { display: none; flex-direction: column; background: #1C2B5A; position: absolute; top: 100%; left: 0; right: 0; width: 100%; padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.1); }
+            .navbar-menu.active { display: flex; } .navbar-toggle { display: block; }
+            .navbar.logged-in .mobile-member-display {
+                display: flex !important;
+            }
+        }
+
         /* Footer Styles */
-        .footer { background: linear-gradient(135deg, #E8F8F5 0%, #D1F2EB 100%); padding: 4rem 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; position: relative; overflow: hidden; border-top: none; }
-        .footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #48C9B0, #1ABC9C); }
+        .footer { background: #1C2B5A; padding: 4rem 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; position: relative; overflow: hidden; border-top: 2px solid #C5A880; }
         .footer-section { display: flex; flex-direction: column; gap: 1.2rem; min-width: 0; }
-        .footer-section h3 { color: #2F4F4F; font-size: 1.3rem; font-weight: 600; position: relative; padding-bottom: 0.8rem; margin-bottom: 0.5rem; }
-        .footer-section h3::after { content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background: linear-gradient(90deg, #48C9B0, #1ABC9C); border-radius: 2px; }
-        .footer-section p, .footer-section ul li { color: #505965; font-size: 0.95rem; line-height: 1.6; margin: 0; }
+        .footer-section h3 { color: white; font-size: 1.3rem; font-weight: 600; position: relative; padding-bottom: 0.8rem; margin-bottom: 0.5rem; }
+        .footer-section h3::after { content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background: #C5A880; border-radius: 2px; }
+        .footer-section p, .footer-section ul li { color: rgba(255, 255, 255, 0.7); font-size: 0.95rem; line-height: 1.6; margin: 0; }
         .footer-section ul { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 0.8rem; }
         .footer-section ul li { display: flex; align-items: center; transition: transform 0.3s ease; white-space: nowrap; }
         .footer-section ul li a { text-decoration: none; color: inherit; width: 100%; display: inline-block; }
-        .footer-section ul li:hover { transform: translateX(5px); color: #4682B4; }
+        .footer-section ul li:hover { transform: translateX(5px); color: #C5A880; }
         .social-links { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 0.5rem; }
-        .social-links a { text-decoration: none; color: #505965; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; transition: all 0.3s ease; background: rgba(72, 201, 176, 0.1); display: inline-flex; align-items: center; white-space: nowrap; }
-        .social-links a:hover { background: linear-gradient(135deg, #48C9B0 0%, #1ABC9C 100%); color: white; transform: translateY(-2px); }
+        .social-links a { text-decoration: none; color: rgba(255, 255, 255, 0.7); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; transition: all 0.3s ease; background: rgba(255, 255, 255, 0.1); display: inline-flex; align-items: center; white-space: nowrap; }
+        .social-links a:hover { background: #C5A880; color: white; transform: translateY(-2px); }
         .social-logo { width: 20px; height: 20px; margin-right: 8px; }
-    
-    /* --- BURGER KING PREMIUM DESIGN SYSTEM OVERRIDE --- */
-    :root {
-        --bk-red: #D62300;
-        --bk-orange: #F2A900;
-        --bk-dark: #3C2415;
-        --bk-cream: #F7EFE9;
-        --bk-brown: #502C1E;
-        --text-light: #F7EFE9;
-        --text-muted-light: #c1a89c;
-    }
-    
-    /* Global Color System */
-    body {
-        background: linear-gradient(135deg, #1b0c07 0%, #0d0604 100%) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .navbar, .navbar-custom {
-        background: var(--bk-dark) !important;
-        border-bottom: 3px solid var(--bk-red) !important;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
-    }
-    
-    .navbar-logo, .navbar-logo span, .navbar-brand {
-        color: var(--bk-orange) !important;
-        font-family: 'Outfit', 'Noto Sans TC', sans-serif !important;
-    }
-    
-    .navbar-menu a {
-        color: var(--text-light) !important;
-    }
-    
-    .navbar-menu a:hover {
-        color: var(--bk-orange) !important;
-    }
-    
-    .navbar-toggle {
-        color: var(--bk-orange) !important;
-    }
-    
-    /* Menu / Home / Section Styles */
-    .menu-section {
-        background: #170d0a !important;
-    }
-    
-    .menu-section:nth-of-type(even) {
-        background: #110806 !important;
-    }
-    
-    .menu-title {
-        color: var(--text-light) !important;
-        border-bottom-color: var(--bk-red) !important;
-        font-family: 'Outfit', 'Noto Sans TC', sans-serif !important;
-    }
-    
-    .menu-subtitle {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .menu-item {
-        background: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.3) !important;
-    }
-    
-    .menu-item-name {
-        color: var(--text-light) !important;
-    }
-    
-    .menu-item-price {
-        color: var(--bk-orange) !important;
-    }
-    
-    .menu-button.buy {
-        background: linear-gradient(135deg, var(--bk-red) 0%, #ff6f00 100%) !important;
-        border: none !important;
-        color: white !important;
-    }
-    
-    .menu-button.buy:hover {
-        background: linear-gradient(135deg, #b31c00 0%, #e65100 100%) !important;
-        transform: translateY(-2px) !important;
-    }
-    
-    .menu-button.learn-more {
-        background: transparent !important;
-        color: var(--bk-orange) !important;
-        border-color: var(--bk-orange) !important;
-    }
-    
-    .menu-button.learn-more:hover {
-        background: rgba(242, 169, 0, 0.1) !important;
-        color: white !important;
-        border-color: white !important;
-    }
-    
-    /* Footer Overrides */
-    .footer {
-        background: linear-gradient(135deg, #251610 0%, #170d0a 100%) !important;
-        border-top: 3px solid var(--bk-red) !important;
-        color: var(--text-muted-light) !important;
-    }
-    
-    .footer::before {
-        display: none !important;
-    }
-    
-    .footer-section h3 {
-        color: var(--bk-orange) !important;
-    }
-    
-    .footer-section h3::after {
-        background: var(--bk-red) !important;
-    }
-    
-    .footer-section p, .footer-section ul li, .footer-section ul li a {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .footer-section ul li:hover, .footer-section ul li a:hover {
-        color: var(--bk-orange) !important;
-    }
-    
-    .social-links a {
-        background: rgba(242, 169, 0, 0.1) !important;
-        color: var(--bk-orange) !important;
-    }
-    
-    .social-links a:hover {
-        background: linear-gradient(135deg, var(--bk-red) 0%, var(--bk-orange) 100%) !important;
-        color: white !important;
-        transform: translateY(-2px) !important;
-    }
-    
-    /* Product Detail page */
-    .product-detail-container {
-        background: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-        box-shadow: 0 15px 35px rgba(0,0,0,0.4) !important;
-    }
-    
-    .image-section {
-        background: linear-gradient(135deg, #3c2415 0%, #251610 100%) !important;
-    }
-    
-    .info-section {
-        color: var(--text-light) !important;
-    }
-    
-    .pd-title {
-        color: var(--text-light) !important;
-    }
-    
-    .pd-desc {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .pd-price {
-        color: var(--bk-orange) !important;
-    }
-    
-    .option-title {
-        color: var(--bk-orange) !important;
-    }
-    
-    .pill {
-        border-color: var(--bk-brown) !important;
-        color: var(--text-muted-light) !important;
-    }
-    
-    .pill:hover {
-        border-color: var(--bk-orange) !important;
-        color: var(--bk-orange) !important;
-    }
-    
-    .pill.active {
-        background: linear-gradient(135deg, var(--bk-red) 0%, var(--bk-orange) 100%) !important;
-        color: white !important;
-        box-shadow: 0 4px 10px rgba(214, 35, 0, 0.3) !important;
-        border-color: transparent !important;
-    }
-    
-    .qty-btn {
-        background: var(--bk-brown) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .qty-btn:hover {
-        background: var(--bk-red) !important;
-        color: white !important;
-    }
-    
-    .qty-input {
-        border-color: var(--bk-brown) !important;
-        background: #170d0a !important;
-        color: var(--text-light) !important;
-    }
-    
-    .btn-add-cart {
-        background: linear-gradient(135deg, var(--bk-red) 0%, #ff6f00 100%) !important;
-        box-shadow: 0 10px 20px rgba(214, 35, 0, 0.3) !important;
-    }
-    
-    .btn-add-cart:hover {
-        box-shadow: 0 15px 25px rgba(214, 35, 0, 0.4) !important;
-        transform: translateY(-3px) !important;
-    }
-    
-    .breadcrumb, .breadcrumb a {
-        color: var(--text-muted-light) !important;
-    }
-    
-    /* Cart / Checkout Overrides */
-    .card, .list-card, .table-card {
-        background-color: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-        box-shadow: 0 8px 30px rgba(0,0,0,0.3) !important;
-    }
-    
-    .cart-item {
-        background-color: #1c0f0a !important;
-        border: 1px solid rgba(242, 169, 0, 0.08) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .trash-btn {
-        color: #ff6b6b !important;
-        background: transparent !important;
-        border: none !important;
-    }
-    
-    .btn-checkout, .btn-primary, .btn-gradient, .btn-login, .btn-signup {
-        background: linear-gradient(135deg, var(--bk-red) 0%, #ff6f00 100%) !important;
-        border: none !important;
-        color: white !important;
-        box-shadow: 0 4px 15px rgba(214, 35, 0, 0.3) !important;
-    }
-    
-    .btn-checkout:hover, .btn-primary:hover, .btn-gradient:hover {
-        background: linear-gradient(135deg, #b31c00 0%, #e65100 100%) !important;
-        color: white !important;
-        transform: translateY(-2px) !important;
-        box-shadow: 0 8px 20px rgba(214, 35, 0, 0.4) !important;
-    }
-    
-    .text-primary, .fs-5.text-primary, #subtotal, #final-total {
-        color: var(--bk-orange) !important;
-    }
-    
-    /* Leaderboard / Ranking */
-    .leaderboard-header h1 {
-        color: var(--bk-orange) !important;
-    }
-    
-    .leaderboard-header p {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .rank-card {
-        background-color: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .rank-name {
-        color: var(--text-light) !important;
-    }
-    
-    .rank-desc {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .rank-price {
-        color: var(--bk-orange) !important;
-    }
-    
-    .btn-rank.btn-cart {
-        background: linear-gradient(135deg, var(--bk-red) 0%, #ff6f00 100%) !important;
-        color: white !important;
-    }
-    
-    .btn-rank.btn-more {
-        border-color: var(--bk-orange) !important;
-        color: var(--bk-orange) !important;
-        background: transparent !important;
-    }
-    
-    .btn-rank.btn-more:hover {
-        background: rgba(242, 169, 0, 0.1) !important;
-        color: white !important;
-    }
-    
-    /* Database Demo / Dashboard Panel */
-    .page-title {
-        color: var(--bk-orange) !important;
-    }
-    
-    .page-subtitle {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .kpi-card {
-        background-color: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .kpi-card h3 {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .kpi-value {
-        color: var(--text-light) !important;
-    }
-    
-    .table-responsive {
-        border-color: rgba(242, 169, 0, 0.1) !important;
-    }
-    
-    .table {
-        color: var(--text-light) !important;
-    }
-    
-    .table th {
-        background-color: rgba(60, 36, 21, 0.6) !important;
-        color: var(--bk-orange) !important;
-    }
-    
-    .table td {
-        border-bottom-color: rgba(242, 169, 0, 0.1) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .table tbody tr:hover {
-        background-color: rgba(242, 169, 0, 0.05) !important;
-    }
-    
-    .pwd-input {
-        background: #170d0a !important;
-        border-color: var(--bk-brown) !important;
-        color: var(--text-light) !important;
-    }
-    
-    /* Dialog / Alerts */
-    .toast-container .toast {
-        background-color: #251610 !important;
-        border-color: var(--bk-orange) !important;
-        color: var(--text-light) !important;
-    }
-
+        @media (max-width: 480px) {
+            .navbar-brand-text { display: none; }
+        }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
         <div class="navbar-container">
-            <a href="index.html" class="navbar-logo">
-                <img src="image/logo.jpeg" alt="漢堡王 Burger King" class="logo">
-                <span>漢堡王 Burger King</span>
-            </a>
+            <div class="navbar-left-container">
+                <a href="index.html" class="navbar-brand-link">
+                    <img src="image/logo.jpeg" alt="得正 3C" class="navbar-brand-logo-img">
+                    <span class="navbar-brand-text">得正 3C</span>
+                </a>
+                <a href="cart.html" class="navbar-logo">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span id="logo-cart-badge" style="display: none;">0</span>
+                </a>
+            </div>
+            <a href="profile.html" id="mobile-member-display" class="mobile-member-display"></a>
+            <button class="navbar-toggle" id="navbarToggle">☰</button>
             <ul class="navbar-menu" id="navbarMenu">
-                <li><a href="index.html#drinks"><i class="fa-solid fa-burger"></i> 漢堡區</a></li>
-                <li><a href="index.html#donuts"><i class="fa-solid fa-cheese"></i> 配餐區</a></li>
-                <li><a href="index.html#fruits"><i class="fa-solid fa-glass-water"></i> 飲料區</a></li>
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> 首頁</a></li>
+                <li><a href="index.html#drinks"><i class="fa-solid fa-mobile-screen-button"></i> 手機平板</a></li>
+                <li><a href="index.html#donuts"><i class="fa-solid fa-keyboard"></i> 電腦週邊</a></li>
+                <li><a href="index.html#fruits"><i class="fa-solid fa-house-laptop"></i> 智慧家居</a></li>
                 <li><a href="leaderboard.html"><i class="fa-solid fa-crown"></i> 排行榜</a></li>
-                <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i> 購物車 <span id="cart-badge" style="background: #e74c3c; color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.75rem; vertical-align: top; display: none;">0</span></a></li>
+                <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i> 購物車 <span id="cart-badge" style="background: #C5A880; color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.75rem; vertical-align: top; display: none;">0</span></a></li>
                 
-                <li><a href="database_demo.html" style="color: #e74c3c; font-weight: bold;"><i class="fa-solid fa-database"></i> 資料庫</a></li>
+                <li><a href="database_demo.html" style="color: #C5A880; font-weight: bold;"><i class="fa-solid fa-database"></i> 資料庫</a></li>
 
                 <li id="nav-login"><a href="login.html"><i class="fa-solid fa-user"></i> 登入/註冊</a></li>
-                <li id="nav-user" style="display:none;"><a href="profile.html" id="user-display" style="color:#1a73e8; font-weight:bold;"></a></li>
-                <li id="nav-logout" style="display:none;"><a href="#" id="btn-logout" style="color:#e74c3c;">登出</a></li>
+                <li id="nav-user" style="display:none;"><a href="profile.html" id="user-display" style="color:#C5A880; font-weight:bold;"></a></li>
+                <li id="nav-logout" style="display:none;"><a href="#" id="btn-logout" style="color:#ff4d4d;">登出</a></li>
             </ul>
         </div>
     </nav>
 
     <div class="product-page-wrapper">
         <div class="product-detail-container">
-            <div class="breadcrumb"><a href="index.html">首頁</a> > <span style="color:#4682B4;">商品詳細</span></div>
+            <div class="breadcrumb"><a href="index.html">首頁</a> > <span style="color:#C5A880;">商品詳細</span></div>
             
             <div class="image-section">
                 <img id="pd-image" src="" alt="商品圖片">
@@ -466,25 +234,27 @@
                 <h1 class="pd-title" id="pd-name">載入中...</h1>
                 <p class="pd-desc" id="pd-desc">商品描述載入中，請稍候...</p>
                 <div class="pd-price" id="pd-price">NT$ 0</div>
+                <div id="pd-stock" class="pd-stock" style="margin-bottom: 20px;"></div>
 
                 <div class="option-group" id="sugar-group">
-                    <div class="option-title"><i class="fa-solid fa-mortar-pestle"></i> 醬汁調整</div>
+                    <div class="option-title"><i class="fa-solid fa-microchip"></i> 規格選擇</div>
                     <div class="pill-container" id="sugar-options">
-                        <div class="pill active" onclick="selectPill(this, 'sugar-options')">正常醬</div>
-                        <div class="pill" onclick="selectPill(this, 'sugar-options')">多醬</div>
-                        <div class="pill" onclick="selectPill(this, 'sugar-options')">少醬</div>
-                        <div class="pill" onclick="selectPill(this, 'sugar-options')">去醬</div>
+                        <div class="pill" onclick="selectPill(this, 'sugar-options')">128GB</div>
+                        <div class="pill active" onclick="selectPill(this, 'sugar-options')">256GB</div>
+                        <div class="pill" onclick="selectPill(this, 'sugar-options')">512GB</div>
+                        <div class="pill" onclick="selectPill(this, 'sugar-options')">1TB</div>
+                        <div class="pill" onclick="selectPill(this, 'sugar-options')">2TB</div>
                     </div>
                 </div>
 
                 <div class="option-group" id="ice-group">
-                    <div class="option-title"><i class="fa-solid fa-leaf"></i> 配料調整</div>
+                    <div class="option-title"><i class="fa-solid fa-palette"></i> 顏色選擇</div>
                     <div class="pill-container" id="ice-options">
-                        <div class="pill active" onclick="selectPill(this, 'ice-options')">正常配料</div>
-                        <div class="pill" onclick="selectPill(this, 'ice-options')">去洋蔥/酸黃瓜</div>
-                        <div class="pill" onclick="selectPill(this, 'ice-options')">去生菜/番茄</div>
-                        <div class="pill" onclick="selectPill(this, 'ice-options')">加生菜</div>
-                        <div class="pill" onclick="selectPill(this, 'ice-options')">雙倍起司 (+15元)</div>
+                        <div class="pill active" onclick="selectPill(this, 'ice-options')">鈦灰色</div>
+                        <div class="pill" onclick="selectPill(this, 'ice-options')">鈦黑色</div>
+                        <div class="pill" onclick="selectPill(this, 'ice-options')">鈦白色</div>
+                        <div class="pill" onclick="selectPill(this, 'ice-options')">鈦藍色</div>
+                        <div class="pill" onclick="selectPill(this, 'ice-options')">金色</div>
                     </div>
                 </div>
 
@@ -507,7 +277,7 @@
     <footer class="footer">
         <div class="footer-section">
             <h3>品牌區塊</h3>
-            <p>漢堡王 Burger King - 漢堡 x 配餐 x 飲料</p>
+            <p>得正 3C - 手機平板 x 電腦週邊 x 智慧家居</p>
             <div class="social-links">
                 <a href="https://instagram.com" target="_blank"><img src="image/Instagram-logo.png" alt="Instagram Logo" class="social-logo"> Instagram</a>
                 <a href="https://line.me" target="_blank"><img src="image/line-logo.png" alt="LINE Logo" class="social-logo"> LINE</a>
@@ -516,11 +286,11 @@
         <div class="footer-section">
             <h3>BUSINESS 商業區塊</h3>
             <ul>
-                <li><a href="index.html#drinks">🍔 經典漢堡</a></li>
-                <li><a href="index.html#donuts">🍟 經典配餐</a></li>
-                <li><a href="index.html#fruits">🥤 沁涼飲料</a></li>
+                <li><a href="index.html#drinks">📱 智慧手機與平板</a></li>
+                <li><a href="index.html#donuts">💻 電腦週邊與配件</a></li>
+                <li><a href="index.html#fruits">🏠 智慧穿戴與智能家居</a></li>
                 <li><a href="leaderboard.html">⭐ 熱銷排行</a></li>
-                <li><a href="database_demo.html" style="color:#1a73e8; font-weight:bold;">📦 資料庫展示頁</a></li>
+                <li><a href="database_demo.html" style="color:#C5A880; font-weight:bold;">📦 資料庫展示頁</a></li>
             </ul>
         </div>
         <div class="footer-section">
@@ -531,7 +301,7 @@
         </div>
         <div class="footer-section">
             <h3>版權資訊</h3>
-            <p>© 2026 漢堡王 Burger King. All rights reserved.</p>
+            <p>© 2026 得正 3C. All rights reserved.</p>
             <p>設計製作者：薛翔謙</p>
         </div>
     </footer>
@@ -549,26 +319,97 @@
             const navUser = document.getElementById('nav-user');
             const navLogout = document.getElementById('nav-logout');
             const userDisplay = document.getElementById('user-display');
+            const navbar = document.querySelector('.navbar');
+            const mobileMemberDisplay = document.getElementById('mobile-member-display');
 
             if (user) {
                 navLogin.style.display = 'none';
                 navUser.style.display = 'block';
                 navLogout.style.display = 'block';
-                userDisplay.innerHTML = `<i class="fa-solid fa-user-check me-1"></i> 會員 ${user.displayName || user.email.split('@')[0]}`;
+                const memberName = user.displayName || user.email.split('@')[0];
+                userDisplay.innerHTML = `<i class="fa-solid fa-user-check"></i> 會員 ${memberName}`;
+                if (mobileMemberDisplay) {
+                    mobileMemberDisplay.innerHTML = `<i class="fa-solid fa-user-check" style="color: #C5A880;"></i> 會員:${memberName}`;
+                }
+                if (navbar) {
+                    navbar.classList.add('logged-in');
+                }
             } else {
                 navLogin.style.display = 'block';
                 navUser.style.display = 'none';
                 navLogout.style.display = 'none';
+                if (navbar) {
+                    navbar.classList.remove('logged-in');
+                }
             }
         });
 
         document.getElementById('btn-logout').addEventListener('click', (e) => {
             e.preventDefault();
-            if(confirm("確定要登出嗎？")) { localStorage.removeItem('burgerking_cart'); signOut(auth).then(() => { window.location.href = "index.html"; }); }
+            if(confirm("確定要登出嗎？")) { localStorage.removeItem('dejeng3c_cart'); signOut(auth).then(() => { window.location.href = "index.html"; }); }
         });
     </script>
 
     <script>
+        function syncInventory() {
+            let baseInventory = JSON.parse(localStorage.getItem('dejeng3c_base_inventory')) || {};
+            let baseInvUpdated = false;
+            
+            const allProducts = [
+                "iPhone 15 Pro Max", "Samsung Galaxy S24 Ultra", "iPad Pro M4", "Google Pixel 8 Pro", "ASUS ROG Phone 8 Pro", 
+                "Xiaomi 14 Ultra", "Sony Xperia 1 VI", "iPad Air 6", "Samsung Galaxy Tab S9", "iPhone 15", 
+                "Google Pixel 8a", "Xiaomi Redmi Note 13 Pro", "ASUS Zenfone 11 Ultra", "OPPO Reno11 Pro", "Sony Xperia 10 VI", 
+                "Samsung Galaxy Fold 5", "iPhone 15 Plus", "iPad 10th Gen", "Logitech MX Master 3S", "Keychron K2 機械鍵盤", 
+                "MacBook Pro M3", "ASUS RT-AX88U Pro 路由器", "WD Black SN850X 2TB SSD", "ROG Swift PG32UCDM 螢幕", "Sony WH-1000XM5 耳機", 
+                "Apple Watch Series 9", "Garmin Venu 3", "AirPods Pro 2", "Google Nest Hub 2", "Dyson Purifier Cool", 
+                "Philips Hue 智慧燈泡", "Nintendo Switch OLED", "DJI Mini 4 Pro 空拍機", "GoPro HERO12 Black", "HomePod 智慧音箱", 
+                "Xiaomi 智慧攝影機 C400", "Dyson V15 Detect"
+            ];
+            
+            allProducts.forEach(name => {
+                if (baseInventory[name] === undefined) {
+                    baseInventory[name] = Math.floor(Math.random() * 101) + 20; // 隨機庫存 20-120
+                    baseInvUpdated = true;
+                }
+            });
+            
+            if (baseInvUpdated) {
+                localStorage.setItem('dejeng3c_base_inventory', JSON.stringify(baseInventory));
+            }
+            
+            const orders = JSON.parse(localStorage.getItem('dejeng3c_orders')) || [];
+            const computedInventory = {};
+            for (let name in baseInventory) {
+                computedInventory[name] = baseInventory[name];
+            }
+            
+            orders.forEach(order => {
+                if (order.items && Array.isArray(order.items)) {
+                    order.items.forEach(itemStr => {
+                        const match = itemStr.match(/(.*?)(?:\s*\(.*?\))?\s*x(\d+)/);
+                        if (match) {
+                            const pName = match[1].trim();
+                            const pQty = parseInt(match[2]);
+                            if (computedInventory[pName] !== undefined) {
+                                computedInventory[pName] -= pQty;
+                            } else {
+                                baseInventory[pName] = Math.floor(Math.random() * 101) + 20;
+                                baseInvUpdated = true;
+                                computedInventory[pName] = baseInventory[pName] - pQty;
+                            }
+                        }
+                    });
+                }
+            });
+            
+            if (baseInvUpdated) {
+                localStorage.setItem('dejeng3c_base_inventory', JSON.stringify(baseInventory));
+            }
+            
+            localStorage.setItem('dejeng3c_computed_inventory', JSON.stringify(computedInventory));
+            return computedInventory;
+        }
+
         function selectPill(element, containerId) {
             const container = document.getElementById(containerId);
             const pills = container.getElementsByClassName('pill');
@@ -581,47 +422,63 @@
             let currentQty = parseInt(qtyInput.value);
             currentQty += amount;
             if(currentQty < 1) currentQty = 1;
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+            if (productId && productsDB[productId]) {
+                const pd = productsDB[productId];
+                const inventory = JSON.parse(localStorage.getItem('dejeng3c_computed_inventory')) || {};
+                const stock = inventory[pd.name] !== undefined ? inventory[pd.name] : 100;
+                if (stock <= 0) {
+                    currentQty = 1;
+                } else if (currentQty > stock) {
+                    currentQty = stock;
+                    alert(`抱歉，購買數量已達庫存上限（${stock} 件）！`);
+                }
+            }
             qtyInput.value = currentQty;
         }
 
-                const productsDB = {
-            "tea01": { name: "蜂蜜芥末脆雞堡", price: 65, img: "image/crispy_chicken.jpg", desc: "鮮嫩酥脆雞腿排，淋上美式蜂蜜芥末醬，酸甜爽口。" },
-            "tea02": { name: "雙層起司牛肉堡", price: 55, img: "image/double_cheese.jpg", desc: "雙層火烤牛肉排搭配雙層濃郁起司，香濃多汁。" },
-            "tea03": { name: "經典華堡", price: 75, img: "image/whopper.jpg", desc: "火烤牛肉排搭爽脆生菜、新鮮番茄與洋蔥，招牌美味！" },
-            "tea04": { name: "雙層華堡", price: 80, img: "image/whopper.jpg", desc: "雙層大火烤牛肉排，重磅美味飽足感十足。" },
-            "tea05": { name: "花生香脆牛肉堡", price: 70, img: "image/double_cheese.jpg", desc: "香濃花生醬搭配火烤牛肉排，鹹甜交織、層次豐富。" },
-            "tea06": { name: "經典鱈魚堡", price: 65, img: "image/crispy_chicken.jpg", desc: "外酥內嫩的黃金鱈魚排，淋上特製塔塔醬，鮮甜美味。" },
-            "tea07": { name: "小華堡", price: 55, img: "image/whopper.jpg", desc: "經典華堡的精緻尺寸，精準火烤，美味不減。" },
-            "tea08": { name: "美式辣味雞腿堡", price: 65, img: "image/crispy_chicken.jpg", desc: "香脆微辣的無骨雞腿排，爽口生菜，熱情的美式風味。" },
-            "tea09": { name: "培根起司脆雞堡", price: 85, img: "image/crispy_chicken.jpg", desc: "香脆雞腿排加上香烤培根與濃郁起司，口感豐富。" },
-            "tea10": { name: "重磅雙層牛肉堡", price: 75, img: "image/double_cheese.jpg", desc: "兩片厚實火烤牛肉排，厚切多汁，肉食控的最愛。" },
-            "tea11": { name: "華鱈魚堡特仕版", price: 80, img: "image/crispy_chicken.jpg", desc: "特製雙層黃金鱈魚排，雙倍酥脆鮮美口感。" },
-            "tea12": { name: "燻烤燒肉堡", price: 85, img: "image/crispy_chicken.jpg", desc: "特調燻烤醬燒豬肉片，香氣撲鼻，道地美式烤肉香。" },
-            "tea13": { name: "金沙雙起司雞堡", price: 90, img: "image/crispy_chicken.jpg", desc: "黃金流沙醬搭配雙片濃郁起司與脆皮雞腿，極致享受。" },
-            "tea27": { name: "焙燒起司牛肉堡", price: 70, img: "image/double_cheese.jpg", desc: "火烤牛肉排加上炭香焙燒起司，濃郁口感無可挑剔。" },
-            "tea28": { name: "柚香脆雞堡", price: 65, img: "image/crispy_chicken.jpg", desc: "酥脆雞腿排淋上清爽柚子醬，爽口不油膩的新選擇。" },
-            "tea31": { name: "蜜桃BBQ豬排堡", price: 75, img: "image/crispy_chicken.jpg", desc: "火烤豬肉排淋上蜜桃BBQ烤肉醬，香甜多汁。" },
-            "tea32": { name: "芝士厚切牛排堡", price: 70, img: "image/double_cheese.jpg", desc: "厚切牛肉排淋上熔岩芝士醬，重磅紮實的極致美味。" },
-            "tea33": { name: "桂花蜜汁雞排堡", price: 65, img: "image/crispy_chicken.jpg", desc: "黃金脆雞排佐清香桂花蜜汁，獨特清甜回甘滋味。" },
-            "donut01": { name: "薯條(大)", price: 45, img: "image/fries.jpg", desc: "金黃香脆的外皮，內裡鬆軟，微鹹美味，經典必點。" },
-            "donut02": { name: "巧克力聖代", price: 50, img: "image/sundae.jpg", desc: "濃郁巧克力醬淋在滑順的香草冰淇淋上，沁涼香甜。" },
-            "donut03": { name: "洋蔥圈(大)", price: 50, img: "image/onion_rings.jpg", desc: "新鮮洋蔥裹上金黃酥脆外皮，酥脆爽口，香甜美味。" },
-            "donut04": { name: "雞塊(8塊)", price: 45, img: "image/nuggets.jpg", desc: "金黃酥脆的黃金雞塊，外酥內嫩，沾上糖醋醬最對味。" },
-            "donut05": { name: "辣味雞翅(4塊)", price: 55, img: "image/nuggets.jpg", desc: "香脆微辣的烤雞翅，肉汁飽滿，令人吮指回味。" },
-            "donut06": { name: "芝司起司球", price: 55, img: "image/fries.jpg", desc: "金黃外皮包裹爆漿牽絲起司，濃郁起司香氣無法抵擋。" },
-            "donut07": { name: "抹茶布朗尼聖代", price: 55, img: "image/sundae.jpg", desc: "宇治抹茶醬與濃郁巧克力布朗尼蛋糕，搭配香草聖代。" },
-            "fruit01": { name: "百事可樂(大)", price: 100, img: "image/cola.jpg", desc: "經典百事可樂，勁爽氣泡，佐餐解膩的最佳搭檔。" },
-            "fruit02": { name: "七喜汽水(大)", price: 80, img: "image/cola.jpg", desc: "檸檬風味氣泡飲料，清爽透心涼，帶來無限活力。" },
-            "fruit03": { name: "激浪汽水", price: 50, img: "image/cola.jpg", desc: "獨特柑橘風味氣泡水，極致暢快，挑戰你的味蕾。" },
-            "fruit04": { name: "檸檬紅茶(大)", price: 150, img: "image/tea.jpg", desc: "清新檸檬香氣與甘醇紅茶完美結合，經典消暑聖品。" },
-            "fruit05": { name: "美式咖啡(熱)", price: 40, img: "image/coffee.jpg", desc: "嚴選阿拉比卡咖啡豆新鮮萃取，口感醇厚，香氣四溢。" },
-            "fruit06": { name: "拿鐵咖啡(冰)", price: 85, img: "image/coffee.jpg", desc: "醇香濃縮咖啡融入鮮乳，奶香濃郁，口感絲滑順口。" },
-            "fruit07": { name: "熱鮮奶茶", price: 120, img: "image/tea.jpg", desc: "甘醇紅茶與香濃鮮奶熱情交織，溫暖濃醇的甜蜜滋味。" },
-            "fruit08": { name: "無糖綠茶(大)", price: 70, img: "image/tea.jpg", desc: "嚴選綠茶茶葉冷泡，茶湯金黃清透，清香回甘無負擔。" },
-            "fruit09": { name: "柳橙汁", price: 90, img: "image/cola.jpg", desc: "百分百純鮮榨柳橙汁，富含維他命C，酸甜好滋味。" },
-            "fruit10": { name: "巧克力奶昔", price: 65, img: "image/cola.jpg", desc: "濃郁巧克力與香醇鮮乳打製，口感綿密絲滑，甜美誘人。" },
-            "fruit11": { name: "鮮磨豆漿", price: 55, img: "image/tea.jpg", desc: "嚴選非基改黃豆新鮮研磨，豆香濃郁，營養滿分的溫暖選擇。" },
-            "fruit12": { name: "伯爵奶茶(冰)", price: 85, img: "image/tea.jpg", desc: "優雅佛手柑伯爵紅茶融入香醇牛奶，茶香清雅、奶香絲滑。" },
+        const productsDB = {
+            "tea01": { name: "iPhone 15 Pro Max", price: 44900, img: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500&auto=format&fit=crop&q=60", desc: "鈦金屬設計，配備強大的 A17 Pro 晶片，自訂的動作按鈕，以及歷來最強大的 iPhone 相機系統。" },
+            "tea02": { name: "Samsung Galaxy S24 Ultra", price: 43900, img: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500&auto=format&fit=crop&q=60", desc: "鈦金屬邊框，搭載 Galaxy AI，配備 2 億畫素相機與內建 S Pen，開啟智慧生活新篇章。" },
+            "tea03": { name: "iPad Pro M4", price: 34900, img: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=500&auto=format&fit=crop&q=60", desc: "搭載全新 M4 晶片，突破性的雙層 OLED 螢幕，極致纖薄設計，專為專業工作者打造。" },
+            "tea04": { name: "Google Pixel 8 Pro", price: 33900, img: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=500&auto=format&fit=crop&q=60", desc: "搭載 Google Tensor G3 晶片與先進的 AI 影像處理技術，提供最純淨的 Android 體驗。" },
+            "tea05": { name: "ASUS ROG Phone 8 Pro", price: 38990, img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60", desc: "專為玩家設計的終極電競手機，搭載驍龍 8 Gen 3，配備獨家散熱系統與 AniMe Vision 燈效。" },
+            "tea06": { name: "Xiaomi 14 Ultra", price: 34999, img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60", desc: "徠卡光學四鏡頭，一吋大底主鏡頭，搭載全新 Xiaomi HyperOS，極致影像旗艦。" },
+            "tea07": { name: "Sony Xperia 1 VI", price: 39990, img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60", desc: "頂級蔡司鏡頭，支援真光學變焦，配備無孔全螢幕與專業錄音級立體聲喇叭。" },
+            "tea08": { name: "iPad Air 6", price: 19900, img: "https://images.unsplash.com/photo-1589739900243-4b52cd9b104e?w=500&auto=format&fit=crop&q=60", desc: "搭載 M2 晶片，全新 11 吋與 13 吋選擇，色彩繽紛，支援 Apple Pencil Pro。" },
+            "tea09": { name: "Samsung Galaxy Tab S9", price: 23990, img: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=500&auto=format&fit=crop&q=60", desc: "搭載 Dynamic AMOLED 2X 螢幕，具備 IP68 防塵防水，隨附 S Pen，極致視聽娛樂。" },
+            "tea10": { name: "iPhone 15", price: 29900, img: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500&auto=format&fit=crop&q=60", desc: "動態島首次登場，配備 4800 萬畫素相機與 USB-C 接口，融合時尚與實用。" },
+            "tea11": { name: "Google Pixel 8a", price: 16490, img: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=500&auto=format&fit=crop&q=60", desc: "超值 Google AI 手機，配備傑出相機與魔術橡皮擦功能，輕鬆擁有旗艦規格。" },
+            "tea12": { name: "Xiaomi Redmi Note 13 Pro", price: 9999, img: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=500&auto=format&fit=crop&q=60", desc: "2 億畫素超清主相機，120Hz AMOLED 螢幕，支援 67W 快充，超高性價比之選。" },
+            "tea13": { name: "ASUS Zenfone 11 Ultra", price: 29990, img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60", desc: "全新大螢幕設計，搭載強大 AI 功能，配備 6 軸防手震單眼級相機。" },
+            "tea27": { name: "OPPO Reno11 Pro", price: 16990, img: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=500&auto=format&fit=crop&q=60", desc: "黃金人像鏡頭，超薄輕巧機身，搭載 80W SuperVOOC 超級閃充，美學與實力兼具。" },
+            "tea28": { name: "Sony Xperia 10 VI", price: 13990, img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60", desc: "輕量化美型機身，極致的兩天續航電力，支援高解析音質與防水防塵。" },
+            "tea31": { name: "Samsung Galaxy Fold 5", price: 56888, img: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500&auto=format&fit=crop&q=60", desc: "摺疊螢幕極致之作，超大 7.6 吋主螢幕，全新雙軌鉸鏈設計，極致多工處理。" },
+            "tea32": { name: "iPhone 15 Plus", price: 32900, img: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500&auto=format&fit=crop&q=60", desc: "超大 6.7 吋螢幕，超強電力續航，動態島設計，為大螢幕愛好者設計。" },
+            "tea33": { name: "iPad 10th Gen", price: 11900, img: "https://images.unsplash.com/photo-1589739900243-4b52cd9b104e?w=500&auto=format&fit=crop&q=60", desc: "全螢幕設計，配備 A14 仿生晶片，支援 Apple Pencil 與巧控鍵盤雙面夾。" },
+            
+            "donut01": { name: "Logitech MX Master 3S", price: 3290, img: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500&auto=format&fit=crop&q=60", desc: "旗艦級無線滑鼠，配備 8,000 DPI 高精準感應器，獨家 MagSpeed 電磁滾輪。" },
+            "donut02": { name: "Keychron K2 機械鍵盤", price: 2580, img: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500&auto=format&fit=crop&q=60", desc: "75% 緊湊配置無線機械鍵盤，支援 Mac/Windows，配備 Gateron 熱插拔軸體與 RGB 背光。" },
+            "donut03": { name: "MacBook Pro M3", price: 54900, img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&auto=format&fit=crop&q=60", desc: "搭載強大 M3 晶片，Liquid Retina XDR 顯示器，超長續航力，專業級筆電首選。" },
+            "donut04": { name: "ASUS RT-AX88U Pro 路由器", price: 8888, img: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=500&auto=format&fit=crop&q=60", desc: "雙頻 WiFi 6 電競路由器，支援 2.5G 連接埠，提供極速且穩定的居家網路體驗。" },
+            "donut05": { name: "WD Black SN850X 2TB SSD", price: 5290, img: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=500&auto=format&fit=crop&q=60", desc: "頂級 PCIe Gen4 NVMe SSD，讀取速度高達 7300MB/s，專為極速遊戲與專業創作打造。" },
+            "donut06": { name: "ROG Swift PG32UCDM 螢幕", price: 42900, img: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500&auto=format&fit=crop&q=60", desc: "32 吋 4K QD-OLED 電競螢幕，240Hz 更新率，0.03ms 反應時間，極致畫質與流暢度。" },
+            "donut07": { name: "Sony WH-1000XM5 耳機", price: 9900, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=60", desc: "業界頂級主動降噪耳罩式耳機，音質純淨細緻，配備卓越通話品質與配戴舒適感。" },
+
+            "fruit01": { name: "Apple Watch Series 9", price: 13500, img: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500&auto=format&fit=crop&q=60", desc: "搭載 S9 SiP 晶片，支援神奇的雙指互碰兩下手勢，配備更明亮的螢幕與健康偵測。" },
+            "fruit02": { name: "Garmin Venu 3", price: 14990, img: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=500&auto=format&fit=crop&q=60", desc: "GPS 智慧腕錶，具備進階健康監測與運動模式，內建喇叭與麥克風可接聽電話。" },
+            "fruit03": { name: "AirPods Pro 2", price: 7490, img: "https://images.unsplash.com/photo-1588449668365-d15e397f6787?w=500&auto=format&fit=crop&q=60", desc: "搭載 H2 晶片，主動降噪效能提升兩倍，具備適應性音訊與通透模式。" },
+            "fruit04": { name: "Google Nest Hub 2", price: 3180, img: "https://images.unsplash.com/photo-1543512214-318c7553f230?w=500&auto=format&fit=crop&q=60", desc: "7 吋智慧螢幕，內建 Google 助理，支援手勢控制，輕鬆控管全家智慧裝置。" },
+            "fruit05": { name: "Dyson Purifier Cool", price: 18900, img: "https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=500&auto=format&fit=crop&q=60", desc: "二合一空氣清淨機，全機密封符合 HEPA H13 標準，淨化空氣同時吹送清涼風。" },
+            "fruit06": { name: "Philips Hue 智慧燈泡", price: 4990, img: "https://images.unsplash.com/photo-1550985616-10810253b84d?w=500&auto=format&fit=crop&q=60", desc: "智慧照明入門套裝，支援 1600 萬色，透過手機或語音助理輕鬆調整居家氛圍。" },
+            "fruit07": { name: "Nintendo Switch OLED", price: 10480, img: "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=500&auto=format&fit=crop&q=60", desc: "配置 7 吋 OLED 螢幕，色彩鮮明，全新設計轉軸支架，隨時隨地享受遊戲樂趣。" },
+            "fruit08": { name: "DJI Mini 4 Pro 空拍機", price: 22090, img: "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?w=500&auto=format&fit=crop&q=60", desc: "低於 249 克的超輕量空拍機，具備全向避障與 4K 頂級影像，新手也能輕鬆上手。" },
+            "fruit09": { name: "GoPro HERO12 Black", price: 14900, img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&auto=format&fit=crop&q=60", desc: "頂級運動相機，支援 5.3K HDR 影片，卓越的 HyperSmooth 6.0 防手震技術。" },
+            "fruit10": { name: "HomePod 智慧音箱", price: 9300, img: "https://images.unsplash.com/photo-1543512214-318c7553f230?w=500&auto=format&fit=crop&q=60", desc: "頂級音質智慧音箱，精準調校的音響系統，內建 Siri 助理與室內溫溼度感測器。" },
+            "fruit11": { name: "Xiaomi 智慧攝影機 C400", price: 1095, img: "https://images.unsplash.com/photo-1558002038-1055907df827?w=500&auto=format&fit=crop&q=60", desc: "400 萬畫素超清鏡量，支援 360 度旋轉監控與紅外線夜視，居家安全的智慧守護者。" },
+            "fruit12": { name: "Dyson V15 Detect", price: 24900, img: "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=500&auto=format&fit=crop&q=60", desc: "旗艦級無線吸塵器，配備智慧光學偵測技術與壓電感應器，精確掌控清潔效果。" }
         };
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -630,18 +487,34 @@
 
             if(productId && productsDB[productId]) {
                 const pd = productsDB[productId];
-                document.title = `${pd.name} - 漢堡王 Burger King`;
+                document.title = `${pd.name} - 得正 3C`;
                 document.getElementById('pd-image').src = pd.img;
                 document.getElementById('pd-name').innerText = pd.name;
                 document.getElementById('pd-desc').innerText = pd.desc;
-                document.getElementById('pd-price').innerText = `NT$ ${pd.price}`;
                 
-                // 動態判斷是否顯示冰塊甜度
+                // 檢查特價
+                const statusSettings = JSON.parse(localStorage.getItem('dejeng3c_product_settings')) || {};
+                const promoPrice = statusSettings[pd.name]?.promoPrice;
+                if (promoPrice && promoPrice < pd.price) {
+                    document.getElementById('pd-price').innerHTML = `
+                        <span style="text-decoration: line-through; color: #95a5a6; font-size: 1.4rem; margin-right: 10px;">NT$ ${pd.price}</span>
+                        <span style="color: #e74c3c; font-weight: bold;">NT$ ${promoPrice}</span>
+                    `;
+                    const badge = document.getElementById('pd-badge');
+                    badge.innerHTML = `<i class="fa-solid fa-fire"></i> 限時特價中`;
+                    badge.style.background = 'linear-gradient(135deg, #ff416c, #ff4b2b)';
+                } else {
+                    document.getElementById('pd-price').innerText = `NT$ ${pd.price}`;
+                }
+                
+                // 動態判斷是否顯示規格/顏色
                 if (!productId.startsWith('tea')) {
                     document.getElementById('sugar-group').style.display = 'none';
                     document.getElementById('ice-group').style.display = 'none';
-                    document.getElementById('pd-badge').innerText = '經典配餐 / 經典副食';
-                    document.getElementById('pd-badge').style.background = '#2ECC71';
+                    if (!(promoPrice && promoPrice < pd.price)) {
+                        document.getElementById('pd-badge').innerText = '原廠公司貨 / 一年保固';
+                        document.getElementById('pd-badge').style.background = '#2ECC71';
+                    }
                 }
 
                 document.getElementById('add-to-cart-btn').addEventListener('click', () => {
@@ -654,13 +527,22 @@
                         ice = document.querySelector('#ice-options .active').innerText;
                     }
                     
-                    let cart = JSON.parse(localStorage.getItem('burgerking_cart')) || [];
+                    let cart = JSON.parse(localStorage.getItem('dejeng3c_cart')) || [];
                     const existingIndex = cart.findIndex(item => item.id === productId && item.sugar === sugar && item.ice === ice);
                     
+                    // Check stock
+                    const inventory = syncInventory();
+                    const stock = inventory[pd.name] !== undefined ? inventory[pd.name] : 100;
+                    let currentQtyInCart = existingIndex > -1 ? cart[existingIndex].qty : 0;
+                    if (currentQtyInCart + qty > stock) {
+                        alert(`抱歉，【${pd.name}】已無足夠庫存！目前庫存剩餘 ${stock} 件，您的購物車中已有 ${currentQtyInCart} 件。`);
+                        return;
+                    }
+
                     if (existingIndex > -1) { cart[existingIndex].qty += qty; } 
                     else { cart.push({ id: productId, qty: qty, sugar: sugar, ice: ice }); }
 
-                    localStorage.setItem('burgerking_cart', JSON.stringify(cart));
+                    localStorage.setItem('dejeng3c_cart', JSON.stringify(cart));
                     let alertText = productId.startsWith('tea') ? `(${sugar}/${ice}) ` : '';
                     alert(`【${pd.name}】${alertText}x ${qty} 已加入購物車！`);
                     updateCartBadge();
@@ -668,8 +550,7 @@
                 });
                 
                 // 檢查是否完售或下架
-                const inventory = JSON.parse(localStorage.getItem('burgerking_computed_inventory')) || {};
-                const statusSettings = JSON.parse(localStorage.getItem('burgerking_product_settings')) || {};
+                const inventory = syncInventory();
                 
                 let isSoldOut = inventory[pd.name] !== undefined && inventory[pd.name] <= 0;
                 let isDelisted = statusSettings[pd.name] && statusSettings[pd.name].status === 'delisted';
@@ -681,6 +562,29 @@
                     btn.style.cursor = 'not-allowed';
                     btn.innerHTML = isDelisted ? '<i class="fa-solid fa-ban"></i> 此商品已下架' : '<i class="fa-solid fa-ban"></i> 已完售';
                 }
+
+                // Render stock badge
+                const stockVal = inventory[pd.name] !== undefined ? inventory[pd.name] : 100;
+                const stockEl = document.getElementById('pd-stock');
+                if(stockEl) {
+                    if (isDelisted) {
+                        stockEl.style.color = '#7f8c8d';
+                        stockEl.style.backgroundColor = '#f0f3f4';
+                        stockEl.innerHTML = `<i class="fa-solid fa-box-archive"></i> 商品狀態: 已下架`;
+                    } else if (stockVal <= 0) {
+                        stockEl.style.color = '#e74c3c';
+                        stockEl.style.backgroundColor = '#fdedec';
+                        stockEl.innerHTML = `<i class="fa-solid fa-box-archive"></i> 庫存剩下: 0 (已完售)`;
+                    } else if (stockVal <= 10) {
+                        stockEl.style.color = '#e67e22';
+                        stockEl.style.backgroundColor = '#fdf2e9';
+                        stockEl.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> 僅剩 ${stockVal} 件，欲購從速！`;
+                    } else {
+                        stockEl.style.color = '#27ae60';
+                        stockEl.style.backgroundColor = '#e8f8f5';
+                        stockEl.innerHTML = `<i class="fa-solid fa-box-open"></i> 商品庫存: ${stockVal} 件`;
+                    }
+                }
             } else {
                 alert('找不到該商品！將返回首頁。');
                 window.location.href = "index.html";
@@ -689,8 +593,12 @@
             updateCartBadge();
         });
         
+        const navbarToggle = document.getElementById('navbarToggle');
+        const navbarMenu = document.getElementById('navbarMenu');
+        navbarToggle.addEventListener('click', () => { navbarMenu.classList.toggle('active'); });
+
         function updateCartBadge() {
-            let cart = JSON.parse(localStorage.getItem('burgerking_cart')) || [];
+            let cart = JSON.parse(localStorage.getItem('dejeng3c_cart')) || [];
             let totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
             let badge = document.getElementById('cart-badge');
             if(badge) {
@@ -699,6 +607,15 @@
                     badge.innerText = totalQty;
                 } else {
                     badge.style.display = 'none';
+                }
+            }
+            let logoBadge = document.getElementById('logo-cart-badge');
+            if(logoBadge) {
+                if(totalQty > 0) {
+                    logoBadge.style.display = 'inline-block';
+                    logoBadge.innerText = totalQty;
+                } else {
+                    logoBadge.style.display = 'none';
                 }
             }
         }

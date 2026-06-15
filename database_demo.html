@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>後台管理系統 - 漢堡王 Burger King</title>
+    <title>後台管理系統 - 得正 3C</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -12,21 +12,21 @@
     
     <style>
         :root {
-            /* 朱紅 / 紺色 / 銀鼠 — 日本傳統配色 */
-            --shu:   #C84B1A;   /* 朱紅 — 帶黃調的朱砂紅 */
-            --shu-light: #E86030;
+            /* 烏龍金黃 / 紺色 / 銀鼠 — 得正 3C 配色 */
+            --shu:   #C5A880;   /* 金黃 */
+            --shu-light: #D5BCA0;
             --kon:   #1C2B5A;   /* 紺色 — 沉穩的深藍 */
             --kon-dark: #111D3E;
-            --gin:   #9B9EA6;   /* 銀鼠 — 江戶時代銀灰 */
+            --gin:   #9B9EA6;   /* 銀鼠 */
 
             --bg-color: #F5F1EB;   /* 和紙色 — 溫潤米白 */
             --card-bg: rgba(255, 252, 248, 0.92);
             --text-main: #1C1A17;
             --text-muted: #7A7775;
-            --accent-primary: #C84B1A;
+            --accent-primary: #C5A880;
             --accent-success: #4D8C6A;
             --accent-warning: #B8860B;
-            --accent-danger:  #C84B1A;
+            --accent-danger:  #ff4d4d;
             --accent-purple:  #4A5F9A;
             --border-color: rgba(28, 43, 90, 0.12);
         }
@@ -176,6 +176,13 @@
             .table th, .table td { padding: 10px 8px; }
             .product-img { width: 40px; height: 40px; }
             .status-badge { padding: 4px 10px; font-size: 0.75rem; }
+            /* 手機版隱藏產品編碼 (第一欄) 與最後異動時間 (第六欄)，以利寬度最大化，方便管理與更改 */
+            #product-table th:nth-child(1),
+            #product-table td:nth-child(1),
+            #product-table th:nth-child(6),
+            #product-table td:nth-child(6) {
+                display: none !important;
+            }
         }
 
         .btn-action { background: rgba(28, 43, 90, 0.08); color: var(--kon); border: 1px solid rgba(28,43,90,0.15); padding: 6px 15px; border-radius: 20px; transition: 0.3s; font-size: 0.85rem; cursor: pointer; }
@@ -206,360 +213,6 @@
         .navbar-logo img { width: 45px; height: 45px; margin-right: 12px; border-radius: 50%; object-fit: cover; border: 2px solid #C84B1A; }
         .navbar-menu { display: none; }
         .navbar-toggle { display: none; }
-    
-    /* --- BURGER KING PREMIUM DESIGN SYSTEM OVERRIDE --- */
-    :root {
-        --bk-red: #D62300;
-        --bk-orange: #F2A900;
-        --bk-dark: #3C2415;
-        --bk-cream: #F7EFE9;
-        --bk-brown: #502C1E;
-        --text-light: #F7EFE9;
-        --text-muted-light: #c1a89c;
-    }
-    
-    /* Global Color System */
-    body {
-        background: linear-gradient(135deg, #1b0c07 0%, #0d0604 100%) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .navbar, .navbar-custom {
-        background: var(--bk-dark) !important;
-        border-bottom: 3px solid var(--bk-red) !important;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
-    }
-    
-    .navbar-logo, .navbar-logo span, .navbar-brand {
-        color: var(--bk-orange) !important;
-        font-family: 'Outfit', 'Noto Sans TC', sans-serif !important;
-    }
-    
-    .navbar-menu a {
-        color: var(--text-light) !important;
-    }
-    
-    .navbar-menu a:hover {
-        color: var(--bk-orange) !important;
-    }
-    
-    .navbar-toggle {
-        color: var(--bk-orange) !important;
-    }
-    
-    /* Menu / Home / Section Styles */
-    .menu-section {
-        background: #170d0a !important;
-    }
-    
-    .menu-section:nth-of-type(even) {
-        background: #110806 !important;
-    }
-    
-    .menu-title {
-        color: var(--text-light) !important;
-        border-bottom-color: var(--bk-red) !important;
-        font-family: 'Outfit', 'Noto Sans TC', sans-serif !important;
-    }
-    
-    .menu-subtitle {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .menu-item {
-        background: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.3) !important;
-    }
-    
-    .menu-item-name {
-        color: var(--text-light) !important;
-    }
-    
-    .menu-item-price {
-        color: var(--bk-orange) !important;
-    }
-    
-    .menu-button.buy {
-        background: linear-gradient(135deg, var(--bk-red) 0%, #ff6f00 100%) !important;
-        border: none !important;
-        color: white !important;
-    }
-    
-    .menu-button.buy:hover {
-        background: linear-gradient(135deg, #b31c00 0%, #e65100 100%) !important;
-        transform: translateY(-2px) !important;
-    }
-    
-    .menu-button.learn-more {
-        background: transparent !important;
-        color: var(--bk-orange) !important;
-        border-color: var(--bk-orange) !important;
-    }
-    
-    .menu-button.learn-more:hover {
-        background: rgba(242, 169, 0, 0.1) !important;
-        color: white !important;
-        border-color: white !important;
-    }
-    
-    /* Footer Overrides */
-    .footer {
-        background: linear-gradient(135deg, #251610 0%, #170d0a 100%) !important;
-        border-top: 3px solid var(--bk-red) !important;
-        color: var(--text-muted-light) !important;
-    }
-    
-    .footer::before {
-        display: none !important;
-    }
-    
-    .footer-section h3 {
-        color: var(--bk-orange) !important;
-    }
-    
-    .footer-section h3::after {
-        background: var(--bk-red) !important;
-    }
-    
-    .footer-section p, .footer-section ul li, .footer-section ul li a {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .footer-section ul li:hover, .footer-section ul li a:hover {
-        color: var(--bk-orange) !important;
-    }
-    
-    .social-links a {
-        background: rgba(242, 169, 0, 0.1) !important;
-        color: var(--bk-orange) !important;
-    }
-    
-    .social-links a:hover {
-        background: linear-gradient(135deg, var(--bk-red) 0%, var(--bk-orange) 100%) !important;
-        color: white !important;
-        transform: translateY(-2px) !important;
-    }
-    
-    /* Product Detail page */
-    .product-detail-container {
-        background: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-        box-shadow: 0 15px 35px rgba(0,0,0,0.4) !important;
-    }
-    
-    .image-section {
-        background: linear-gradient(135deg, #3c2415 0%, #251610 100%) !important;
-    }
-    
-    .info-section {
-        color: var(--text-light) !important;
-    }
-    
-    .pd-title {
-        color: var(--text-light) !important;
-    }
-    
-    .pd-desc {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .pd-price {
-        color: var(--bk-orange) !important;
-    }
-    
-    .option-title {
-        color: var(--bk-orange) !important;
-    }
-    
-    .pill {
-        border-color: var(--bk-brown) !important;
-        color: var(--text-muted-light) !important;
-    }
-    
-    .pill:hover {
-        border-color: var(--bk-orange) !important;
-        color: var(--bk-orange) !important;
-    }
-    
-    .pill.active {
-        background: linear-gradient(135deg, var(--bk-red) 0%, var(--bk-orange) 100%) !important;
-        color: white !important;
-        box-shadow: 0 4px 10px rgba(214, 35, 0, 0.3) !important;
-        border-color: transparent !important;
-    }
-    
-    .qty-btn {
-        background: var(--bk-brown) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .qty-btn:hover {
-        background: var(--bk-red) !important;
-        color: white !important;
-    }
-    
-    .qty-input {
-        border-color: var(--bk-brown) !important;
-        background: #170d0a !important;
-        color: var(--text-light) !important;
-    }
-    
-    .btn-add-cart {
-        background: linear-gradient(135deg, var(--bk-red) 0%, #ff6f00 100%) !important;
-        box-shadow: 0 10px 20px rgba(214, 35, 0, 0.3) !important;
-    }
-    
-    .btn-add-cart:hover {
-        box-shadow: 0 15px 25px rgba(214, 35, 0, 0.4) !important;
-        transform: translateY(-3px) !important;
-    }
-    
-    .breadcrumb, .breadcrumb a {
-        color: var(--text-muted-light) !important;
-    }
-    
-    /* Cart / Checkout Overrides */
-    .card, .list-card, .table-card {
-        background-color: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-        box-shadow: 0 8px 30px rgba(0,0,0,0.3) !important;
-    }
-    
-    .cart-item {
-        background-color: #1c0f0a !important;
-        border: 1px solid rgba(242, 169, 0, 0.08) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .trash-btn {
-        color: #ff6b6b !important;
-        background: transparent !important;
-        border: none !important;
-    }
-    
-    .btn-checkout, .btn-primary, .btn-gradient, .btn-login, .btn-signup {
-        background: linear-gradient(135deg, var(--bk-red) 0%, #ff6f00 100%) !important;
-        border: none !important;
-        color: white !important;
-        box-shadow: 0 4px 15px rgba(214, 35, 0, 0.3) !important;
-    }
-    
-    .btn-checkout:hover, .btn-primary:hover, .btn-gradient:hover {
-        background: linear-gradient(135deg, #b31c00 0%, #e65100 100%) !important;
-        color: white !important;
-        transform: translateY(-2px) !important;
-        box-shadow: 0 8px 20px rgba(214, 35, 0, 0.4) !important;
-    }
-    
-    .text-primary, .fs-5.text-primary, #subtotal, #final-total {
-        color: var(--bk-orange) !important;
-    }
-    
-    /* Leaderboard / Ranking */
-    .leaderboard-header h1 {
-        color: var(--bk-orange) !important;
-    }
-    
-    .leaderboard-header p {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .rank-card {
-        background-color: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .rank-name {
-        color: var(--text-light) !important;
-    }
-    
-    .rank-desc {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .rank-price {
-        color: var(--bk-orange) !important;
-    }
-    
-    .btn-rank.btn-cart {
-        background: linear-gradient(135deg, var(--bk-red) 0%, #ff6f00 100%) !important;
-        color: white !important;
-    }
-    
-    .btn-rank.btn-more {
-        border-color: var(--bk-orange) !important;
-        color: var(--bk-orange) !important;
-        background: transparent !important;
-    }
-    
-    .btn-rank.btn-more:hover {
-        background: rgba(242, 169, 0, 0.1) !important;
-        color: white !important;
-    }
-    
-    /* Database Demo / Dashboard Panel */
-    .page-title {
-        color: var(--bk-orange) !important;
-    }
-    
-    .page-subtitle {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .kpi-card {
-        background-color: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .kpi-card h3 {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .kpi-value {
-        color: var(--text-light) !important;
-    }
-    
-    .table-responsive {
-        border-color: rgba(242, 169, 0, 0.1) !important;
-    }
-    
-    .table {
-        color: var(--text-light) !important;
-    }
-    
-    .table th {
-        background-color: rgba(60, 36, 21, 0.6) !important;
-        color: var(--bk-orange) !important;
-    }
-    
-    .table td {
-        border-bottom-color: rgba(242, 169, 0, 0.1) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .table tbody tr:hover {
-        background-color: rgba(242, 169, 0, 0.05) !important;
-    }
-    
-    .pwd-input {
-        background: #170d0a !important;
-        border-color: var(--bk-brown) !important;
-        color: var(--text-light) !important;
-    }
-    
-    /* Dialog / Alerts */
-    .toast-container .toast {
-        background-color: #251610 !important;
-        border-color: var(--bk-orange) !important;
-        color: var(--text-light) !important;
-    }
-
     </style>
 </head>
 <body>
@@ -588,8 +241,8 @@
     <nav class="navbar-custom">
         <div class="navbar-container">
             <a href="index.html" class="navbar-logo">
-                <img src="image/logo.jpeg" alt="漢堡王 Burger King">
-                <span>漢堡王 Burger King</span>
+                <img src="image/logo.jpeg" alt="得正 3C">
+                <span>得正 3C</span>
             </a>
         </div>
     </nav>
@@ -695,24 +348,6 @@
                     <!-- 動態產生 -->
                 </ul>
             </div>
-            
-            <!-- 顧客評價與數據分析 -->
-            <div class="list-card">
-                <div class="card-header-title">
-                    <span><i class="fa-solid fa-comments text-success me-2"></i> 顧客評價與數據分析</span>
-                    <span class="badge bg-success" style="font-size:0.8rem; font-weight:normal;">最新評價</span>
-                </div>
-                <div id="reviews-summary" style="text-align: center; margin-bottom: 15px;">
-                    <h3 style="margin: 0; font-size: 2.5rem; font-weight: 800; color: #2F4F4F;" id="review-avg">0.0</h3>
-                    <div style="color: #FFD700; font-size: 1.2rem;" id="review-stars-avg">
-                        <i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i>
-                    </div>
-                    <p style="color: #7A7775; font-size: 0.9rem; margin-top: 5px;" id="review-count">共 0 則評價</p>
-                </div>
-                <ul class="alert-list" id="reviews-list" style="max-height: 200px;">
-                    <!-- 動態產生 -->
-                </ul>
-            </div>
         </div>
 
         <!-- 訂單管理 -->
@@ -763,48 +398,48 @@
                     <span class="record-count">目前共有：37 筆</span>
                 </div>
                 <div class="table-responsive" style="max-height: 600px; overflow-y: auto;">
-                    <table class="table align-middle">
+                    <table class="table align-middle" id="product-table">
                         <thead style="position: sticky; top: 0; z-index: 1;">
-                            <tr><th>產品編碼</th><th>產品名稱</th><th>售價</th><th>產品描述</th><th>產品圖示</th><th>現有庫存</th><th>最後異動時間</th></tr>
+                            <tr><th>產品編碼</th><th>產品名稱</th><th>售價</th><th>產品圖示</th><th>現有庫存</th><th>最後異動時間</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>2026055001</td><td>蜂蜜芥末脆雞堡</td><td>NT$ 65</td><td>鮮嫩酥脆雞腿排，淋上美式蜂蜜芥末醬，酸甜爽口。</td><td><img src="image/crispy_chicken.jpg" class="product-img"></td><td>120</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055002</td><td>雙層起司牛肉堡</td><td>NT$ 55</td><td>雙層火烤牛肉排搭配雙層濃郁起司，香濃多汁。</td><td><img src="image/double_cheese.jpg" class="product-img"></td><td>115</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055003</td><td>經典華堡</td><td>NT$ 75</td><td>火烤牛肉排搭爽脆生菜、新鮮番茄與洋蔥，招牌美味！</td><td><img src="image/whopper.jpg" class="product-img"></td><td>108</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055004</td><td>雙層華堡</td><td>NT$ 80</td><td>雙層大火烤牛肉排，重磅美味飽足感十足。</td><td><img src="image/whopper.jpg" class="product-img"></td><td>95</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055005</td><td>花生香脆牛肉堡</td><td>NT$ 70</td><td>香濃花生醬搭配火烤牛肉排，鹹甜交織、層次豐富。</td><td><img src="image/double_cheese.jpg" class="product-img"></td><td>88</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055006</td><td>經典鱈魚堡</td><td>NT$ 65</td><td>外酥內嫩的黃金鱈魚排，淋上特製塔塔醬，鮮甜美味。</td><td><img src="image/crispy_chicken.jpg" class="product-img"></td><td>76</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055007</td><td>小華堡</td><td>NT$ 55</td><td>經典華堡的精緻尺寸，精準火烤，美味不減。</td><td><img src="image/whopper.jpg" class="product-img"></td><td>150</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055008</td><td>美式辣味雞腿堡</td><td>NT$ 65</td><td>香脆微辣的無骨雞腿排，爽口生菜，熱情的美式風味。</td><td><img src="image/crispy_chicken.jpg" class="product-img"></td><td>102</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055009</td><td>培根起司脆雞堡</td><td>NT$ 85</td><td>香脆雞腿排加上香烤培根與濃郁起司，口感豐富。</td><td><img src="image/crispy_chicken.jpg" class="product-img"></td><td>65</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055010</td><td>重磅雙層牛肉堡</td><td>NT$ 75</td><td>兩片厚實火烤牛肉排，厚切多汁，肉食控的最愛。</td><td><img src="image/double_cheese.jpg" class="product-img"></td><td>92</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055011</td><td>華鱈魚堡特仕版</td><td>NT$ 80</td><td>多種沁涼飲料與茶湯結合</td><td><img src="image/crispy_chicken.jpg" class="product-img"></td><td>80</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055012</td><td>燻烤燒肉堡</td><td>NT$ 85</td><td>特調燻烤醬燒豬肉片，香氣撲鼻，道地美式烤肉香。</td><td><img src="image/crispy_chicken.jpg" class="product-img"></td><td>50</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055013</td><td>金沙雙起司雞堡</td><td>NT$ 90</td><td>漢堡王招牌果茶，豐富多層次</td><td><img src="image/crispy_chicken.jpg" class="product-img"></td><td>70</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055027</td><td>焙燒起司牛肉堡</td><td>NT$ 70</td><td>火烤牛肉排加上炭香焙燒起司，濃郁口感無可挑剔。</td><td><img src="image/double_cheese.jpg" class="product-img"></td><td>110</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055015</td><td>柚香脆雞堡</td><td>NT$ 65</td><td>酥脆雞腿排淋上清爽柚子醬，爽口不油膩的新選擇。</td><td><img src="image/crispy_chicken.jpg" class="product-img"></td><td>85</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055031</td><td>蜜桃BBQ豬排堡</td><td>NT$ 75</td><td>火烤豬肉排淋上蜜桃BBQ烤肉醬，香甜多汁。</td><td><img src="image/crispy_chicken.jpg" class="product-img"></td><td>96</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055017</td><td>芝士厚切牛排堡</td><td>NT$ 70</td><td>厚切牛肉排淋上熔岩芝士醬，重磅紮實的極致美味。</td><td><img src="image/double_cheese.jpg" class="product-img"></td><td>77</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055018</td><td>桂花蜜汁雞排堡</td><td>NT$ 65</td><td>黃金脆雞排佐清香桂花蜜汁，獨特清甜回甘滋味。</td><td><img src="image/crispy_chicken.jpg" class="product-img"></td><td>105</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055101</td><td>薯條(大)</td><td>NT$ 45</td><td>金黃香脆的外皮，內裡鬆軟，微鹹美味，經典必點。</td><td><img src="image/fries.jpg" class="product-img"></td><td>126</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055102</td><td>巧克力聖代</td><td>NT$ 50</td><td>濃郁巧克力醬淋在滑順的香草冰淇淋上，沁涼香甜。</td><td><img src="image/sundae.jpg" class="product-img"></td><td>110</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055103</td><td>洋蔥圈(大)</td><td>NT$ 50</td><td>新鮮洋蔥裹上金黃酥脆外皮，酥脆爽口，香甜美味。</td><td><img src="image/onion_rings.jpg" class="product-img"></td><td>95</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055104</td><td>雞塊(8塊)</td><td>NT$ 45</td><td>金黃酥脆的黃金雞塊，外酥內嫩，沾上糖醋醬最對味。</td><td><img src="image/nuggets.jpg" class="product-img"></td><td>80</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055105</td><td>辣味雞翅(4塊)</td><td>NT$ 55</td><td>香脆微辣的烤雞翅，肉汁飽滿，令人吮指回味。</td><td><img src="image/nuggets.jpg" class="product-img"></td><td>60</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055106</td><td>芝司起司球</td><td>NT$ 55</td><td>金黃外皮包裹爆漿牽絲起司，濃郁起司香氣無法抵擋。</td><td><img src="image/fries.jpg" class="product-img"></td><td>45</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055107</td><td>抹茶布朗尼聖代</td><td>NT$ 55</td><td>宇治抹茶醬與濃郁巧克力布朗尼蛋糕，搭配香草聖代。</td><td><img src="image/sundae.jpg" class="product-img"></td><td>85</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055201</td><td>百事可樂(大)</td><td>NT$ 100</td><td>經典百事可樂，勁爽氣泡，佐餐解膩的最佳搭檔。</td><td><img src="image/cola.jpg" class="product-img"></td><td>72</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055202</td><td>七喜汽水(大)</td><td>NT$ 80</td><td>檸檬風味氣泡飲料，清爽透心涼，帶來無限活力。</td><td><img src="image/cola.jpg" class="product-img"></td><td>68</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055203</td><td>激浪汽水</td><td>NT$ 50</td><td>獨特柑橘風味氣泡水，極致暢快，挑戰你的味蕾。</td><td><img src="image/cola.jpg" class="product-img"></td><td>110</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055204</td><td>檸檬紅茶(大)</td><td>NT$ 150</td><td>清新檸檬香氣與甘醇紅茶完美結合，經典消暑聖品。</td><td><img src="image/tea.jpg" class="product-img"></td><td>48</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055205</td><td>美式咖啡(熱)</td><td>NT$ 40</td><td>嚴選阿拉比卡咖啡豆新鮮萃取，口感醇厚，香氣四溢。</td><td><img src="image/coffee.jpg" class="product-img"></td><td>62</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055206</td><td>拿鐵咖啡(冰)</td><td>NT$ 85</td><td>醇香濃縮咖啡融入鮮乳，奶香濃郁，口感絲滑順口。</td><td><img src="image/coffee.jpg" class="product-img"></td><td>55</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055207</td><td>熱鮮奶茶</td><td>NT$ 120</td><td>甘醇紅茶與香濃鮮奶熱情交織，溫暖濃醇的甜蜜滋味。</td><td><img src="image/tea.jpg" class="product-img"></td><td>35</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055208</td><td>無糖綠茶(大)</td><td>NT$ 70</td><td>嚴選綠茶茶葉冷泡，茶湯金黃清透，清香回甘無負擔。</td><td><img src="image/tea.jpg" class="product-img"></td><td>40</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055209</td><td>柳橙汁</td><td>NT$ 90</td><td>百分百純鮮榨柳橙汁，富含維他命C，酸甜好滋味。</td><td><img src="image/cola.jpg" class="product-img"></td><td>50</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055210</td><td>巧克力奶昔</td><td>NT$ 65</td><td>濃郁巧克力與香醇鮮乳打製，口感綿密絲滑，甜美誘人。</td><td><img src="image/cola.jpg" class="product-img"></td><td>90</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055211</td><td>鮮磨豆漿</td><td>NT$ 55</td><td>嚴選非基改黃豆新鮮研磨，豆香濃郁，營養滿分的溫暖選擇。</td><td><img src="image/tea.jpg" class="product-img"></td><td>120</td><td>2026-04-16 22:00:01</td></tr>
-                            <tr><td>2026055212</td><td>伯爵奶茶(冰)</td><td>NT$ 85</td><td>優雅佛手柑伯爵紅茶融入香醇牛奶，茶香清雅、奶香絲滑。</td><td><img src="image/tea.jpg" class="product-img"></td><td>60</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055001</td><td>iPhone 15 Pro Max</td><td>NT$ 44900</td><td><img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>120</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055002</td><td>Samsung Galaxy S24 Ultra</td><td>NT$ 43900</td><td><img src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>115</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055003</td><td>iPad Pro M4</td><td>NT$ 34900</td><td><img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>108</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055004</td><td>Google Pixel 8 Pro</td><td>NT$ 33900</td><td><img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>95</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055005</td><td>ASUS ROG Phone 8 Pro</td><td>NT$ 38990</td><td><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>88</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055006</td><td>Xiaomi 14 Ultra</td><td>NT$ 34999</td><td><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>76</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055007</td><td>Sony Xperia 1 VI</td><td>NT$ 39990</td><td><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>150</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055008</td><td>iPad Air 6</td><td>NT$ 19900</td><td><img src="https://images.unsplash.com/photo-1589739900243-4b52cd9b104e?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>102</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055009</td><td>Samsung Galaxy Tab S9</td><td>NT$ 23990</td><td><img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>65</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055010</td><td>iPhone 15</td><td>NT$ 29900</td><td><img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>92</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055011</td><td>Google Pixel 8a</td><td>NT$ 16490</td><td><img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>80</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055012</td><td>Xiaomi Redmi Note 13 Pro</td><td>NT$ 9999</td><td><img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>50</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055013</td><td>ASUS Zenfone 11 Ultra</td><td>NT$ 29990</td><td><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>70</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055027</td><td>OPPO Reno11 Pro</td><td>NT$ 16990</td><td><img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>110</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055015</td><td>Sony Xperia 10 VI</td><td>NT$ 13990</td><td><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>85</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055031</td><td>Samsung Galaxy Fold 5</td><td>NT$ 56888</td><td><img src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>96</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055017</td><td>iPhone 15 Plus</td><td>NT$ 32900</td><td><img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>77</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055018</td><td>iPad 10th Gen</td><td>NT$ 11900</td><td><img src="https://images.unsplash.com/photo-1589739900243-4b52cd9b104e?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>105</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055101</td><td>Logitech MX Master 3S</td><td>NT$ 3290</td><td><img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>126</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055102</td><td>Keychron K2 機械鍵盤</td><td>NT$ 2580</td><td><img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>110</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055103</td><td>MacBook Pro M3</td><td>NT$ 54900</td><td><img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>95</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055104</td><td>ASUS RT-AX88U Pro 路由器</td><td>NT$ 8888</td><td><img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>80</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055105</td><td>WD Black SN850X 2TB SSD</td><td>NT$ 5290</td><td><img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>60</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055106</td><td>ROG Swift PG32UCDM 螢幕</td><td>NT$ 42900</td><td><img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>45</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055107</td><td>Sony WH-1000XM5 耳機</td><td>NT$ 9900</td><td><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>85</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055201</td><td>Apple Watch Series 9</td><td>NT$ 13500</td><td><img src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>72</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055202</td><td>Garmin Venu 3</td><td>NT$ 14990</td><td><img src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>68</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055203</td><td>AirPods Pro 2</td><td>NT$ 7490</td><td><img src="https://images.unsplash.com/photo-1588449668365-d15e397f6787?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>110</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055204</td><td>Google Nest Hub 2</td><td>NT$ 3180</td><td><img src="https://images.unsplash.com/photo-1543512214-318c7553f230?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>48</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055205</td><td>Dyson Purifier Cool</td><td>NT$ 18900</td><td><img src="https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>62</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055206</td><td>Philips Hue 智慧燈泡</td><td>NT$ 4990</td><td><img src="https://images.unsplash.com/photo-1550985616-10810253b84d?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>55</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055207</td><td>Nintendo Switch OLED</td><td>NT$ 10480</td><td><img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>35</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055208</td><td>DJI Mini 4 Pro 空拍機</td><td>NT$ 22090</td><td><img src="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>40</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055209</td><td>GoPro HERO12 Black</td><td>NT$ 14900</td><td><img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>50</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055210</td><td>HomePod 智慧音箱</td><td>NT$ 9300</td><td><img src="https://images.unsplash.com/photo-1543512214-318c7553f230?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>90</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055211</td><td>Xiaomi 智慧攝影機 C400</td><td>NT$ 1095</td><td><img src="https://images.unsplash.com/photo-1558002038-1055907df827?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>120</td><td>2026-04-16 22:00:01</td></tr>
+                            <tr><td>2026055212</td><td>Dyson V15 Detect</td><td>NT$ 24900</td><td><img src="https://images.unsplash.com/photo-1558317374-067fb5f30001?w=500&auto=format&fit=crop&q=60" class="product-img"></td><td>60</td><td>2026-04-16 22:00:01</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -846,12 +481,14 @@
         </div>
 
         <!-- 隱藏的產品清單，用於初始化庫存基底 -->
-        <div id="base-products" style="display:none;">蜂蜜芥末脆雞堡,雙層起司牛肉堡,經典華堡,雙層華堡,花生香脆牛肉堡,經典鱈魚堡,小華堡,美式辣味雞腿堡,培根起司脆雞堡,重磅雙層牛肉堡,華鱈魚堡特仕版,燻烤燒肉堡,金沙雙起司雞堡,焙燒起司牛肉堡,柚香脆雞堡,蜜桃BBQ豬排堡,芝士厚切牛排堡,桂花蜜汁雞排堡,薯條(大),巧克力聖代,洋蔥圈(大),雞塊(8塊),辣味雞翅(4塊),芝司起司球,抹茶布朗尼聖代,百事可樂(大),七喜汽水(大),激浪汽水,檸檬紅茶(大),美式咖啡(熱),拿鐵咖啡(冰),熱鮮奶茶,無糖綠茶(大),柳橙汁,巧克力奶昔,鮮磨豆漿,伯爵奶茶(冰)</div>
+        <div id="base-products" style="display:none;">
+            iPhone 15 Pro Max,Samsung Galaxy S24 Ultra,iPad Pro M4,Google Pixel 8 Pro,ASUS ROG Phone 8 Pro,Xiaomi 14 Ultra,Sony Xperia 1 VI,iPad Air 6,Samsung Galaxy Tab S9,iPhone 15,Google Pixel 8a,Xiaomi Redmi Note 13 Pro,ASUS Zenfone 11 Ultra,OPPO Reno11 Pro,Sony Xperia 10 VI,Samsung Galaxy Fold 5,iPhone 15 Plus,iPad 10th Gen,Logitech MX Master 3S,Keychron K2 機械鍵盤,MacBook Pro M3,ASUS RT-AX88U Pro 路由器,WD Black SN850X 2TB SSD,ROG Swift PG32UCDM 螢幕,Sony WH-1000XM5 耳機,Apple Watch Series 9,Garmin Venu 3,AirPods Pro 2,Google Nest Hub 2,Dyson Purifier Cool,Philips Hue 智慧燈泡,Nintendo Switch OLED,DJI Mini 4 Pro 空拍機,GoPro HERO12 Black,HomePod 智慧音箱,Xiaomi 智慧攝影機 C400,Dyson V15 Detect
+        </div>
 
     </div>
 
     <footer class="footer">
-        <p class="mb-0 fw-bold" style="color:var(--text-muted); font-family: 'Outfit', sans-serif;">© 2026 burgerking.admin | Dashboard Data Center</p>
+        <p class="mb-0 fw-bold" style="color:var(--text-muted); font-family: 'Outfit', sans-serif;">© 2026 dejeng3c.admin | Dashboard Data Center</p>
     </footer>
 
     <script>
@@ -918,7 +555,7 @@
 
         // 主要渲染與計算邏輯
         function updateDashboard() {
-            const orders = JSON.parse(localStorage.getItem('burgerking_orders')) || [];
+            const orders = JSON.parse(localStorage.getItem('dejeng3c_orders')) || [];
             
             let totalRevenue = 0;
             let todayRevenue = 0;
@@ -939,14 +576,26 @@
             // 新增變數
             let totalMembers = 5; // 寫死的會員資料表數量
             const itemSales = {}; // 追蹤各品項銷量
-            const categorySales = { '經典漢堡': 0, '經典配餐': 0, '沁涼飲料': 0 };
+            const categorySales = { '📱 智慧手機與平板': 0, '💻 電腦週邊與配件': 0, '🏠 智慧穿戴與智能家居': 0 };
 
-            // 初始化商品庫存追蹤 (預設庫存 100)
+            // 初始化商品庫存追蹤 (從 dejeng3c_base_inventory 取得隨機初始值)
             const baseProductsList = document.getElementById('base-products').innerText.split(',');
+            let baseInventory = JSON.parse(localStorage.getItem('dejeng3c_base_inventory')) || {};
+            let baseInvUpdated = false;
             const inventory = {};
+            
             baseProductsList.forEach(name => {
-                inventory[name.trim()] = 100; // 每個商品預設100個
+                const trimmedName = name.trim();
+                if (baseInventory[trimmedName] === undefined) {
+                    baseInventory[trimmedName] = Math.floor(Math.random() * 101) + 20; // 隨機庫存 20-120
+                    baseInvUpdated = true;
+                }
+                inventory[trimmedName] = baseInventory[trimmedName];
             });
+            
+            if (baseInvUpdated) {
+                localStorage.setItem('dejeng3c_base_inventory', JSON.stringify(baseInventory));
+            }
 
             // 解析訂單
             let orderHtml = '';
@@ -986,19 +635,25 @@
                             itemSales[pName] += pQty;
 
                             // 記錄類別銷量
-                            if(pName.includes('堡')) {
-                                categorySales['經典漢堡'] += pQty;
-                            } else if(pName.includes('薯條') || pName.includes('聖代') || pName.includes('洋蔥圈') || pName.includes('雞塊') || pName.includes('雞翅') || pName.includes('起司球') || pName.includes('布朗尼')) {
-                                categorySales['經典配餐'] += pQty;
+                            if(pName.includes('iPhone') || pName.includes('Galaxy') || pName.includes('iPad') || pName.includes('Pixel') || pName.includes('Phone') || pName.includes('Xiaomi 14') || pName.includes('Xperia') || pName.includes('Redmi') || pName.includes('Zenfone') || pName.includes('OPPO') || pName.includes('Tab')) {
+                                categorySales['📱 智慧手機與平板'] += pQty;
+                            } else if(pName.includes('Logitech') || pName.includes('Keychron') || pName.includes('MacBook') || pName.includes('路由器') || pName.includes('SSD') || pName.includes('螢幕') || pName.includes('耳機') || pName.includes('鍵盤') || pName.includes('滑鼠')) {
+                                categorySales['💻 電腦週邊與配件'] += pQty;
                             } else {
-                                categorySales['沁涼飲料'] += pQty;
+                                categorySales['🏠 智慧穿戴與智能家居'] += pQty;
                             }
                         }
                     });
                 }
 
                 // 渲染訂單表格
-                const orderId = `ORD-2604-${String(1000 + originalIndex).substring(1)}`;
+                const orderDateStr = orderDate.getFullYear() + 
+                                     String(orderDate.getMonth() + 1).padStart(2, '0') + 
+                                     String(orderDate.getDate()).padStart(2, '0') +
+                                     String(orderDate.getHours()).padStart(2, '0') +
+                                     String(orderDate.getMinutes()).padStart(2, '0') +
+                                     String(orderDate.getSeconds()).padStart(2, '0');
+                const orderId = order.orderId || `ORD${orderDateStr}`;
                 const time = orderDate.toLocaleString('zh-TW');
                 const isCompleted = order.status === 'completed';
                 
@@ -1019,12 +674,17 @@
                 const payId = `PAY-${order.timestamp.toString().substring(7)}`;
                 const shipId = `SHP-${order.timestamp.toString().substring(5)}`;
                 
+                const paymentMethodDisp = order.paymentMethod || '線上刷卡';
+                const paymentStatusBadge = paymentMethodDisp === '貨到付款'
+                    ? '<span class="status-badge status-pending">未付款 (貨到付款)</span>'
+                    : '<span class="status-badge status-success">已付款</span>';
+
                 paymentHtml += `<tr>
                     <td>${payId}</td>
                     <td>${orderId}</td>
-                    <td>線上刷卡</td>
+                    <td>${paymentMethodDisp}</td>
                     <td>NT$ ${order.total}</td>
-                    <td><span class="status-badge status-success">已付款</span></td>
+                    <td>${paymentStatusBadge}</td>
                 </tr>`;
 
                 const shipBadge = isCompleted 
@@ -1034,7 +694,7 @@
                 shippingHtml += `<tr>
                     <td>${shipId}</td>
                     <td>${orderId}</td>
-                    <td>漢堡王低溫配送</td>
+                    <td>得正低溫配送</td>
                     <td>${order.customer}</td>
                     <td>${shipBadge}</td>
                 </tr>`;
@@ -1070,7 +730,7 @@
             }
             document.getElementById('kpi-top-item').innerText = topItem;
             
-            // 畫配餐區圖
+            // 畫甜甜圈圖
             renderCategoryChart(categorySales);
 
 
@@ -1108,59 +768,14 @@
             document.getElementById('kpi-restock-count').innerText = alertCount;
 
             // 儲存計算出的庫存供前台使用
-            localStorage.setItem('burgerking_computed_inventory', JSON.stringify(inventory));
+            localStorage.setItem('dejeng3c_computed_inventory', JSON.stringify(inventory));
 
             // 繪製圖表
             const chartData = past30Days.map(date => dailyRevenue[date]);
             renderChart(past30Days, chartData);
             
-            // 處理顧客評價
-            renderReviews();
-            
             // 處理產品上下架機制 (動態加入按鈕與背景)
             renderProductTableStatus();
-        }
-        
-        function renderReviews() {
-            const reviews = JSON.parse(localStorage.getItem('burgerking_reviews')) || [];
-            let avgRating = 0;
-            let html = '';
-            
-            if(reviews.length > 0) {
-                const totalStars = reviews.reduce((sum, r) => sum + r.rating, 0);
-                avgRating = (totalStars / reviews.length).toFixed(1);
-                
-                // 渲染星星
-                let starsHtml = '';
-                for(let i=1; i<=5; i++) {
-                    if(i <= Math.round(avgRating)) starsHtml += '<i class="fa-solid fa-star"></i>';
-                    else starsHtml += '<i class="fa-regular fa-star"></i>';
-                }
-                document.getElementById('review-stars-avg').innerHTML = starsHtml;
-                document.getElementById('review-avg').innerText = avgRating;
-                document.getElementById('review-count').innerText = `共 ${reviews.length} 則評價`;
-                
-                reviews.slice().reverse().forEach(r => {
-                    let rStars = '';
-                    for(let i=1; i<=5; i++) {
-                        rStars += i <= r.rating ? '<i class="fa-solid fa-star text-warning"></i>' : '<i class="fa-regular fa-star text-muted"></i>';
-                    }
-                    html += `
-                        <li class="alert-item" style="flex-direction: column; align-items: flex-start;">
-                            <div style="display:flex; justify-content:space-between; width:100%; margin-bottom:5px;">
-                                <span style="font-weight:bold;"><i class="fa-solid fa-user-circle text-info"></i> ${r.name}</span>
-                                <span>${rStars}</span>
-                            </div>
-                            <div style="color: #555; font-size: 0.9rem; background: rgba(28,43,90,0.05); padding: 8px; border-radius: 8px; width:100%;">
-                                ${r.comment || '無留言'}
-                            </div>
-                        </li>
-                    `;
-                });
-            } else {
-                html = '<li style="text-align:center; padding: 20px; color:var(--text-muted);">目前尚無評價。</li>';
-            }
-            document.getElementById('reviews-list').innerHTML = html;
         }
 
         function renderProductTableStatus() {
@@ -1180,15 +795,22 @@
             
             if(!targetTableHead || !targetTableBody) return;
             
-            // 加入表頭
+            // 加入促銷特價表頭
+            if(!targetTableHead.innerHTML.includes('促銷特價')) {
+                const thPromo = document.createElement('th');
+                thPromo.innerText = '促銷特價';
+                targetTableHead.appendChild(thPromo);
+            }
+            
+            // 加入狀態操作表頭
             if(!targetTableHead.innerHTML.includes('狀態操作')) {
                 const th = document.createElement('th');
                 th.innerText = '狀態操作';
                 targetTableHead.appendChild(th);
             }
             
-            const statusSettings = JSON.parse(localStorage.getItem('burgerking_product_settings')) || {};
-            const inventory = JSON.parse(localStorage.getItem('burgerking_computed_inventory')) || {};
+            const statusSettings = JSON.parse(localStorage.getItem('dejeng3c_product_settings')) || {};
+            const inventory = JSON.parse(localStorage.getItem('dejeng3c_computed_inventory')) || {};
             
             const rows = targetTableBody.querySelectorAll('tr');
             rows.forEach((row, idx) => {
@@ -1197,7 +819,7 @@
                 const pName = nameCell.innerText.trim();
                 
                 // 動態更新庫存顯示
-                const inventoryCell = row.querySelectorAll('td')[5];
+                const inventoryCell = row.querySelectorAll('td')[4];
                 if(inventoryCell && inventory[pName] !== undefined) {
                     inventoryCell.innerText = inventory[pName];
                 }
@@ -1210,8 +832,33 @@
                     row.style.backgroundColor = '';
                 }
                 
-                // 加入操作按鈕
+                // 加入促銷特價輸入框
                 let actionCell = row.querySelector('.product-action-td');
+                let promoCell = row.querySelector('.product-promo-td');
+                if(!promoCell) {
+                    promoCell = document.createElement('td');
+                    promoCell.className = 'product-promo-td';
+                    if(actionCell) {
+                        row.insertBefore(promoCell, actionCell);
+                    } else {
+                        row.appendChild(promoCell);
+                    }
+                }
+                
+                const promoPrice = (statusSettings[pName] && statusSettings[pName].promoPrice) || '';
+                promoCell.innerHTML = `
+                    <div class="input-group input-group-sm" style="max-width: 120px; margin: 0 auto;">
+                        <span class="input-group-text" style="background: rgba(28, 43, 90, 0.05); color: var(--kon); padding: 2px 6px;">$</span>
+                        <input type="number" class="form-control promo-price-input" 
+                               placeholder="原價" 
+                               value="${promoPrice}" 
+                               min="1" 
+                               style="text-align: center; font-weight: bold; color: #e74c3c;"
+                               onchange="updatePromoPrice('${pName}', this.value)">
+                    </div>
+                `;
+                
+                // 加入操作按鈕
                 if(!actionCell) {
                     actionCell = document.createElement('td');
                     actionCell.className = 'product-action-td';
@@ -1226,15 +873,31 @@
             });
         }
         
+        window.updatePromoPrice = function(pName, value) {
+            let statusSettings = JSON.parse(localStorage.getItem('dejeng3c_product_settings')) || {};
+            if(!statusSettings[pName]) statusSettings[pName] = {};
+            
+            const parsedVal = parseInt(value, 10);
+            if(isNaN(parsedVal) || parsedVal <= 0) {
+                delete statusSettings[pName].promoPrice;
+            } else {
+                statusSettings[pName].promoPrice = parsedVal;
+            }
+            
+            localStorage.setItem('dejeng3c_product_settings', JSON.stringify(statusSettings));
+            renderProductTableStatus();
+            updateDashboard();
+        }
+        
         window.toggleProductStatus = function(pName, action) {
-            let statusSettings = JSON.parse(localStorage.getItem('burgerking_product_settings')) || {};
+            let statusSettings = JSON.parse(localStorage.getItem('dejeng3c_product_settings')) || {};
             if(action === 'delist') {
                 if(!statusSettings[pName]) statusSettings[pName] = {};
                 statusSettings[pName].status = 'delisted';
             } else {
                 if(statusSettings[pName]) statusSettings[pName].status = 'normal';
             }
-            localStorage.setItem('burgerking_product_settings', JSON.stringify(statusSettings));
+            localStorage.setItem('dejeng3c_product_settings', JSON.stringify(statusSettings));
             renderProductTableStatus();
         }
 
@@ -1335,24 +998,24 @@
         }
 
         window.markCompleted = function(index) {
-            const orders = JSON.parse(localStorage.getItem('burgerking_orders')) || [];
+            const orders = JSON.parse(localStorage.getItem('dejeng3c_orders')) || [];
             orders[index].status = 'completed'; 
-            localStorage.setItem('burgerking_orders', JSON.stringify(orders));
+            localStorage.setItem('dejeng3c_orders', JSON.stringify(orders));
             updateDashboard(); 
         }
 
         window.deleteOrder = function(index) {
             if(confirm("確定要刪除這筆訂單嗎？相關營收與庫存數據也將隨之移除！")) {
-                const orders = JSON.parse(localStorage.getItem('burgerking_orders')) || [];
+                const orders = JSON.parse(localStorage.getItem('dejeng3c_orders')) || [];
                 orders.splice(index, 1); 
-                localStorage.setItem('burgerking_orders', JSON.stringify(orders));
+                localStorage.setItem('dejeng3c_orders', JSON.stringify(orders));
                 updateDashboard(); 
             }
         }
 
         // 當儲存空間變更時 (例如在另一個分頁結帳)，自動更新圖表
         window.addEventListener('storage', function(e) {
-            if(e.key === 'burgerking_orders') {
+            if(e.key === 'dejeng3c_orders') {
                 updateDashboard();
             }
         });

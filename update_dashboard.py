@@ -1,6 +1,6 @@
 import re
 
-with open('/Users/sean/Desktop/A/database_demo.html', 'r', encoding='utf-8') as f:
+with open('/Users/sean/Desktop/shop-4-main/database_demo.html', 'r', encoding='utf-8') as f:
     content = f.read()
 
 # 1. Localize Login Screen
@@ -76,7 +76,7 @@ js_insert = """
             // 新增變數
             let totalMembers = 5; // 寫死的會員資料表數量
             const itemSales = {}; // 追蹤各品項銷量
-            const categorySales = { '茶飲類': 0, '甜甜圈': 0, '鮮果類': 0 };
+            const categorySales = { '📱 智慧手機與平板': 0, '💻 電腦週邊與配件': 0, '🏠 智慧穿戴與智能家居': 0 };
 """
 
 content = content.replace("            // 初始化商品庫存追蹤", js_insert + "\n            // 初始化商品庫存追蹤")
@@ -96,12 +96,12 @@ item_loop_new = item_loop + """
                             itemSales[pName] += pQty;
 
                             // 記錄類別銷量
-                            if(pName.includes('抹茶') || pName.includes('紅茶') || pName.includes('鮮奶') || pName.includes('烏龍') || pName.includes('綠') || pName.includes('冰茶') || pName.includes('氣泡飲') || pName.includes('果茶')) {
-                                categorySales['茶飲類'] += pQty;
-                            } else if(pName.includes('波堤') || pName.includes('甜甜圈') || pName.includes('巧貝')) {
-                                categorySales['甜甜圈'] += pQty;
+                            if(pName.includes('iPhone') || pName.includes('Galaxy') || pName.includes('iPad') || pName.includes('Pixel') || pName.includes('Phone') || pName.includes('Xiaomi 14') || pName.includes('Xperia') || pName.includes('Redmi') || pName.includes('Zenfone') || pName.includes('OPPO') || pName.includes('Tab')) {
+                                categorySales['📱 智慧手機與平板'] += pQty;
+                            } else if(pName.includes('Logitech') || pName.includes('Keychron') || pName.includes('MacBook') || pName.includes('路由器') || pName.includes('SSD') || pName.includes('螢幕') || pName.includes('耳機') || pName.includes('鍵盤') || pName.includes('滑鼠')) {
+                                categorySales['💻 電腦週邊與配件'] += pQty;
                             } else {
-                                categorySales['鮮果類'] += pQty;
+                                categorySales['🏠 智慧穿戴與智能家居'] += pQty;
                             }
 """
 content = content.replace(item_loop, item_loop_new)
@@ -165,5 +165,5 @@ doughnut_func = """
 content = content.replace("        // Chart.js 渲染函式", doughnut_func + "\n        // Chart.js 渲染函式")
 
 
-with open('/Users/sean/Desktop/A/database_demo.html', 'w', encoding='utf-8') as f:
+with open('/Users/sean/Desktop/shop-4-main/database_demo.html', 'w', encoding='utf-8') as f:
     f.write(content)

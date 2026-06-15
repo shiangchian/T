@@ -3,25 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>操作成功 - 漢堡王 Burger King</title>
+    <title>操作成功 - 得正 3C</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         * { box-sizing: border-box; }
         body {
             margin: 0;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Noto Sans TC', sans-serif;
             /* 與 login.html 相同的漸層背景 */
-            background: linear-gradient(135deg, #87CEEB 0%, #4682B4 100%);
-            overflow: hidden;
+            background: radial-gradient(circle at 10% 20%, #1C2B5A 0%, #0F1836 100%);
+            overflow-y: auto;
+            padding: 40px 0;
         }
 
         /* 背景漂浮物特效 */
-        .background-pattern { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.1; background-image: radial-gradient(circle at 20% 80%, #ffffff 0%, transparent 50%), radial-gradient(circle at 80% 20%, #ffffff 0%, transparent 50%); z-index: 0; }
+        .background-pattern { position: fixed; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.1; background-image: radial-gradient(circle at 20% 80%, #ffffff 0%, transparent 50%), radial-gradient(circle at 80% 20%, #ffffff 0%, transparent 50%); z-index: 0; }
         .floating-element { position: absolute; border-radius: 50%; background: rgba(255, 255, 255, 0.15); animation: float 6s ease-in-out infinite; z-index: 0; }
         .floating-element:nth-child(1) { width: 120px; height: 120px; top: 15%; left: 15%; animation-delay: 0s; }
         .floating-element:nth-child(2) { width: 80px; height: 80px; top: 65%; right: 10%; animation-delay: 2s; }
@@ -94,13 +95,13 @@
         }
 
         .btn-custom {
-            border: 2px solid #2F4F4F; /* 深色黑框 */
+            border: 2px solid #1C2B5A; /* 得正深藍外框 */
             border-radius: 50px;
             padding: 12px 30px;
             font-size: 18px;
             font-weight: 800;
             text-decoration: none;
-            color: #2F4F4F;
+            color: #1C2B5A;
             transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
@@ -109,17 +110,17 @@
         }
 
         /* 左邊藍色系按鈕 */
-        .btn-home { background: #E0F6FF; }
+        .btn-home { background: rgba(28, 43, 90, 0.05); }
         .btn-home:hover {
-            background: #5DADE2; color: white; border-color: #5DADE2;
-            transform: translateY(-3px); box-shadow: 0 10px 20px rgba(93, 173, 226, 0.3);
+            background: #1C2B5A; color: white; border-color: #1C2B5A;
+            transform: translateY(-3px); box-shadow: 0 10px 20px rgba(28, 43, 90, 0.3);
         }
 
-        /* 右邊綠色系按鈕 */
-        .btn-action { background: #E8F8F5; }
+        /* 右邊金色系按鈕 */
+        .btn-action { background: rgba(197, 168, 128, 0.1); }
         .btn-action:hover {
-            background: #48C9B0; color: white; border-color: #48C9B0;
-            transform: translateY(-3px); box-shadow: 0 10px 20px rgba(72, 201, 176, 0.3);
+            background: #C5A880; color: white; border-color: #C5A880;
+            transform: translateY(-3px); box-shadow: 0 10px 20px rgba(197, 168, 128, 0.3);
         }
 
         /* 倒數計時文字 */
@@ -130,373 +131,165 @@
             font-weight: 500;
         }
         .timer-text span {
-            color: #5DADE2;
+            color: #C5A880;
             font-size: 22px;
             font-weight: 900;
             margin: 0 5px;
         }
 
-        @media (max-width: 600px) {
-            .glass-card { padding: 25px; }
-            .professor-box { padding: 40px 15px 30px 15px; }
-            .msg-title { font-size: 30px; }
-            .msg-welcome { font-size: 22px; }
-            .btn-group { flex-direction: column; gap: 15px; }
+        /* 購買明細收據樣式 */
+        .receipt-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1.5px solid rgba(70, 130, 180, 0.15);
+            border-radius: 18px;
+            padding: 24px;
+            margin: 25px auto;
+            text-align: left;
+            box-shadow: 0 10px 25px rgba(70, 130, 180, 0.05);
+            max-width: 500px;
         }
-    
-    /* --- BURGER KING PREMIUM DESIGN SYSTEM OVERRIDE --- */
-    :root {
-        --bk-red: #D62300;
-        --bk-orange: #F2A900;
-        --bk-dark: #3C2415;
-        --bk-cream: #F7EFE9;
-        --bk-brown: #502C1E;
-        --text-light: #F7EFE9;
-        --text-muted-light: #c1a89c;
-    }
-    
-    /* Global Color System */
-    body {
-        background: linear-gradient(135deg, #1b0c07 0%, #0d0604 100%) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .navbar, .navbar-custom {
-        background: var(--bk-dark) !important;
-        border-bottom: 3px solid var(--bk-red) !important;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
-    }
-    
-    .navbar-logo, .navbar-logo span, .navbar-brand {
-        color: var(--bk-orange) !important;
-        font-family: 'Outfit', 'Noto Sans TC', sans-serif !important;
-    }
-    
-    .navbar-menu a {
-        color: var(--text-light) !important;
-    }
-    
-    .navbar-menu a:hover {
-        color: var(--bk-orange) !important;
-    }
-    
-    .navbar-toggle {
-        color: var(--bk-orange) !important;
-    }
-    
-    /* Menu / Home / Section Styles */
-    .menu-section {
-        background: #170d0a !important;
-    }
-    
-    .menu-section:nth-of-type(even) {
-        background: #110806 !important;
-    }
-    
-    .menu-title {
-        color: var(--text-light) !important;
-        border-bottom-color: var(--bk-red) !important;
-        font-family: 'Outfit', 'Noto Sans TC', sans-serif !important;
-    }
-    
-    .menu-subtitle {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .menu-item {
-        background: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.3) !important;
-    }
-    
-    .menu-item-name {
-        color: var(--text-light) !important;
-    }
-    
-    .menu-item-price {
-        color: var(--bk-orange) !important;
-    }
-    
-    .menu-button.buy {
-        background: linear-gradient(135deg, var(--bk-red) 0%, #ff6f00 100%) !important;
-        border: none !important;
-        color: white !important;
-    }
-    
-    .menu-button.buy:hover {
-        background: linear-gradient(135deg, #b31c00 0%, #e65100 100%) !important;
-        transform: translateY(-2px) !important;
-    }
-    
-    .menu-button.learn-more {
-        background: transparent !important;
-        color: var(--bk-orange) !important;
-        border-color: var(--bk-orange) !important;
-    }
-    
-    .menu-button.learn-more:hover {
-        background: rgba(242, 169, 0, 0.1) !important;
-        color: white !important;
-        border-color: white !important;
-    }
-    
-    /* Footer Overrides */
-    .footer {
-        background: linear-gradient(135deg, #251610 0%, #170d0a 100%) !important;
-        border-top: 3px solid var(--bk-red) !important;
-        color: var(--text-muted-light) !important;
-    }
-    
-    .footer::before {
-        display: none !important;
-    }
-    
-    .footer-section h3 {
-        color: var(--bk-orange) !important;
-    }
-    
-    .footer-section h3::after {
-        background: var(--bk-red) !important;
-    }
-    
-    .footer-section p, .footer-section ul li, .footer-section ul li a {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .footer-section ul li:hover, .footer-section ul li a:hover {
-        color: var(--bk-orange) !important;
-    }
-    
-    .social-links a {
-        background: rgba(242, 169, 0, 0.1) !important;
-        color: var(--bk-orange) !important;
-    }
-    
-    .social-links a:hover {
-        background: linear-gradient(135deg, var(--bk-red) 0%, var(--bk-orange) 100%) !important;
-        color: white !important;
-        transform: translateY(-2px) !important;
-    }
-    
-    /* Product Detail page */
-    .product-detail-container {
-        background: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-        box-shadow: 0 15px 35px rgba(0,0,0,0.4) !important;
-    }
-    
-    .image-section {
-        background: linear-gradient(135deg, #3c2415 0%, #251610 100%) !important;
-    }
-    
-    .info-section {
-        color: var(--text-light) !important;
-    }
-    
-    .pd-title {
-        color: var(--text-light) !important;
-    }
-    
-    .pd-desc {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .pd-price {
-        color: var(--bk-orange) !important;
-    }
-    
-    .option-title {
-        color: var(--bk-orange) !important;
-    }
-    
-    .pill {
-        border-color: var(--bk-brown) !important;
-        color: var(--text-muted-light) !important;
-    }
-    
-    .pill:hover {
-        border-color: var(--bk-orange) !important;
-        color: var(--bk-orange) !important;
-    }
-    
-    .pill.active {
-        background: linear-gradient(135deg, var(--bk-red) 0%, var(--bk-orange) 100%) !important;
-        color: white !important;
-        box-shadow: 0 4px 10px rgba(214, 35, 0, 0.3) !important;
-        border-color: transparent !important;
-    }
-    
-    .qty-btn {
-        background: var(--bk-brown) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .qty-btn:hover {
-        background: var(--bk-red) !important;
-        color: white !important;
-    }
-    
-    .qty-input {
-        border-color: var(--bk-brown) !important;
-        background: #170d0a !important;
-        color: var(--text-light) !important;
-    }
-    
-    .btn-add-cart {
-        background: linear-gradient(135deg, var(--bk-red) 0%, #ff6f00 100%) !important;
-        box-shadow: 0 10px 20px rgba(214, 35, 0, 0.3) !important;
-    }
-    
-    .btn-add-cart:hover {
-        box-shadow: 0 15px 25px rgba(214, 35, 0, 0.4) !important;
-        transform: translateY(-3px) !important;
-    }
-    
-    .breadcrumb, .breadcrumb a {
-        color: var(--text-muted-light) !important;
-    }
-    
-    /* Cart / Checkout Overrides */
-    .card, .list-card, .table-card {
-        background-color: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-        box-shadow: 0 8px 30px rgba(0,0,0,0.3) !important;
-    }
-    
-    .cart-item {
-        background-color: #1c0f0a !important;
-        border: 1px solid rgba(242, 169, 0, 0.08) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .trash-btn {
-        color: #ff6b6b !important;
-        background: transparent !important;
-        border: none !important;
-    }
-    
-    .btn-checkout, .btn-primary, .btn-gradient, .btn-login, .btn-signup {
-        background: linear-gradient(135deg, var(--bk-red) 0%, #ff6f00 100%) !important;
-        border: none !important;
-        color: white !important;
-        box-shadow: 0 4px 15px rgba(214, 35, 0, 0.3) !important;
-    }
-    
-    .btn-checkout:hover, .btn-primary:hover, .btn-gradient:hover {
-        background: linear-gradient(135deg, #b31c00 0%, #e65100 100%) !important;
-        color: white !important;
-        transform: translateY(-2px) !important;
-        box-shadow: 0 8px 20px rgba(214, 35, 0, 0.4) !important;
-    }
-    
-    .text-primary, .fs-5.text-primary, #subtotal, #final-total {
-        color: var(--bk-orange) !important;
-    }
-    
-    /* Leaderboard / Ranking */
-    .leaderboard-header h1 {
-        color: var(--bk-orange) !important;
-    }
-    
-    .leaderboard-header p {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .rank-card {
-        background-color: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .rank-name {
-        color: var(--text-light) !important;
-    }
-    
-    .rank-desc {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .rank-price {
-        color: var(--bk-orange) !important;
-    }
-    
-    .btn-rank.btn-cart {
-        background: linear-gradient(135deg, var(--bk-red) 0%, #ff6f00 100%) !important;
-        color: white !important;
-    }
-    
-    .btn-rank.btn-more {
-        border-color: var(--bk-orange) !important;
-        color: var(--bk-orange) !important;
-        background: transparent !important;
-    }
-    
-    .btn-rank.btn-more:hover {
-        background: rgba(242, 169, 0, 0.1) !important;
-        color: white !important;
-    }
-    
-    /* Database Demo / Dashboard Panel */
-    .page-title {
-        color: var(--bk-orange) !important;
-    }
-    
-    .page-subtitle {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .kpi-card {
-        background-color: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .kpi-card h3 {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .kpi-value {
-        color: var(--text-light) !important;
-    }
-    
-    .table-responsive {
-        border-color: rgba(242, 169, 0, 0.1) !important;
-    }
-    
-    .table {
-        color: var(--text-light) !important;
-    }
-    
-    .table th {
-        background-color: rgba(60, 36, 21, 0.6) !important;
-        color: var(--bk-orange) !important;
-    }
-    
-    .table td {
-        border-bottom-color: rgba(242, 169, 0, 0.1) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .table tbody tr:hover {
-        background-color: rgba(242, 169, 0, 0.05) !important;
-    }
-    
-    .pwd-input {
-        background: #170d0a !important;
-        border-color: var(--bk-brown) !important;
-        color: var(--text-light) !important;
-    }
-    
-    /* Dialog / Alerts */
-    .toast-container .toast {
-        background-color: #251610 !important;
-        border-color: var(--bk-orange) !important;
-        color: var(--text-light) !important;
-    }
+        .receipt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px dashed #cbd5e1;
+            padding-bottom: 12px;
+            margin-bottom: 15px;
+        }
+        .receipt-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: #2F4F4F;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .receipt-badge {
+            background: linear-gradient(135deg, #FF4757 0%, #ff6b81 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700;
+            box-shadow: 0 4px 8px rgba(255, 71, 87, 0.2);
+        }
+        .receipt-info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        .receipt-info-label {
+            color: #64748b;
+            font-weight: 600;
+        }
+        .receipt-info-value {
+            color: #1e293b;
+            font-weight: 700;
+            word-break: break-all;
+            max-width: 65%;
+            text-align: right;
+        }
+        .receipt-items-list {
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 12px 0;
+            margin: 15px 0;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        /* 美化收據內滾動條 */
+        .receipt-items-list::-webkit-scrollbar {
+            width: 4px;
+        }
+        .receipt-items-list::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .receipt-items-list::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .receipt-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 14px;
+            gap: 10px;
+        }
+        .receipt-item:last-child {
+            margin-bottom: 0;
+        }
+        .receipt-item-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-grow: 1;
+        }
+        .receipt-item-img {
+            width: 42px;
+            height: 42px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        .receipt-item-text {
+            display: flex;
+            flex-direction: column;
+        }
+        .receipt-item-name {
+            color: #334155;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        .receipt-item-spec {
+            color: #64748b;
+            font-size: 11px;
+            margin-top: 2px;
+        }
+        .receipt-item-qty {
+            color: #64748b;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 6px;
+        }
+        .receipt-item-price {
+            color: #e74c3c;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .receipt-total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: 900;
+            color: #FF4757;
+        }
 
+        @media (max-width: 600px) {
+            .glass-card { padding: 45px 15px 20px 15px; }
+            .professor-box { padding: 30px 12px 20px 12px; }
+            .success-icon { font-size: 50px; top: -30px; }
+            .msg-title { font-size: 26px; margin: 5px 0 10px 0; }
+            .msg-welcome { font-size: 16px; margin: 0 0 15px 0; }
+            .btn-group { flex-direction: row; gap: 10px; justify-content: center; }
+            .btn-custom { padding: 10px 18px; font-size: 14px; gap: 6px; }
+            .receipt-card { padding: 14px; margin: 15px auto; border-radius: 12px; }
+            .receipt-header { padding-bottom: 8px; margin-bottom: 10px; }
+            .receipt-title { font-size: 15px; }
+            .receipt-badge { font-size: 11px; padding: 2px 8px; }
+            .receipt-info-row { margin-bottom: 6px; font-size: 13px; }
+            .receipt-items-list { padding: 8px 0; margin: 10px 0; max-height: 130px; }
+            .receipt-item { margin-bottom: 8px; }
+            .receipt-item-img { width: 36px; height: 36px; border-radius: 6px; }
+            .receipt-item-name { font-size: 13px; }
+            .receipt-item-spec { font-size: 10px; }
+            .receipt-item-qty { font-size: 11px; }
+            .receipt-item-price { font-size: 13px; }
+            .receipt-total-row { font-size: 16px; margin-top: 10px; }
+        }
     </style>
 </head>
 <body>
@@ -513,31 +306,101 @@
             <h1 class="msg-title" id="display-title">會員註冊成功</h1>
             <h2 class="msg-welcome" id="display-welcome">歡迎 <span id="user-name">薛翔謙</span> 成為會員</h2>
             
+            <!-- 購買明細容器 -->
+            <div id="receipt-container" style="display: none;"></div>
+
             <div class="btn-group" id="btn-container">
                 <a href="index.html" class="btn-custom btn-home"><i class="fa-solid fa-house"></i> 點選回首頁</a>
                 <a href="login.html" class="btn-custom btn-action" id="action-link"><i class="fa-solid fa-arrow-right-to-bracket"></i> 點選立即登入</a>
             </div>
 
             <div class="timer-text" id="timer-container">
-                系統將在 <span id="sec">3</span> 秒後自動導向主頁面...
-            </div>
-            
-            <div id="review-container" style="display:none; margin-top: 25px; border-top: 2px dashed #eee; padding-top: 20px;">
-                <h3 style="color:#2F4F4F; font-weight:800; font-size:1.4rem; margin-bottom:15px;">請為本次購物體驗評分</h3>
-                <div class="stars" id="star-rating" style="font-size: 2.2rem; color: #ddd; cursor: pointer; margin-bottom: 15px; transition: 0.3s;">
-                    <i class="fa-solid fa-star" data-value="1"></i>
-                    <i class="fa-solid fa-star" data-value="2"></i>
-                    <i class="fa-solid fa-star" data-value="3"></i>
-                    <i class="fa-solid fa-star" data-value="4"></i>
-                    <i class="fa-solid fa-star" data-value="5"></i>
-                </div>
-                <textarea id="review-text" rows="3" placeholder="留下您的寶貴意見..." style="width:100%; padding:12px; border-radius:15px; border:2px solid #E0F6FF; margin-bottom:15px; font-family:inherit; resize:none; outline:none; transition:0.3s;"></textarea>
-                <button id="btn-submit-review" class="btn-custom btn-action" style="width:100%; justify-content:center; border:none; background:linear-gradient(90deg, #2ED573, #28b463); color:white; font-size:1.2rem; box-shadow: 0 4px 15px rgba(46, 213, 115, 0.4);">送出評價</button>
+                系統將在 <span id="sec">5</span> 秒後自動導向主頁面...
             </div>
         </div>
     </div>
 
     <script>
+        const productsDB = {
+            "tea01": { name: "iPhone 15 Pro Max", price: 44900, img: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500&auto=format&fit=crop&q=60" },
+            "tea02": { name: "Samsung Galaxy S24 Ultra", price: 43900, img: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500&auto=format&fit=crop&q=60" },
+            "tea03": { name: "iPad Pro M4", price: 34900, img: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=500&auto=format&fit=crop&q=60" },
+            "tea04": { name: "Google Pixel 8 Pro", price: 33900, img: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=500&auto=format&fit=crop&q=60" },
+            "tea05": { name: "ASUS ROG Phone 8 Pro", price: 38990, img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60" },
+            "tea06": { name: "Xiaomi 14 Ultra", price: 34999, img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60" },
+            "tea07": { name: "Sony Xperia 1 VI", price: 39990, img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60" },
+            "tea08": { name: "iPad Air 6", price: 19900, img: "https://images.unsplash.com/photo-1589739900243-4b52cd9b104e?w=500&auto=format&fit=crop&q=60" },
+            "tea09": { name: "Samsung Galaxy Tab S9", price: 23990, img: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=500&auto=format&fit=crop&q=60" },
+            "tea10": { name: "iPhone 15", price: 29900, img: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500&auto=format&fit=crop&q=60" },
+            "tea11": { name: "Google Pixel 8a", price: 16490, img: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=500&auto=format&fit=crop&q=60" },
+            "tea12": { name: "Xiaomi Redmi Note 13 Pro", price: 9999, img: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=500&auto=format&fit=crop&q=60" },
+            "tea13": { name: "ASUS Zenfone 11 Ultra", price: 29990, img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60" },
+            "tea27": { name: "OPPO Reno11 Pro", price: 16990, img: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=500&auto=format&fit=crop&q=60" },
+            "tea28": { name: "Sony Xperia 10 VI", price: 13990, img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60" },
+            "tea31": { name: "Samsung Galaxy Fold 5", price: 56888, img: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500&auto=format&fit=crop&q=60" },
+            "tea32": { name: "iPhone 15 Plus", price: 32900, img: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500&auto=format&fit=crop&q=60" },
+            "tea33": { name: "iPad 10th Gen", price: 11900, img: "https://images.unsplash.com/photo-1589739900243-4b52cd9b104e?w=500&auto=format&fit=crop&q=60" },
+            
+            "donut01": { name: "Logitech MX Master 3S", price: 3290, img: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500&auto=format&fit=crop&q=60" },
+            "donut02": { name: "Keychron K2 機械鍵盤", price: 2580, img: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500&auto=format&fit=crop&q=60" },
+            "donut03": { name: "MacBook Pro M3", price: 54900, img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&auto=format&fit=crop&q=60" },
+            "donut04": { name: "ASUS RT-AX88U Pro 路由器", price: 8888, img: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=500&auto=format&fit=crop&q=60" },
+            "donut05": { name: "WD Black SN850X 2TB SSD", price: 5290, img: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=500&auto=format&fit=crop&q=60" },
+            "donut06": { name: "ROG Swift PG32UCDM 螢幕", price: 42900, img: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500&auto=format&fit=crop&q=60" },
+            "donut07": { name: "Sony WH-1000XM5 耳機", price: 9900, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=60" },
+
+            "fruit01": { name: "Apple Watch Series 9", price: 13500, img: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500&auto=format&fit=crop&q=60" },
+            "fruit02": { name: "Garmin Venu 3", price: 14990, img: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=500&auto=format&fit=crop&q=60" },
+            "fruit03": { name: "AirPods Pro 2", price: 7490, img: "https://images.unsplash.com/photo-1588449668365-d15e397f6787?w=500&auto=format&fit=crop&q=60" },
+            "fruit04": { name: "Google Nest Hub 2", price: 3180, img: "https://images.unsplash.com/photo-1543512214-318c7553f230?w=500&auto=format&fit=crop&q=60" },
+            "fruit05": { name: "Dyson Purifier Cool", price: 18900, img: "https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=500&auto=format&fit=crop&q=60" },
+            "fruit06": { name: "Philips Hue 智慧燈泡", price: 4990, img: "https://images.unsplash.com/photo-1550985616-10810253b84d?w=500&auto=format&fit=crop&q=60" },
+            "fruit07": { name: "Nintendo Switch OLED", price: 10480, img: "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=500&auto=format&fit=crop&q=60" },
+            "fruit08": { name: "DJI Mini 4 Pro 空拍機", price: 22090, img: "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?w=500&auto=format&fit=crop&q=60" },
+            "fruit09": { name: "GoPro HERO12 Black", price: 14900, img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&auto=format&fit=crop&q=60" },
+            "fruit10": { name: "HomePod 智慧音箱", price: 9300, img: "https://images.unsplash.com/photo-1543512214-318c7553f230?w=500&auto=format&fit=crop&q=60" },
+            "fruit11": { name: "Xiaomi 智慧攝影機 C400", price: 1095, img: "https://images.unsplash.com/photo-1558002038-1055907df827?w=500&auto=format&fit=crop&q=60" },
+            "fruit12": { name: "Dyson V15 Detect", price: 24900, img: "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=500&auto=format&fit=crop&q=60" }
+        };
+
+        function parseOrderItem(itemStr) {
+            let name = '';
+            let code = '';
+            let specs = '';
+            let qty = 1;
+
+            const lastX = itemStr.lastIndexOf(' x');
+            let baseStr = itemStr;
+            if (lastX !== -1) {
+                baseStr = itemStr.substring(0, lastX).trim();
+                qty = parseInt(itemStr.substring(lastX + 2).trim(), 10) || 1;
+            }
+
+            const parenMatch = baseStr.match(/\(([^)]+)\)/);
+            if (parenMatch) {
+                name = baseStr.replace(/\s*\([^)]+\)/g, '').trim();
+                const inner = parenMatch[1];
+                const parts = inner.split('/');
+                code = parts[0];
+                if (parts.length > 1) {
+                    specs = parts.slice(1).join(' / ');
+                }
+            } else {
+                name = baseStr;
+            }
+
+            return { name, code, specs, qty };
+        }
+
+        function findProductDetails(name) {
+            for (const key in productsDB) {
+                if (productsDB[key].name === name) {
+                    return productsDB[key];
+                }
+            }
+            return null;
+        }
+
         // 抓取網址參數
         const params = new URLSearchParams(window.location.search);
         const type = params.get('type');
@@ -548,74 +411,122 @@
         const actionLink = document.getElementById('action-link');
 
         // 根據來源變更顯示內容
-        let isCheckout = false;
         if (type === 'login') {
             titleEl.innerText = "會員登入成功";
-            welcomeEl.innerHTML = `歡迎 <span style="color:#2F4F4F;">${name}</span> 回來`;
+            welcomeEl.innerHTML = `歡迎 <span style="color:#1C2B5A;">${name}</span> 回來`;
             actionLink.innerHTML = `<i class="fa-solid fa-cart-shopping"></i> 前往購物車`;
             actionLink.href = "cart.html";
         } else if (type === 'checkout') {
-            isCheckout = true;
-            titleEl.innerText = "訂單完成";
-            welcomeEl.innerHTML = `感謝 <span style="color:#2F4F4F;">${name}</span> 的購買`;
-            document.getElementById('btn-container').style.display = 'none';
-            document.getElementById('timer-container').style.display = 'none';
-            document.getElementById('review-container').style.display = 'block';
+            titleEl.innerText = "訂單交易成功";
+            welcomeEl.innerHTML = `感謝 <span style="color:#1C2B5A;">${name}</span> 的購買`;
+            actionLink.innerHTML = `<i class="fa-solid fa-file-invoice"></i> 查看我的訂單`;
+            actionLink.href = "profile.html";
+
+            // 讀取訂單資訊
+            const orderId = params.get('orderId');
+            const orders = JSON.parse(localStorage.getItem('dejeng3c_orders')) || [];
+            let order = null;
+            if (orderId) {
+                order = orders.find(o => o.orderId === orderId);
+            }
+            if (!order && orders.length > 0) {
+                order = orders[orders.length - 1];
+            }
+
+            if (order) {
+                const receiptContainer = document.getElementById('receipt-container');
+                receiptContainer.style.display = 'block';
+
+                let itemsHtml = '';
+                const statusSettings = JSON.parse(localStorage.getItem('dejeng3c_product_settings')) || {};
+
+                order.items.forEach(itemStr => {
+                    const parsed = parseOrderItem(itemStr);
+                    const p = findProductDetails(parsed.name);
+                    
+                    const img = p ? p.img : 'image/logo.jpeg';
+                    let unitPrice = p ? p.price : 0;
+                    if (p) {
+                        const promoPrice = statusSettings[p.name]?.promoPrice;
+                        if (promoPrice && promoPrice < p.price) {
+                            unitPrice = promoPrice;
+                        }
+                    }
+                    const subtotal = unitPrice * parsed.qty;
+
+                    itemsHtml += `
+                        <div class="receipt-item">
+                            <div class="receipt-item-info">
+                                <img src="${img}" alt="${parsed.name}" class="receipt-item-img">
+                                <div class="receipt-item-text">
+                                    <span class="receipt-item-name">${parsed.name}</span>
+                                    ${parsed.specs ? `<span class="receipt-item-spec">${parsed.specs}</span>` : ''}
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <span class="receipt-item-qty">x${parsed.qty}</span>
+                                <span class="receipt-item-price">$${subtotal.toLocaleString()}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                const paymentMethodText = order.paymentMethod || '線上付款';
+                let paymentIconClass = 'fa-solid fa-credit-card';
+                if (paymentMethodText === '貨到付款') {
+                    paymentIconClass = 'fa-solid fa-truck-ramp-box';
+                } else if (paymentMethodText === 'Line Pay') {
+                    paymentIconClass = 'fa-brands fa-line';
+                }
+
+                receiptContainer.innerHTML = `
+                    <div class="receipt-card">
+                        <div class="receipt-header">
+                            <div class="receipt-title">
+                                <i class="fa-solid fa-receipt" style="color:#C5A880;"></i>
+                                <span>購買明細</span>
+                            </div>
+                            <span class="receipt-badge">已付款</span>
+                        </div>
+                        <div class="receipt-info-row">
+                            <span class="receipt-info-label">訂單編號</span>
+                            <span class="receipt-info-value">${order.orderId || '無'}</span>
+                        </div>
+                        <div class="receipt-info-row">
+                            <span class="receipt-info-label">付款方式</span>
+                            <span class="receipt-info-value">
+                                <i class="${paymentIconClass} me-1" style="${paymentMethodText === 'Line Pay' ? 'color:#06c755;' : ''}"></i>${paymentMethodText}
+                            </span>
+                        </div>
+                        
+                        <div class="receipt-items-list">
+                            ${itemsHtml}
+                        </div>
+
+                        ${order.discount > 0 ? `
+                        <div class="receipt-info-row" style="margin-top: 10px;">
+                            <span class="receipt-info-label">折扣折抵</span>
+                            <span class="receipt-info-value text-success">-$${order.discount.toLocaleString()}</span>
+                        </div>
+                        ` : ''}
+
+                        <div class="receipt-total-row">
+                            <span>付款金額</span>
+                            <span>$${order.total.toLocaleString()}</span>
+                        </div>
+                    </div>
+                `;
+            }
         } else {
             titleEl.innerText = "會員註冊成功";
-            welcomeEl.innerHTML = `歡迎 <span style="color:#2F4F4F;">${name}</span> 成為會員`;
+            welcomeEl.innerHTML = `歡迎 <span style="color:#1C2B5A;">${name}</span> 成為會員`;
             actionLink.innerHTML = `<i class="fa-solid fa-arrow-right-to-bracket"></i> 點選立即登入`;
             actionLink.href = "login.html";
         }
 
-        // 星星評分邏輯
-        let selectedRating = 0;
-        const stars = document.querySelectorAll('#star-rating i');
-        stars.forEach(star => {
-            star.addEventListener('mouseover', function() {
-                let val = this.getAttribute('data-value');
-                stars.forEach(s => {
-                    s.style.color = s.getAttribute('data-value') <= val ? '#FFD700' : '#ddd';
-                });
-            });
-            star.addEventListener('mouseout', function() {
-                stars.forEach(s => {
-                    s.style.color = s.getAttribute('data-value') <= selectedRating ? '#FFD700' : '#ddd';
-                });
-            });
-            star.addEventListener('click', function() {
-                selectedRating = this.getAttribute('data-value');
-            });
-        });
-
-        // 評價送出邏輯
-        document.getElementById('btn-submit-review').addEventListener('click', () => {
-            if (selectedRating == 0) {
-                alert('請選擇星級評分！');
-                return;
-            }
-            const reviewText = document.getElementById('review-text').value;
-            const review = {
-                name: name,
-                rating: parseInt(selectedRating),
-                comment: reviewText,
-                timestamp: new Date().getTime()
-            };
-            
-            let reviews = JSON.parse(localStorage.getItem('burgerking_reviews')) || [];
-            reviews.push(review);
-            localStorage.setItem('burgerking_reviews', JSON.stringify(reviews));
-            
-            document.getElementById('review-container').innerHTML = '<h3 style="color:#2ED573; font-weight:bold; margin-top:20px;"><i class="fa-solid fa-heart"></i> 感謝您的評價！</h3>';
-            
-            setTimeout(() => {
-                window.location.href = "index.html";
-            }, 2000);
-        });
-
-        // 自動跳轉倒數邏輯 (僅非 checkout 時)
-        if (!isCheckout) {
-            let count = 3;
+        // 自動跳轉倒數邏輯
+        if (type !== 'checkout') {
+            let count = 5;
             const secEl = document.getElementById('sec');
             const timer = setInterval(() => {
                 count--;
@@ -625,6 +536,8 @@
                     window.location.href = "index.html";
                 }
             }, 1000);
+        } else {
+            document.getElementById('timer-container').style.display = 'none';
         }
     </script>
 </body>

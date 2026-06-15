@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>會員註冊 - 漢堡王 Burger King</title>
+    <title>會員註冊 - 得正 3C</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         * { box-sizing: border-box; }
         body { 
-            background: linear-gradient(135deg, #87CEEB 0%, #4682B4 100%); 
+            background: radial-gradient(circle at 10% 20%, #1C2B5A 0%, #0F1836 100%); 
             height: 100vh; display: flex; align-items: center; justify-content: center; 
             font-family: 'Noto Sans TC', sans-serif; position: relative; overflow: hidden;
         }
@@ -34,380 +34,26 @@
 
         /* Logo 區域 */
         .brand-header { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 10px; }
-        .brand-logo { width: 50px; height: 50px; border-radius: 50%; border: 3px solid #E0F6FF; box-shadow: 0 4px 10px rgba(0,0,0,0.1); object-fit: cover; }
-        .brand-title { color: #2F4F4F; font-weight: 800; letter-spacing: 1px; margin: 0; font-size: 1.8rem; }
+        .brand-logo { width: 50px; height: 50px; border-radius: 50%; border: 3px solid #C5A880; box-shadow: 0 4px 10px rgba(0,0,0,0.15); object-fit: cover; }
+        .brand-title { color: #1C2B5A; font-weight: 800; letter-spacing: 1px; margin: 0; font-size: 1.8rem; }
         
         /* 表單設計 */
-        .input-group-text { background: #f4f6f8; border-right: none; color: #4682B4; border-radius: 10px 0 0 10px; }
+        .input-group-text { background: #f4f6f8; border-right: none; color: #1C2B5A; border-radius: 10px 0 0 10px; }
         .form-control { border-left: none; padding: 12px; background: #f4f6f8; border-radius: 0 10px 10px 0; font-size: 0.95rem; }
-        .form-control:focus { border-color: #4682B4; box-shadow: none; background: #ffffff; }
+        .form-control:focus { border-color: #1C2B5A; box-shadow: none; background: #ffffff; }
         .input-group { border-radius: 10px; border: 1px solid #dee2e6; transition: 0.3s; overflow: hidden; margin-bottom: 1rem; }
-        .input-group:focus-within { border-color: #4682B4; box-shadow: 0 0 0 0.25rem rgba(70, 130, 180, 0.2); background: #ffffff; }
+        .input-group:focus-within { border-color: #1C2B5A; box-shadow: 0 0 0 0.25rem rgba(28, 43, 90, 0.2); background: #ffffff; }
         .input-group:focus-within .input-group-text { background: #ffffff; }
 
         /* 按鈕設計 */
-        .btn-gradient { background: linear-gradient(135deg, #5DADE2 0%, #4682B4 100%); border: none; color: white; padding: 14px; font-size: 1.1rem; font-weight: 700; border-radius: 50px; transition: 0.3s; width: 100%; margin-top: 10px; box-shadow: 0 10px 20px rgba(93, 173, 226, 0.3); }
-        .btn-gradient:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(93, 173, 226, 0.4); color: white; }
+        .btn-gradient { background: #1C2B5A; border: none; color: white; padding: 14px; font-size: 1.1rem; font-weight: 700; border-radius: 50px; transition: 0.3s; width: 100%; margin-top: 10px; box-shadow: 0 10px 20px rgba(28, 43, 90, 0.3); }
+        .btn-gradient:hover { background: #2E4A7D; transform: translateY(-3px); box-shadow: 0 15px 25px rgba(28, 43, 90, 0.4); color: white; }
         
         /* 驗證碼 */
-        .captcha-box { background: linear-gradient(to right, #f4f6f8, #e9ecef); color: #2F4F4F; font-family: monospace; font-size: 1.5rem; letter-spacing: 5px; display: flex; align-items: center; justify-content: center; border-radius: 10px; cursor: pointer; user-select: none; border: 1px dashed #ccc; font-weight: bold; text-shadow: 1px 1px 0px rgba(255,255,255,0.8); }
+        .captcha-box { background: linear-gradient(to right, #f4f6f8, #e9ecef); color: #1C2B5A; font-family: monospace; font-size: 1.5rem; letter-spacing: 5px; display: flex; align-items: center; justify-content: center; border-radius: 10px; cursor: pointer; user-select: none; border: 1px dashed #ccc; font-weight: bold; text-shadow: 1px 1px 0px rgba(255,255,255,0.8); }
         
-        .bottom-links a { color: #4682B4; font-weight: 600; text-decoration: none; transition: 0.3s; }
-        .bottom-links a:hover { color: #2F4F4F; text-decoration: underline; }
-    
-    /* --- BURGER KING PREMIUM DESIGN SYSTEM OVERRIDE --- */
-    :root {
-        --bk-red: #D62300;
-        --bk-orange: #F2A900;
-        --bk-dark: #3C2415;
-        --bk-cream: #F7EFE9;
-        --bk-brown: #502C1E;
-        --text-light: #F7EFE9;
-        --text-muted-light: #c1a89c;
-    }
-    
-    /* Global Color System */
-    body {
-        background: linear-gradient(135deg, #1b0c07 0%, #0d0604 100%) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .navbar, .navbar-custom {
-        background: var(--bk-dark) !important;
-        border-bottom: 3px solid var(--bk-red) !important;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
-    }
-    
-    .navbar-logo, .navbar-logo span, .navbar-brand {
-        color: var(--bk-orange) !important;
-        font-family: 'Outfit', 'Noto Sans TC', sans-serif !important;
-    }
-    
-    .navbar-menu a {
-        color: var(--text-light) !important;
-    }
-    
-    .navbar-menu a:hover {
-        color: var(--bk-orange) !important;
-    }
-    
-    .navbar-toggle {
-        color: var(--bk-orange) !important;
-    }
-    
-    /* Menu / Home / Section Styles */
-    .menu-section {
-        background: #170d0a !important;
-    }
-    
-    .menu-section:nth-of-type(even) {
-        background: #110806 !important;
-    }
-    
-    .menu-title {
-        color: var(--text-light) !important;
-        border-bottom-color: var(--bk-red) !important;
-        font-family: 'Outfit', 'Noto Sans TC', sans-serif !important;
-    }
-    
-    .menu-subtitle {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .menu-item {
-        background: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.3) !important;
-    }
-    
-    .menu-item-name {
-        color: var(--text-light) !important;
-    }
-    
-    .menu-item-price {
-        color: var(--bk-orange) !important;
-    }
-    
-    .menu-button.buy {
-        background: linear-gradient(135deg, var(--bk-red) 0%, #ff6f00 100%) !important;
-        border: none !important;
-        color: white !important;
-    }
-    
-    .menu-button.buy:hover {
-        background: linear-gradient(135deg, #b31c00 0%, #e65100 100%) !important;
-        transform: translateY(-2px) !important;
-    }
-    
-    .menu-button.learn-more {
-        background: transparent !important;
-        color: var(--bk-orange) !important;
-        border-color: var(--bk-orange) !important;
-    }
-    
-    .menu-button.learn-more:hover {
-        background: rgba(242, 169, 0, 0.1) !important;
-        color: white !important;
-        border-color: white !important;
-    }
-    
-    /* Footer Overrides */
-    .footer {
-        background: linear-gradient(135deg, #251610 0%, #170d0a 100%) !important;
-        border-top: 3px solid var(--bk-red) !important;
-        color: var(--text-muted-light) !important;
-    }
-    
-    .footer::before {
-        display: none !important;
-    }
-    
-    .footer-section h3 {
-        color: var(--bk-orange) !important;
-    }
-    
-    .footer-section h3::after {
-        background: var(--bk-red) !important;
-    }
-    
-    .footer-section p, .footer-section ul li, .footer-section ul li a {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .footer-section ul li:hover, .footer-section ul li a:hover {
-        color: var(--bk-orange) !important;
-    }
-    
-    .social-links a {
-        background: rgba(242, 169, 0, 0.1) !important;
-        color: var(--bk-orange) !important;
-    }
-    
-    .social-links a:hover {
-        background: linear-gradient(135deg, var(--bk-red) 0%, var(--bk-orange) 100%) !important;
-        color: white !important;
-        transform: translateY(-2px) !important;
-    }
-    
-    /* Product Detail page */
-    .product-detail-container {
-        background: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-        box-shadow: 0 15px 35px rgba(0,0,0,0.4) !important;
-    }
-    
-    .image-section {
-        background: linear-gradient(135deg, #3c2415 0%, #251610 100%) !important;
-    }
-    
-    .info-section {
-        color: var(--text-light) !important;
-    }
-    
-    .pd-title {
-        color: var(--text-light) !important;
-    }
-    
-    .pd-desc {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .pd-price {
-        color: var(--bk-orange) !important;
-    }
-    
-    .option-title {
-        color: var(--bk-orange) !important;
-    }
-    
-    .pill {
-        border-color: var(--bk-brown) !important;
-        color: var(--text-muted-light) !important;
-    }
-    
-    .pill:hover {
-        border-color: var(--bk-orange) !important;
-        color: var(--bk-orange) !important;
-    }
-    
-    .pill.active {
-        background: linear-gradient(135deg, var(--bk-red) 0%, var(--bk-orange) 100%) !important;
-        color: white !important;
-        box-shadow: 0 4px 10px rgba(214, 35, 0, 0.3) !important;
-        border-color: transparent !important;
-    }
-    
-    .qty-btn {
-        background: var(--bk-brown) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .qty-btn:hover {
-        background: var(--bk-red) !important;
-        color: white !important;
-    }
-    
-    .qty-input {
-        border-color: var(--bk-brown) !important;
-        background: #170d0a !important;
-        color: var(--text-light) !important;
-    }
-    
-    .btn-add-cart {
-        background: linear-gradient(135deg, var(--bk-red) 0%, #ff6f00 100%) !important;
-        box-shadow: 0 10px 20px rgba(214, 35, 0, 0.3) !important;
-    }
-    
-    .btn-add-cart:hover {
-        box-shadow: 0 15px 25px rgba(214, 35, 0, 0.4) !important;
-        transform: translateY(-3px) !important;
-    }
-    
-    .breadcrumb, .breadcrumb a {
-        color: var(--text-muted-light) !important;
-    }
-    
-    /* Cart / Checkout Overrides */
-    .card, .list-card, .table-card {
-        background-color: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-        box-shadow: 0 8px 30px rgba(0,0,0,0.3) !important;
-    }
-    
-    .cart-item {
-        background-color: #1c0f0a !important;
-        border: 1px solid rgba(242, 169, 0, 0.08) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .trash-btn {
-        color: #ff6b6b !important;
-        background: transparent !important;
-        border: none !important;
-    }
-    
-    .btn-checkout, .btn-primary, .btn-gradient, .btn-login, .btn-signup {
-        background: linear-gradient(135deg, var(--bk-red) 0%, #ff6f00 100%) !important;
-        border: none !important;
-        color: white !important;
-        box-shadow: 0 4px 15px rgba(214, 35, 0, 0.3) !important;
-    }
-    
-    .btn-checkout:hover, .btn-primary:hover, .btn-gradient:hover {
-        background: linear-gradient(135deg, #b31c00 0%, #e65100 100%) !important;
-        color: white !important;
-        transform: translateY(-2px) !important;
-        box-shadow: 0 8px 20px rgba(214, 35, 0, 0.4) !important;
-    }
-    
-    .text-primary, .fs-5.text-primary, #subtotal, #final-total {
-        color: var(--bk-orange) !important;
-    }
-    
-    /* Leaderboard / Ranking */
-    .leaderboard-header h1 {
-        color: var(--bk-orange) !important;
-    }
-    
-    .leaderboard-header p {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .rank-card {
-        background-color: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .rank-name {
-        color: var(--text-light) !important;
-    }
-    
-    .rank-desc {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .rank-price {
-        color: var(--bk-orange) !important;
-    }
-    
-    .btn-rank.btn-cart {
-        background: linear-gradient(135deg, var(--bk-red) 0%, #ff6f00 100%) !important;
-        color: white !important;
-    }
-    
-    .btn-rank.btn-more {
-        border-color: var(--bk-orange) !important;
-        color: var(--bk-orange) !important;
-        background: transparent !important;
-    }
-    
-    .btn-rank.btn-more:hover {
-        background: rgba(242, 169, 0, 0.1) !important;
-        color: white !important;
-    }
-    
-    /* Database Demo / Dashboard Panel */
-    .page-title {
-        color: var(--bk-orange) !important;
-    }
-    
-    .page-subtitle {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .kpi-card {
-        background-color: #251610 !important;
-        border: 1px solid rgba(242, 169, 0, 0.15) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .kpi-card h3 {
-        color: var(--text-muted-light) !important;
-    }
-    
-    .kpi-value {
-        color: var(--text-light) !important;
-    }
-    
-    .table-responsive {
-        border-color: rgba(242, 169, 0, 0.1) !important;
-    }
-    
-    .table {
-        color: var(--text-light) !important;
-    }
-    
-    .table th {
-        background-color: rgba(60, 36, 21, 0.6) !important;
-        color: var(--bk-orange) !important;
-    }
-    
-    .table td {
-        border-bottom-color: rgba(242, 169, 0, 0.1) !important;
-        color: var(--text-light) !important;
-    }
-    
-    .table tbody tr:hover {
-        background-color: rgba(242, 169, 0, 0.05) !important;
-    }
-    
-    .pwd-input {
-        background: #170d0a !important;
-        border-color: var(--bk-brown) !important;
-        color: var(--text-light) !important;
-    }
-    
-    /* Dialog / Alerts */
-    .toast-container .toast {
-        background-color: #251610 !important;
-        border-color: var(--bk-orange) !important;
-        color: var(--text-light) !important;
-    }
-
+        .bottom-links a { color: #C5A880; font-weight: 600; text-decoration: none; transition: 0.3s; }
+        .bottom-links a:hover { color: #1C2B5A; text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -420,10 +66,10 @@
     <div class="card">
         <div class="text-center mb-4">
             <div class="brand-header">
-                <img src="image/logo.jpeg" alt="漢堡王 Burger King Logo" class="brand-logo">
-                <h2 class="brand-title">漢堡王 Burger King</h2>
+                <img src="image/logo.jpeg" alt="得正 3C Logo" class="brand-logo">
+                <h2 class="brand-title">得正 3C</h2>
             </div>
-            <p class="text-muted small mt-2">註冊會員，享受最新優惠與專屬漢堡配餐</p>
+            <p class="text-muted small mt-2">註冊會員，享受最新優惠與專屬科技體驗</p>
         </div>
         
         <div class="input-group">
