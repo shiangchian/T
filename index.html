@@ -1,693 +1,418 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>得正 3C - 智慧手機 x 電腦週邊 x 智慧家居</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: radial-gradient(circle at 10% 20%, rgba(28, 43, 90, 0.05) 0%, rgba(244, 246, 248, 1) 90.1%); min-height: 100vh; overflow-x: hidden; padding-top: 60px; }
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Photographer Portfolio</title>
+<style>
+/* Layout: page 1 = full-screen photo (Aa), name top-left, menu top-right; page 2 = 服務項目, rows of [label | photo ~half | text], stacked vertically (Ab, Ac, Ad) on a plain washi-paper ground */
+:root {
+  --bg: #ffffff;
+  --paper: #e6e5e0;      /* 素色暖灰，帶一點和紙感 */
+  --fg: #1d1d1b;
+  --muted: #5f5e58;
+  --line: #d6d4cc;
+  --on-photo: #ffffff;
+  --font-body: "Inter", "Noto Sans TC", -apple-system, "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--paper); color: var(--fg); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible { outline: 1px solid currentColor; outline-offset: 3px; }
 
-        /* Navbar Styles */
-        .navbar { background: #1C2B5A; padding: 10px 20px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15); position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; border-bottom: 2px solid #C5A880; }
-        .navbar-container { display: flex; justify-content: space-between; align-items: center; gap: 15px; }
-        .navbar-brand-link {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            gap: 8px;
-            transition: all 0.3s ease;
-        }
-        .navbar-brand-link:hover {
-            transform: translateY(-1px);
-            filter: brightness(1.1);
-        }
-        .navbar-brand-logo-img {
-            height: 38px;
-            width: 38px;
-            border-radius: 50%;
-            object-fit: cover;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-        .navbar-brand-text {
-            font-weight: bold;
-            color: white;
-            font-size: 1.15rem;
-            white-space: nowrap;
-        }
-        .navbar-left-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .navbar-logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.05rem;
-            font-weight: bold;
-            color: white !important;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            text-decoration: none;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        .navbar-logo:hover {
-            transform: translateY(-2px);
-            background: rgba(255, 255, 255, 0.2);
-            color: #C5A880 !important;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-        }
-        #logo-cart-badge {
-            position: absolute;
-            top: -4px;
-            right: -4px;
-            background: #e74c3c;
-            color: white !important;
-            border-radius: 50%;
-            min-width: 18px;
-            height: 18px;
-            line-height: 15px;
-            text-align: center;
-            font-size: 0.7rem;
-            font-weight: bold;
-            border: 1.5px solid white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            padding: 0 2px;
-            box-sizing: border-box;
-        }
-        .navbar-search-container { flex-grow: 1; display: flex; justify-content: center; }
-        .navbar-search { padding: 8px 15px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; font-size: 0.9rem; width: 100%; max-width: 400px; transition: all 0.3s ease; background-color: rgba(255, 255, 255, 0.1); color: white; }
-        .navbar-search::placeholder { color: rgba(255, 255, 255, 0.5); }
-        .navbar-search:focus { outline: none; border-color: #C5A880; box-shadow: 0 0 0 2px rgba(197, 168, 128, 0.25); background-color: white; color: #1C2B5A; }
-        .navbar-menu { display: flex; list-style: none; gap: 15px; align-items: center; margin: 0; padding: 0; }
-        .navbar-menu li { position: relative; }
-        .navbar-menu a { text-decoration: none; color: rgba(255, 255, 255, 0.85); font-weight: 500; transition: color 0.3s ease; font-size: 0.95rem; }
-        .navbar-menu a:hover { color: #C5A880; }
-        .navbar-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: white; }
+/* ===== Page 1 — Aa ===== */
+.hero {
+  position: relative;
+  height: 100vh; height: 100svh;
+  min-height: 420px;
+  background: #cfe0e8;
+  color: var(--on-photo);
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: url("images/Aa.jpg") center / cover no-repeat;
+  animation: heroZoom 3.2s cubic-bezier(.22,.61,.36,1) both;
+}
+@keyframes heroZoom { from { transform: scale(1.08); opacity: 0; } 30% { opacity: 1; } to { transform: scale(1); opacity: 1; } }
+.hero header > * { animation: fadeUp 1.2s cubic-bezier(.22,.61,.36,1) both; }
+.hero header > .nav { animation-delay: .9s; }
+.hero header > .name { animation-delay: .7s; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.hero::before {
+  z-index: 1;
+  content: ""; position: absolute; inset: 0 0 auto 0; height: 30%;
+  background: linear-gradient(rgba(0,0,0,.22), rgba(0,0,0,0));
+  pointer-events: none;
+}
+/* 首圖底部漸層，順順地接到下面的底色 */
+.hero::after {
+  z-index: 1;
+  content: ""; position: absolute; inset: auto 0 0 0; height: 26%;
+  background: linear-gradient(to bottom, rgba(230,229,224,0) 0%, rgba(230,229,224,.35) 45%, rgba(230,229,224,.8) 78%, var(--paper) 100%);
+  pointer-events: none;
+}
+.hero header {
+  position: relative; z-index: 2;
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 24px;
+  padding: calc(22px + env(safe-area-inset-top, 0px)) 24px 0;
+}
+.name { font-size: 15px; font-weight: 600; letter-spacing: .01em; }
+.nav { display: flex; gap: 52px; font-size: 12px; font-weight: 500; }
+.nav ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.nav a:hover { opacity: .7; }
 
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
-        
-        /* 菜單區塊樣式 */
-        .menu-section { background: transparent; padding: 3rem 1rem 4rem; text-align: center; }
-        .menu-title { color: #1C2B5A; font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; margin-bottom: 1rem; opacity: 0; animation: fadeInUp 1s ease-out forwards; border-bottom: 3px solid #C5A880; display: inline-block; padding-bottom: 10px; }
-        .menu-subtitle { color: #505965; margin-bottom: 3rem; font-size: 1.1rem; }
-        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
-        .menu-item { background: #ffffff; border-radius: 15px; padding: 1.5rem; text-align: center; color: #333; opacity: 0; transform: translateY(50px); transition: all 0.6s ease, box-shadow 0.3s ease, transform 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.06); display: flex; flex-direction: column; align-items: center; border: 1px solid rgba(0, 0, 0, 0.03); }
-        .menu-item.visible { opacity: 1; transform: translateY(0); }
-        .menu-item:hover { transform: translateY(-8px); box-shadow: 0 8px 25px rgba(0,0,0,0.12); border-color: rgba(28, 43, 90, 0.1); }
-        .menu-item-image { width: 150px; height: 150px; border-radius: 15px; margin: 0 auto 1.5rem; overflow: hidden; }
-        .menu-item-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
-        .menu-item:hover .menu-item-image img { transform: scale(1.1); }
-        .menu-item-name { font-size: 1.15rem; font-weight: 600; margin-bottom: 0.5rem; color: #1C2B5A; }
-        .menu-item-price { font-size: 1.05rem; font-weight: 700; color: #C5A880; margin-bottom: 1rem; }
-        .menu-item-actions { display: flex; gap: 0.5rem; margin-top: auto; justify-content: center; width: 100%; }
-        .menu-button { padding: 0.75rem 1rem; font-size: 0.95rem; border-radius: 25px; flex: 1; text-align: center; transition: all 0.3s ease; cursor: pointer; border: 1px solid transparent; font-weight: bold; }
-        .menu-button.buy { background-color: #1C2B5A; color: white; }
-        .menu-button.buy:hover { background-color: #2E4A7D; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(28, 43, 90, 0.2); }
-        .menu-button.learn-more { background-color: white; color: #1C2B5A; border-color: #1C2B5A; text-decoration: none; }
-        .menu-button.learn-more:hover { background-color: rgba(28, 43, 90, 0.05); transform: translateY(-2px); }
+/* ===== Page 2 — 服務項目 (Ab / Ac / Ad) ===== */
+.services { padding-block: 160px 200px; }
+.label {
+  display: flex; align-items: baseline; gap: 10px;
+  margin: 0 0 72px; padding-inline: 56px;
+  font-size: 11px; font-weight: 500; letter-spacing: .24em; color: var(--muted);
+}
+.label .sep { opacity: .5; letter-spacing: 0; }
 
-        /* Footer Styles */
-        .footer { background: #1C2B5A; padding: 4rem 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; position: relative; overflow: hidden; border-top: 2px solid #C5A880; }
-        .footer-section { display: flex; flex-direction: column; gap: 1.2rem; min-width: 0; }
-        .footer-section h3 { color: white; font-size: 1.3rem; font-weight: 600; position: relative; padding-bottom: 0.8rem; margin-bottom: 0.5rem; }
-        .footer-section h3::after { content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background: #C5A880; border-radius: 2px; }
-        .footer-section p, .footer-section ul li { color: rgba(255, 255, 255, 0.7); font-size: 0.95rem; line-height: 1.6; margin: 0; }
-        .footer-section ul { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 0.8rem; }
-        .footer-section ul li { display: flex; align-items: center; transition: transform 0.3s ease; white-space: nowrap; }
-        .footer-section ul li a { text-decoration: none; color: inherit; width: 100%; display: inline-block; }
-        .footer-section ul li:hover { transform: translateX(5px); color: #C5A880; }
-        .social-links { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 0.5rem; }
-        .social-links a { text-decoration: none; color: rgba(255, 255, 255, 0.8); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; transition: all 0.3s ease; background: rgba(255, 255, 255, 0.08); display: inline-flex; align-items: center; white-space: nowrap; }
-        .social-links a:hover { background: #C5A880; color: white; transform: translateY(-2px); }
-        .social-logo { width: 20px; height: 20px; margin-right: 8px; }
-        
-        .mobile-member-display {
-            display: none;
-            font-size: 0.95rem;
-            font-weight: bold;
-            color: white;
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 8px 16px;
-            border-radius: 20px;
-            white-space: nowrap;
-            align-items: center;
-            gap: 5px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            height: 38px;
-        }
-        .mobile-member-display:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            color: #C5A880;
-        }
+.list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 52px;
+  padding-inline: 56px;
+}
+.item { display: flex; flex-direction: column; gap: 36px; min-width: 0; }
+.ph {
+  display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in;
+  overflow: hidden; aspect-ratio: 1 / 0.97; max-width: 100%;
+  transition: filter .9s cubic-bezier(.22,.61,.36,1), opacity .9s cubic-bezier(.22,.61,.36,1);
+}
+.ph:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
+.text { transition: opacity .9s cubic-bezier(.22,.61,.36,1); }
+/* 聚焦：滑過或點開其中一張時，另外兩張暗下來 */
+@media (hover: hover) {
+  .list:hover .item:not(:hover) .ph { filter: brightness(.55) saturate(.7); }
+  .list:hover .item:not(:hover) .text { opacity: .35; }
+}
+.list.dim .item:not(.active) .ph { filter: brightness(.55) saturate(.7); }
+.list.dim .item:not(.active) .text { opacity: .35; }
 
-        @media (max-width: 768px) {
-            .navbar-menu { display: none; flex-direction: column; background: #1C2B5A; position: absolute; top: 100%; left: 0; right: 0; width: 100%; padding: 10px 0; border-top: 1px solid rgba(255, 255, 255, 0.1); }
-            .navbar-menu.active { display: flex; } .navbar-toggle { display: block; }
-            .footer { padding: 3rem 1.5rem; grid-template-columns: 1fr; text-align: center; gap: 3rem; }
-            .footer-section h3::after { left: 50%; transform: translateX(-50%); } .social-links { justify-content: center; }
-            
-            .navbar.logged-in .navbar-search-container {
-                display: none !important;
-            }
-            .navbar.logged-in .mobile-member-display {
-                display: flex !important;
-            }
-        }
-        @media (max-width: 480px) {
-            .navbar-brand-text { display: none; }
-        }
-    </style>
-</head>
-<body>
+/* 手機：捲到畫面中間的那張亮起，其他變暗 */
+.list.has-inview .item:not(.inview) .ph { filter: brightness(.55) saturate(.7); }
+.list.has-inview .item:not(.inview) .text { opacity: .35; }
 
-    <nav class="navbar">
-        <div class="navbar-container">
-            <div class="navbar-left-container">
-                <a href="index.html" class="navbar-brand-link">
-                    <img src="image/logo.jpeg" alt="得正 3C" class="navbar-brand-logo-img">
-                    <span class="navbar-brand-text">得正 3C</span>
-                </a>
-                <a href="cart.html" class="navbar-logo">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <span id="logo-cart-badge" style="display: none;">0</span>
-                </a>
-            </div>
-            <div class="navbar-search-container">
-                <input type="search" id="searchInput" class="navbar-search" placeholder="搜尋手機、筆電、智慧配件...">
-            </div>
-            <a href="profile.html" id="mobile-member-display" class="mobile-member-display"></a>
-            <button class="navbar-toggle" id="navbarToggle">☰</button>
-            <ul class="navbar-menu" id="navbarMenu">
-                <li><a href="index.html"><i class="fa-solid fa-house"></i> 首頁</a></li>
-                <li><a href="#drinks"><i class="fa-solid fa-mobile-screen-button"></i> 手機平板</a></li>
-                <li><a href="#donuts"><i class="fa-solid fa-keyboard"></i> 電腦週邊</a></li>
-                <li><a href="#fruits"><i class="fa-solid fa-house-laptop"></i> 智慧家居</a></li>
-                <li><a href="leaderboard.html"><i class="fa-solid fa-crown"></i> 排行榜</a></li>
-                <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i> 購物車 <span id="cart-badge" style="background: #e74c3c; color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.75rem; vertical-align: top; display: none;">0</span></a></li>
-                
-                <li><a href="database_demo.html" style="color: #e74c3c; font-weight: bold;"><i class="fa-solid fa-database"></i> 資料庫</a></li>
+/* 點開後：完整比例展示 */
+.lightbox { position: fixed; inset: 0; z-index: 50; cursor: pointer; background: rgba(22,22,20,0); transition: background .9s cubic-bezier(.22,.61,.36,1); touch-action: pan-y; }
+.lightbox.open { background: rgba(22,22,20,.985); }
+.lb-img {
+  position: fixed; display: block; max-width: none; object-fit: cover;
+  transform-origin: center;
+  transition: top .95s cubic-bezier(.65,0,.25,1), left .95s cubic-bezier(.65,0,.25,1), width .95s cubic-bezier(.65,0,.25,1), height .95s cubic-bezier(.65,0,.25,1), transform .8s cubic-bezier(.22,.61,.36,1), opacity .45s ease;
+}
+.lb-img.breathe {
+  transform: scale(1.035);
+  transition: top .95s cubic-bezier(.65,0,.25,1), left .95s cubic-bezier(.65,0,.25,1), width .95s cubic-bezier(.65,0,.25,1), height .95s cubic-bezier(.65,0,.25,1), transform 8s cubic-bezier(.3,0,.25,1), opacity .45s ease;
+}
+.lb-img.fading { opacity: 0; }
 
-                <li id="nav-login"><a href="login.html"><i class="fa-solid fa-user"></i> 登入/註冊</a></li>
-                <li id="nav-user" style="display:none;"><a href="profile.html" id="user-display" style="color:#C5A880; font-weight:bold;"></a></li>
-                <li id="nav-logout" style="display:none;"><a href="#" id="btn-logout" style="color:#e74c3c;">登出</a></li>
-            </ul>
-        </div>
+.lb-close {
+  position: fixed; z-index: 2; right: 24px; top: calc(22px + env(safe-area-inset-top, 0px));
+  display: flex; align-items: center; gap: 10px;
+  padding: 6px 0; border: 0; background: none; color: #fff;
+  font: 500 11px/1 var(--font-body); letter-spacing: .24em;
+}
+.lb-close span { font-size: 18px; font-weight: 300; letter-spacing: 0; }
+.lb-bar {
+  position: fixed; z-index: 2; left: 0; right: 0; bottom: 0;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 32px;
+  padding: 0 24px calc(28px + env(safe-area-inset-bottom, 0px));
+  color: rgba(255,255,255,.88);
+}
+.lb-cap { margin: 0; display: flex; align-items: baseline; gap: 12px; font-size: 13px; letter-spacing: .16em; }
+.lb-num { font-size: 11px; letter-spacing: .1em; font-variant-numeric: tabular-nums; opacity: .7; }
+.lb-dash { opacity: .4; }
+.lb-cap small { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; opacity: .6; }
+.lb-close, .lb-bar { opacity: 0; transition: opacity .5s ease; }
+.lightbox.open .lb-close, .lightbox.open .lb-bar { opacity: 1; transition: opacity .8s ease .65s; }
+.lb-cap { transition: opacity .45s ease; }
+.lb-cap.fading { opacity: 0; }
+.lightbox :focus-visible { outline: 1px solid #fff; outline-offset: 4px; }
+@media (max-width: 760px) {
+  .lb-close { right: 16px; }
+  .lb-bar { padding-inline: 16px; }
+}
+.item img {
+  display: block; width: 100%; max-width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 1.6s cubic-bezier(.22,.61,.36,1);
+}
+.item:hover img { transform: scale(1.03); }
+
+.text { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.text h3 {
+  margin: 0; display: flex; align-items: baseline; gap: 14px;
+  font-size: 16px; font-weight: 400; letter-spacing: .18em;
+}
+.text h3 small { font-size: 10px; font-weight: 400; letter-spacing: .2em; color: var(--muted); text-transform: uppercase; }
+.text p { margin: 0; font-size: 13px; line-height: 2.1; letter-spacing: .04em; color: var(--muted); max-width: 30em; }
+
+/* 往下捲時淡入：只有 JS 執行、且元素在畫面下方時才先隱藏 */
+.reveal.pending { opacity: 0; transform: translateY(24px); }
+.reveal { transition: opacity 1.4s cubic-bezier(.22,.61,.36,1), transform 1.4s cubic-bezier(.22,.61,.36,1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg, .hero header > * { animation: none; }
+  .reveal, .reveal.pending { opacity: 1; transform: none; transition: none; }
+  .item img, .ph, .text, .lightbox, .lb-img, .lb-close, .lb-bar, .lb-cap { transition: none !important; }
+  .lb-img.breathe { transform: none; }
+  .item:hover img { transform: none; }
+}
+
+@media (max-width: 1000px) {
+  .list { gap: 28px; padding-inline: 32px; }
+  .label { padding-inline: 32px; }
+}
+@media (max-width: 760px) {
+  .hero header { padding-inline: 16px; }
+  .nav { gap: 24px; }
+  .services { padding-block: 96px 120px; }
+  .label { padding-inline: 20px; margin-bottom: 44px; }
+  .list { grid-template-columns: 1fr; gap: 72px; padding-inline: 20px; }
+  .item { gap: 24px; }
+}
+</style>
+
+<!-- Page 1: A -->
+<section class="hero" id="A" aria-label="首頁">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <header>
+    <a class="name" href="#A">Haoward Chen</a>
+    <nav class="nav" aria-label="主選單">
+      <ul>
+        <li><a href="#Works">Works</a></li>
+        <li><a href="#Text">Text</a></li>
+        <li><a href="#About">About</a></li>
+      </ul>
+      <ul>
+        <li><a href="#Contact">Contact</a></li>
+      </ul>
     </nav>
+  </header>
+</section>
 
-    <div id="no-result-msg" style="display: none; color: #e74c3c; font-size: 1.2rem; font-weight: bold; text-align: center; margin-top: 2rem; padding-top: 20px;">
-        沒有找到符合的商品，請嘗試其他關鍵字。
-    </div>
+<!-- Page 2: 服務項目 -->
+<section class="services" id="Services">
+  <h2 class="label reveal">SERVICES <span class="sep">／</span> 服務項目</h2>
+  <div class="list">
+    <article class="item reveal" id="Ab">
+      <button type="button" class="ph" aria-label="放大照片：婚禮證婚儀式"><img src="images/Ab.jpg" alt="婚禮證婚儀式" width="2400" height="1600" loading="lazy"></button>
+      <div class="text">
+        <h3>婚禮攝影<small>Wedding</small></h3>
+        <p>以紀實的方式記錄婚禮當天，從新人準備、證婚儀式到宴客，留下真實的表情與光線。不刻意擺拍，讓每一個瞬間都保有當下的溫度。</p>
+      </div>
+    </article>
+    <article class="item reveal" id="Ac">
+      <button type="button" class="ph" aria-label="放大照片：一家四口在海邊散步"><img src="images/Ac.jpg" alt="一家四口在海邊散步" width="1629" height="1111" loading="lazy"></button>
+      <div class="text">
+        <h3>全家福<small>Family</small></h3>
+        <p>在海邊、公園或家裡，用輕鬆的節奏陪伴一家人。孩子跑跳、大人相視而笑，這些自然的片刻，就是最好的家庭紀錄。</p>
+      </div>
+    </article>
+    <article class="item reveal" id="Ad">
+      <button type="button" class="ph" aria-label="放大照片：母女拿著畫作開心大笑"><img src="images/Ad.jpg" alt="母女拿著畫作開心大笑" width="2400" height="1600" loading="lazy"></button>
+      <div class="text">
+        <h3>商業攝影<small>Commercial</small></h3>
+        <p>為品牌、店家與課程活動拍攝形象照與產品照，依照品牌調性規劃畫面，交付可直接用於官網與社群的影像。</p>
+      </div>
+    </article>
+  </div>
+</section>
 
-    <section id="drinks" class="menu-section">
-        <h2 class="menu-title">📱 智慧手機與平板</h2>
-        <p class="menu-subtitle">Smart Phones & Tablets</p>
-        <div class="menu-grid">
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500&auto=format&fit=crop&q=60" alt="iPhone 15 Pro Max"></div><div class="menu-item-name">iPhone 15 Pro Max</div><div class="menu-item-price">NT$ 44,900</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea01')">加入購物車</button><a href="product.html?id=tea01" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500&auto=format&fit=crop&q=60" alt="Samsung Galaxy S24 Ultra"></div><div class="menu-item-name">Samsung Galaxy S24 Ultra</div><div class="menu-item-price">NT$ 43,900</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea02')">加入購物車</button><a href="product.html?id=tea02" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=500&auto=format&fit=crop&q=60" alt="iPad Pro M4"></div><div class="menu-item-name">iPad Pro M4</div><div class="menu-item-price">NT$ 34,900</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea03')">加入購物車</button><a href="product.html?id=tea03" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=500&auto=format&fit=crop&q=60" alt="Google Pixel 8 Pro"></div><div class="menu-item-name">Google Pixel 8 Pro</div><div class="menu-item-price">NT$ 33,900</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea04')">加入購物車</button><a href="product.html?id=tea04" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60" alt="ASUS ROG Phone 8 Pro"></div><div class="menu-item-name">ASUS ROG Phone 8 Pro</div><div class="menu-item-price">NT$ 38,990</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea05')">加入購物車</button><a href="product.html?id=tea05" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60" alt="Xiaomi 14 Ultra"></div><div class="menu-item-name">Xiaomi 14 Ultra</div><div class="menu-item-price">NT$ 34,999</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea06')">加入購物車</button><a href="product.html?id=tea06" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60" alt="Sony Xperia 1 VI"></div><div class="menu-item-name">Sony Xperia 1 VI</div><div class="menu-item-price">NT$ 39,990</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea07')">加入購物車</button><a href="product.html?id=tea07" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1589739900243-4b52cd9b104e?w=500&auto=format&fit=crop&q=60" alt="iPad Air 6"></div><div class="menu-item-name">iPad Air 6</div><div class="menu-item-price">NT$ 19,900</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea08')">加入購物車</button><a href="product.html?id=tea08" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=500&auto=format&fit=crop&q=60" alt="Samsung Galaxy Tab S9"></div><div class="menu-item-name">Samsung Galaxy Tab S9</div><div class="menu-item-price">NT$ 23,990</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea09')">加入購物車</button><a href="product.html?id=tea09" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500&auto=format&fit=crop&q=60" alt="iPhone 15"></div><div class="menu-item-name">iPhone 15</div><div class="menu-item-price">NT$ 29,900</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea10')">加入購物車</button><a href="product.html?id=tea10" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=500&auto=format&fit=crop&q=60" alt="Google Pixel 8a"></div><div class="menu-item-name">Google Pixel 8a</div><div class="menu-item-price">NT$ 16,490</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea11')">加入購物車</button><a href="product.html?id=tea11" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=500&auto=format&fit=crop&q=60" alt="Xiaomi Redmi Note 13 Pro"></div><div class="menu-item-name">Xiaomi Redmi Note 13 Pro</div><div class="menu-item-price">NT$ 9,999</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea12')">加入購物車</button><a href="product.html?id=tea12" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60" alt="ASUS Zenfone 11 Ultra"></div><div class="menu-item-name">ASUS Zenfone 11 Ultra</div><div class="menu-item-price">NT$ 29,990</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea13')">加入購物車</button><a href="product.html?id=tea13" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=500&auto=format&fit=crop&q=60" alt="OPPO Reno11 Pro"></div><div class="menu-item-name">OPPO Reno11 Pro</div><div class="menu-item-price">NT$ 16,990</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea27')">加入購物車</button><a href="product.html?id=tea27" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=60" alt="Sony Xperia 10 VI"></div><div class="menu-item-name">Sony Xperia 10 VI</div><div class="menu-item-price">NT$ 13,990</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea28')">加入購物車</button><a href="product.html?id=tea28" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500&auto=format&fit=crop&q=60" alt="Samsung Galaxy Fold 5"></div><div class="menu-item-name">Samsung Galaxy Fold 5</div><div class="menu-item-price">NT$ 56,888</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea31')">加入購物車</button><a href="product.html?id=tea31" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500&auto=format&fit=crop&q=60" alt="iPhone 15 Plus"></div><div class="menu-item-name">iPhone 15 Plus</div><div class="menu-item-price">NT$ 32,900</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea32')">加入購物車</button><a href="product.html?id=tea32" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1589739900243-4b52cd9b104e?w=500&auto=format&fit=crop&q=60" alt="iPad 10th Gen"></div><div class="menu-item-name">iPad 10th Gen</div><div class="menu-item-price">NT$ 11,900</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('tea33')">加入購物車</button><a href="product.html?id=tea33" class="menu-button learn-more">詳細</a></div></div>
-        </div>
-    </section>
+<div class="lightbox" hidden role="dialog" aria-modal="true" aria-label="作品檢視">
+  <img class="lb-img" alt="">
+  <button type="button" class="lb-close">CLOSE <span aria-hidden="true">×</span></button>
+  <div class="lb-bar">
+    <p class="lb-cap" aria-live="polite"><span class="lb-num">01</span><span class="lb-dash">—</span><span class="lb-title">婚禮攝影</span><small class="lb-en">Wedding</small></p>
+  </div>
+</div>
 
-    <section id="donuts" class="menu-section" style="background: rgba(28, 43, 90, 0.02);">
-        <h2 class="menu-title" style="border-color: #C5A880;">💻 電腦週邊與配件</h2>
-        <p class="menu-subtitle">Computers & Accessories</p>
-        <div class="menu-grid">
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500&auto=format&fit=crop&q=60" alt="Logitech MX Master 3S"></div><div class="menu-item-name">Logitech MX Master 3S</div><div class="menu-item-price">NT$ 3,290</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('donut01')">加入購物車</button><a href="product.html?id=donut01" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500&auto=format&fit=crop&q=60" alt="Keychron K2 機械鍵盤"></div><div class="menu-item-name">Keychron K2 機械鍵盤</div><div class="menu-item-price">NT$ 2,580</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('donut02')">加入購物車</button><a href="product.html?id=donut02" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&auto=format&fit=crop&q=60" alt="MacBook Pro M3"></div><div class="menu-item-name">MacBook Pro M3</div><div class="menu-item-price">NT$ 54,900</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('donut03')">加入購物車</button><a href="product.html?id=donut03" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=500&auto=format&fit=crop&q=60" alt="ASUS RT-AX88U Pro 路由器"></div><div class="menu-item-name">ASUS RT-AX88U Pro 路由器</div><div class="menu-item-price">NT$ 8,888</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('donut04')">加入購物車</button><a href="product.html?id=donut04" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=500&auto=format&fit=crop&q=60" alt="WD Black SN850X 2TB SSD"></div><div class="menu-item-name">WD Black SN850X 2TB SSD</div><div class="menu-item-price">NT$ 5,290</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('donut05')">加入購物車</button><a href="product.html?id=donut05" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500&auto=format&fit=crop&q=60" alt="ROG Swift PG32UCDM 螢幕"></div><div class="menu-item-name">ROG Swift PG32UCDM 螢幕</div><div class="menu-item-price">NT$ 42,900</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('donut06')">加入購物車</button><a href="product.html?id=donut06" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=60" alt="Sony WH-1000XM5 耳機"></div><div class="menu-item-name">Sony WH-1000XM5 耳機</div><div class="menu-item-price">NT$ 9,900</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('donut07')">加入購物車</button><a href="product.html?id=donut07" class="menu-button learn-more">詳細</a></div></div>
-        </div>
-    </section>
 
-    <section id="fruits" class="menu-section" style="background: rgba(28, 43, 90, 0.04);">
-        <h2 class="menu-title" style="border-color: #C5A880;">🏠 智慧穿戴與智能家居</h2>
-        <p class="menu-subtitle">Smart Wearables & Smart Home</p>
-        <div class="menu-grid">
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500&auto=format&fit=crop&q=60" alt="Apple Watch Series 9"></div><div class="menu-item-name">Apple Watch Series 9</div><div class="menu-item-price">NT$ 13,500</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit01')">加入購物車</button><a href="product.html?id=fruit01" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=500&auto=format&fit=crop&q=60" alt="Garmin Venu 3"></div><div class="menu-item-name">Garmin Venu 3</div><div class="menu-item-price">NT$ 14,990</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit02')">加入購物車</button><a href="product.html?id=fruit02" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1588449668365-d15e397f6787?w=500&auto=format&fit=crop&q=60" alt="AirPods Pro 2"></div><div class="menu-item-name">AirPods Pro 2</div><div class="menu-item-price">NT$ 7,490</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit03')">加入購物車</button><a href="product.html?id=fruit03" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1543512214-318c7553f230?w=500&auto=format&fit=crop&q=60" alt="Google Nest Hub 2"></div><div class="menu-item-name">Google Nest Hub 2</div><div class="menu-item-price">NT$ 3,180</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit04')">加入購物車</button><a href="product.html?id=fruit04" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=500&auto=format&fit=crop&q=60" alt="Dyson Purifier Cool"></div><div class="menu-item-name">Dyson Purifier Cool</div><div class="menu-item-price">NT$ 18,900</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit05')">加入購物車</button><a href="product.html?id=fruit05" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1550985616-10810253b84d?w=500&auto=format&fit=crop&q=60" alt="Philips Hue 智慧燈泡"></div><div class="menu-item-name">Philips Hue 智慧燈泡</div><div class="menu-item-price">NT$ 4,990</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit06')">加入購物車</button><a href="product.html?id=fruit06" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=500&auto=format&fit=crop&q=60" alt="Nintendo Switch OLED"></div><div class="menu-item-name">Nintendo Switch OLED</div><div class="menu-item-price">NT$ 10,480</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit07')">加入購物車</button><a href="product.html?id=fruit07" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?w=500&auto=format&fit=crop&q=60" alt="DJI Mini 4 Pro 空拍機"></div><div class="menu-item-name">DJI Mini 4 Pro 空拍機</div><div class="menu-item-price">NT$ 22,090</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit08')">加入購物車</button><a href="product.html?id=fruit08" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&auto=format&fit=crop&q=60" alt="GoPro HERO12 Black"></div><div class="menu-item-name">GoPro HERO12 Black</div><div class="menu-item-price">NT$ 14,900</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit09')">加入購物車</button><a href="product.html?id=fruit09" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1543512214-318c7553f230?w=500&auto=format&fit=crop&q=60" alt="HomePod 智慧音箱"></div><div class="menu-item-name">HomePod 智慧音箱</div><div class="menu-item-price">NT$ 9,300</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit10')">加入購物車</button><a href="product.html?id=fruit10" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1558002038-1055907df827?w=500&auto=format&fit=crop&q=60" alt="Xiaomi 智慧攝影機 C400"></div><div class="menu-item-name">Xiaomi 智慧攝影機 C400</div><div class="menu-item-price">NT$ 1,095</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit11')">加入購物車</button><a href="product.html?id=fruit11" class="menu-button learn-more">詳細</a></div></div>
-            <div class="menu-item"><div class="menu-item-image"><img src="https://images.unsplash.com/photo-1558317374-067fb5f30001?w=500&auto=format&fit=crop&q=60" alt="Dyson V15 Detect"></div><div class="menu-item-name">Dyson V15 Detect</div><div class="menu-item-price">NT$ 24,900</div><div class="menu-item-actions"><button class="menu-button buy" onclick="addToCart('fruit12')">加入購物車</button><a href="product.html?id=fruit12" class="menu-button learn-more">詳細</a></div></div>
-        </div>
-    </section>
+<script>
+(function () {
+  var els = [].slice.call(document.querySelectorAll('.reveal'));
+  if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var vh = window.innerHeight;
+  els.forEach(function (el, i) {
+    if (el.getBoundingClientRect().top > vh * 0.92) {
+      el.classList.add('pending');
+      if (el.classList.contains('item')) el.style.transitionDelay = (el.parentNode.children.length > 1 && innerWidth > 900 ? [].indexOf.call(el.parentNode.children, el) * 0.15 : 0) + 's';
+    }
+  });
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        var t = e.target;
+        t.classList.remove('pending'); io.unobserve(t);
+        setTimeout(function () { t.style.transitionDelay = ''; }, 2000);
+      }
+    });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  els.forEach(function (el) { if (el.classList.contains('pending')) io.observe(el); });
+})();
+</script>
 
-    <footer class="footer">
-        <div class="footer-section">
-            <h3>品牌區塊</h3>
-            <p>得正 3C - 手機平板 x 電腦週邊 x 智慧家居</p>
-            <div class="social-links">
-                <a href="https://instagram.com" target="_blank"><img src="image/Instagram-logo.png" alt="Instagram Logo" class="social-logo"> Instagram</a>
-                <a href="https://line.me" target="_blank"><img src="image/line-logo.png" alt="LINE Logo" class="social-logo"> LINE</a>
-            </div>
-        </div>
-        <div class="footer-section">
-            <h3>BUSINESS 商業區塊</h3>
-            <ul>
-                <li><a href="#drinks">📱 智慧手機與平板</a></li>
-                <li><a href="#donuts">💻 電腦週邊與配件</a></li>
-                <li><a href="#fruits">🏠 智慧穿戴與智能家居</a></li>
-                <li><a href="leaderboard.html">⭐ 熱銷排行</a></li>
-                <li><a href="database_demo.html" style="color:#C5A880; font-weight:bold;">📦 資料庫展示頁</a></li>
-            </ul>
-        </div>
-        <div class="footer-section">
-            <h3>CONTACT 聯繫區塊</h3>
-            <p>📧 電子郵件：a113280055@gm.usc.edu.tw</p>
-            <p>📞 電話：0952702813</p>
-            <p>🏪 地址：台北市大安區忠孝東路四段123號</p>
-        </div>
-        <div class="footer-section">
-            <h3>版權資訊</h3>
-            <p>© 2026 得正 3C. All rights reserved.</p>
-            <p>設計製作者：薛翔謙</p>
-        </div>
-    </footer>
+<script>
+(function () {
+  var list = document.querySelector('.list');
+  var items = [].slice.call(list.querySelectorAll('.item'));
+  var lb = document.querySelector('.lightbox');
+  var big = lb.querySelector('.lb-img');
+  var cap = lb.querySelector('.lb-cap');
+  var closeBtn = lb.querySelector('.lb-close');
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var DUR = reduce ? 0 : 950, FADE = reduce ? 0 : 450;
+  var idx = -1, busy = false, breatheTimer;
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-        const firebaseConfig = { apiKey: "AIzaSyC-LcCfcPYCYAQZ7n45YCe6tCY_jb-ygvI", authDomain: "sonicboom-shop.firebaseapp.com", projectId: "sonicboom-shop", storageBucket: "sonicboom-shop.firebasestorage.app", messagingSenderId: "976804831944", appId: "1:976804831944:web:6ede6a95196478bd49bbfd", measurementId: "G-3FEKWL0QXZ" };
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function place(r) {
+    big.style.top = r.top + 'px'; big.style.left = r.left + 'px';
+    big.style.width = r.width + 'px'; big.style.height = r.height + 'px';
+  }
+  function rectOf(el) { var r = el.getBoundingClientRect(); return { top: r.top, left: r.left, width: r.width, height: r.height }; }
+  function ratioOf(img) {
+    var w = img.naturalWidth || +img.getAttribute('width'), h = img.naturalHeight || +img.getAttribute('height');
+    return w / h;
+  }
+  // 照片完整比例，置中，上下留給 CLOSE 和說明列
+  function fit(img) {
+    var W = window.innerWidth, H = window.innerHeight, small = W <= 760;
+    var top = small ? 64 : 76, bottom = small ? 96 : 92, side = small ? 16 : Math.max(32, W * 0.05);
+    var aw = W - side * 2, ah = H - top - bottom, r = ratioOf(img);
+    var w = aw, h = w / r;
+    if (h > ah) { h = ah; w = h * r; }
+    return { top: top + (ah - h) / 2, left: (W - w) / 2, width: w, height: h };
+  }
+  function phOf(i) { return items[i].querySelector('.ph'); }
+  function imgOf(i) { return phOf(i).querySelector('img'); }
+  function setCaption(i) {
+    var h = items[i].querySelector('h3');
+    lb.querySelector('.lb-num').textContent = pad(i + 1) + ' / ' + pad(items.length);
+    lb.querySelector('.lb-title').textContent = h.firstChild.textContent.trim();
+    lb.querySelector('.lb-en').textContent = h.querySelector('small').textContent;
+  }
+  function setActive(i) {
+    items.forEach(function (it, k) { it.classList.toggle('active', k === i); });
+  }
+  function startBreathe() {
+    clearTimeout(breatheTimer);
+    big.classList.remove('breathe');
+    if (reduce) return;
+    breatheTimer = setTimeout(function () { big.classList.add('breathe'); }, 60);
+  }
 
-        onAuthStateChanged(auth, (user) => {
-            const navLogin = document.getElementById('nav-login');
-            const navUser = document.getElementById('nav-user');
-            const navLogout = document.getElementById('nav-logout');
-            const userDisplay = document.getElementById('user-display');
-            const navbar = document.querySelector('.navbar');
-            const mobileMemberDisplay = document.getElementById('mobile-member-display');
+  function open(i) {
+    if (busy || idx !== -1) return;
+    busy = true; idx = i;
+    var ph = phOf(i), img = imgOf(i);
+    list.classList.add('dim'); setActive(i); setCaption(i);
+    big.src = img.currentSrc || img.src; big.alt = img.alt;
+    big.classList.remove('breathe', 'fading');
+    lb.hidden = false;
+    big.style.transition = 'none';
+    place(rectOf(ph));
+    ph.style.visibility = 'hidden';
+    void big.offsetWidth;
+    big.style.transition = '';
+    document.documentElement.style.overflow = 'hidden';
+    lb.classList.add('open');
+    place(fit(img));
+    setTimeout(function () { busy = false; startBreathe(); closeBtn.focus({ preventScroll: true }); }, DUR);
+  }
 
-            if (user) {
-                navLogin.style.display = 'none';
-                navUser.style.display = 'block';
-                navLogout.style.display = 'block';
-                const memberName = user.displayName || user.email.split('@')[0];
-                userDisplay.innerHTML = `<i class="fa-solid fa-user-check"></i> 會員 ${memberName}`;
-                if (mobileMemberDisplay) {
-                    mobileMemberDisplay.innerHTML = `<i class="fa-solid fa-user-check" style="color: #C5A880;"></i> 會員:${memberName}`;
-                }
-                if (navbar) {
-                    navbar.classList.add('logged-in');
-                }
-            } else {
-                navLogin.style.display = 'block';
-                navUser.style.display = 'none';
-                navLogout.style.display = 'none';
-                if (navbar) {
-                    navbar.classList.remove('logged-in');
-                }
-            }
-        });
+  function go(step) {
+    if (busy || idx === -1) return;
+    busy = true;
+    var next = (idx + step + items.length) % items.length, nImg = imgOf(next);
+    big.classList.add('fading'); cap.classList.add('fading');
+    setTimeout(function () {
+      phOf(idx).style.visibility = '';
+      phOf(next).style.visibility = 'hidden';
+      idx = next; setActive(next); setCaption(next);
+      big.classList.remove('breathe');
+      big.style.transition = 'none';
+      big.src = nImg.currentSrc || nImg.src; big.alt = nImg.alt;
+      var done = function () {
+        place(fit(nImg));
+        void big.offsetWidth;
+        big.style.transition = '';
+        big.classList.remove('fading'); cap.classList.remove('fading');
+        startBreathe();
+        setTimeout(function () { busy = false; }, FADE);
+      };
+      if (big.decode) big.decode().then(done, done); else done();
+    }, FADE);
+  }
 
-        document.getElementById('btn-logout').addEventListener('click', (e) => {
-            e.preventDefault();
-            if(confirm("確定要登出嗎？")) { localStorage.removeItem('dejeng3c_cart'); signOut(auth).then(() => { window.location.reload(); }); }
-        });
-    </script>
+  function close() {
+    if (busy || idx === -1) return;
+    busy = true;
+    var i = idx, ph = phOf(i);
+    clearTimeout(breatheTimer);
+    big.classList.remove('breathe');
+    lb.classList.remove('open');
+    document.documentElement.style.overflow = '';
+    var r = ph.getBoundingClientRect();
+    if (r.bottom < 0 || r.top > window.innerHeight) ph.scrollIntoView({ block: 'center', behavior: 'instant' });
+    place(rectOf(ph));
+    setTimeout(function () {
+      lb.hidden = true; ph.style.visibility = '';
+      setActive(-1); list.classList.remove('dim');
+      idx = -1; busy = false;
+      ph.focus({ preventScroll: true });
+    }, DUR);
+  }
 
-    <script>
-        function addToCart(itemId) {
-            let cart = JSON.parse(localStorage.getItem('dejeng3c_cart')) || [];
-            let defSugar = itemId.startsWith('tea') ? '256GB' : '--';
-            let defIce = itemId.startsWith('tea') ? '鈦灰色' : '--';
-            let alertMsg = itemId.startsWith('tea') ? '(預設256GB、鈦灰色)' : '';
+  items.forEach(function (item, i) {
+    item.querySelector('.ph').addEventListener('click', function () { open(i); });
+  });
+  closeBtn.addEventListener('click', close);
 
-            // Find product name in DOM
-            let pName = "";
-            const items = document.querySelectorAll('.menu-item');
-            for (let item of items) {
-                const btn = item.querySelector('.buy');
-                if (btn) {
-                    const match = btn.getAttribute('onclick').match(/'([^']+)'/);
-                    if (match && match[1] === itemId) {
-                        const nameNode = item.querySelector('.menu-item-name');
-                        if (nameNode) {
-                            pName = nameNode.innerText.trim();
-                            break;
-                        }
-                    }
-                }
-            }
+  // 點畫面：左側上一張、右側下一張、中間關閉
+  function zoneOf(x) { var W = window.innerWidth; return x < W / 3 ? -1 : x > W * 2 / 3 ? 1 : 0; }
+  lb.addEventListener('click', function (e) {
+    if (e.target.closest('button, a, .lb-bar')) return;
+    var z = zoneOf(e.clientX);
+    if (z === 0) close(); else go(z);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (idx === -1) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowRight') go(1);
+    else if (e.key === 'ArrowLeft') go(-1);
+    else if (e.key === 'Tab') { // 焦點留在檢視視窗內
+      var f = [].slice.call(lb.querySelectorAll('button, a')).filter(function (el) { return el.offsetParent !== null; });
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+  // 手機左右滑
+  var sx = null, sy = null;
+  lb.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+  lb.addEventListener('touchend', function (e) {
+    if (sx === null) return;
+    var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? 1 : -1);
+    sx = null;
+  });
+  window.addEventListener('resize', function () {
+    if (idx !== -1 && !busy) { big.style.transition = 'none'; place(fit(imgOf(idx))); void big.offsetWidth; big.style.transition = ''; }
+  });
 
-            // Verify stock
-            const inventory = syncInventory();
-            const stock = (pName && inventory[pName] !== undefined) ? inventory[pName] : 100;
-            const existingIndex = cart.findIndex(item => item.id === itemId && item.sugar === defSugar && item.ice === defIce);
-            let currentQtyInCart = existingIndex > -1 ? cart[existingIndex].qty : 0;
-            
-            if (currentQtyInCart + 1 > stock) {
-                alert(`抱歉，【${pName || itemId}】已無足夠庫存！目前庫存剩餘 ${stock} 件，您的購物車中已有 ${currentQtyInCart} 件。`);
-                return;
-            }
+  // 手機：捲到畫面中間的那張亮起
+  if (matchMedia('(hover: none)').matches && 'IntersectionObserver' in window) {
+    var mq = matchMedia('(max-width: 760px)');
+    var io2 = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { e.target.classList.toggle('inview', e.isIntersecting && mq.matches); });
+      list.classList.toggle('has-inview', mq.matches && !!list.querySelector('.inview'));
+    }, { rootMargin: '-42% 0px -42% 0px' });
+    items.forEach(function (it) { io2.observe(it); });
+  }
+})();
+</script>
 
-            if (existingIndex > -1) { cart[existingIndex].qty += 1; } 
-            else { cart.push({ id: itemId, qty: 1, sugar: defSugar, ice: defIce }); }
-            
-            localStorage.setItem('dejeng3c_cart', JSON.stringify(cart));
-            updateCartBadge();
-            alert(`商品已加入購物車！${alertMsg}`);
-            window.location.href = "cart.html";
-        }
-
-        function updateCartBadge() {
-            let cart = JSON.parse(localStorage.getItem('dejeng3c_cart')) || [];
-            let totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-            let badge = document.getElementById('cart-badge');
-            if(badge) {
-                if(totalQty > 0) {
-                    badge.style.display = 'inline-block';
-                    badge.innerText = totalQty;
-                } else {
-                    badge.style.display = 'none';
-                }
-            }
-            let logoBadge = document.getElementById('logo-cart-badge');
-            if(logoBadge) {
-                if(totalQty > 0) {
-                    logoBadge.style.display = 'inline-block';
-                    logoBadge.innerText = totalQty;
-                } else {
-                    logoBadge.style.display = 'none';
-                }
-            }
-        }
-        
-        function syncInventory() {
-            let baseInventory = JSON.parse(localStorage.getItem('dejeng3c_base_inventory')) || {};
-            let baseInvUpdated = false;
-            
-            const allProducts = [
-                "iPhone 15 Pro Max", "Samsung Galaxy S24 Ultra", "iPad Pro M4", "Google Pixel 8 Pro", "ASUS ROG Phone 8 Pro", 
-                "Xiaomi 14 Ultra", "Sony Xperia 1 VI", "iPad Air 6", "Samsung Galaxy Tab S9", "iPhone 15", 
-                "Google Pixel 8a", "Xiaomi Redmi Note 13 Pro", "ASUS Zenfone 11 Ultra", "OPPO Reno11 Pro", "Sony Xperia 10 VI", 
-                "Samsung Galaxy Fold 5", "iPhone 15 Plus", "iPad 10th Gen", "Logitech MX Master 3S", "Keychron K2 機械鍵盤", 
-                "MacBook Pro M3", "ASUS RT-AX88U Pro 路由器", "WD Black SN850X 2TB SSD", "ROG Swift PG32UCDM 螢幕", "Sony WH-1000XM5 耳機", 
-                "Apple Watch Series 9", "Garmin Venu 3", "AirPods Pro 2", "Google Nest Hub 2", "Dyson Purifier Cool", 
-                "Philips Hue 智慧燈泡", "Nintendo Switch OLED", "DJI Mini 4 Pro 空拍機", "GoPro HERO12 Black", "HomePod 智慧音箱", 
-                "Xiaomi 智慧攝影機 C400", "Dyson V15 Detect"
-            ];
-            
-            allProducts.forEach(name => {
-                if (baseInventory[name] === undefined) {
-                    baseInventory[name] = Math.floor(Math.random() * 101) + 20; // 隨機庫存 20-120
-                    baseInvUpdated = true;
-                }
-            });
-            
-            if (baseInvUpdated) {
-                localStorage.setItem('dejeng3c_base_inventory', JSON.stringify(baseInventory));
-            }
-            
-            const orders = JSON.parse(localStorage.getItem('dejeng3c_orders')) || [];
-            const computedInventory = {};
-            for (let name in baseInventory) {
-                computedInventory[name] = baseInventory[name];
-            }
-            
-            orders.forEach(order => {
-                if (order.items && Array.isArray(order.items)) {
-                    order.items.forEach(itemStr => {
-                        const match = itemStr.match(/(.*?)(?:\s*\(.*?\))?\s*x(\d+)/);
-                        if (match) {
-                            const pName = match[1].trim();
-                            const pQty = parseInt(match[2]);
-                            if (computedInventory[pName] !== undefined) {
-                                computedInventory[pName] -= pQty;
-                            } else {
-                                baseInventory[pName] = Math.floor(Math.random() * 101) + 20;
-                                baseInvUpdated = true;
-                                computedInventory[pName] = baseInventory[pName] - pQty;
-                            }
-                        }
-                    });
-                }
-            });
-            
-            if (baseInvUpdated) {
-                localStorage.setItem('dejeng3c_base_inventory', JSON.stringify(baseInventory));
-            }
-            
-            localStorage.setItem('dejeng3c_computed_inventory', JSON.stringify(computedInventory));
-            return computedInventory;
-        }
-        
-        function updateProductStatus() {
-            const inventory = syncInventory();
-            const statusSettings = JSON.parse(localStorage.getItem('dejeng3c_product_settings')) || {};
-            
-            document.querySelectorAll('.menu-item').forEach(item => {
-                const btn = item.querySelector('.buy');
-                if(!btn) return;
-                const match = btn.getAttribute('onclick').match(/'([^']+)'/);
-                if(!match) return;
-                
-                const productId = match[1];
-                const nameNode = item.querySelector('.menu-item-name');
-                const pName = nameNode ? nameNode.innerText.trim() : '';
-                
-                let isSoldOut = inventory[pName] !== undefined && inventory[pName] <= 0;
-                let isDelisted = statusSettings[pName] && statusSettings[pName].status === 'delisted';
-                
-                let imageContainer = item.querySelector('.menu-item-image');
-                let existingOverlay = imageContainer.querySelector('.status-overlay');
-                if(existingOverlay) existingOverlay.remove();
-                
-                if(isDelisted) {
-                    let overlay = document.createElement('div');
-                    overlay.className = 'status-overlay';
-                    overlay.style = 'position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.7); color: white; display:flex; align-items:center; justify-content:center; font-size: 1.5rem; font-weight:bold; z-index:10; border-radius:15px;';
-                    overlay.innerText = '已下架';
-                    imageContainer.style.position = 'relative';
-                    imageContainer.appendChild(overlay);
-                    
-                    btn.disabled = true;
-                    btn.style.background = '#888';
-                    btn.style.cursor = 'not-allowed';
-                    btn.innerText = '已下架';
-                } else if(isSoldOut) {
-                    let overlay = document.createElement('div');
-                    overlay.className = 'status-overlay';
-                    overlay.style = 'position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(231,76,60,0.7); color: white; display:flex; align-items:center; justify-content:center; font-size: 1.5rem; font-weight:bold; z-index:10;';
-                    overlay.innerText = '已完售';
-                    imageContainer.style.position = 'relative';
-                    imageContainer.appendChild(overlay);
-                    
-                    btn.disabled = true;
-                    btn.style.background = '#ccc';
-                    btn.style.cursor = 'not-allowed';
-                    btn.innerText = '已完售';
-                }
-
-                // New remaining stock badge display logic
-                let stock = inventory[pName] !== undefined ? inventory[pName] : 100;
-                let stockEl = item.querySelector('.menu-item-stock');
-                if (!stockEl) {
-                    stockEl = document.createElement('div');
-                    stockEl.className = 'menu-item-stock';
-                    stockEl.style.fontSize = '0.8rem';
-                    stockEl.style.fontWeight = '600';
-                    stockEl.style.marginBottom = '10px';
-                    stockEl.style.padding = '4px 10px';
-                    stockEl.style.borderRadius = '12px';
-                    stockEl.style.display = 'inline-flex';
-                    stockEl.style.alignItems = 'center';
-                    stockEl.style.gap = '5px';
-                    
-                    const priceEl = item.querySelector('.menu-item-price');
-                    if (priceEl) {
-                        priceEl.parentNode.insertBefore(stockEl, priceEl.nextSibling);
-                    } else {
-                        item.appendChild(stockEl);
-                    }
-                }
-                
-                if (isDelisted) {
-                    stockEl.style.color = '#7f8c8d';
-                    stockEl.style.backgroundColor = '#f0f3f4';
-                    stockEl.innerHTML = `<i class="fa-solid fa-box-archive"></i> 庫存: --`;
-                } else if (stock <= 0) {
-                    stockEl.style.color = '#e74c3c';
-                    stockEl.style.backgroundColor = '#fdedec';
-                    stockEl.innerHTML = `<i class="fa-solid fa-box-archive"></i> 庫存剩下: 0`;
-                } else if (stock <= 10) {
-                    stockEl.style.color = '#e67e22';
-                    stockEl.style.backgroundColor = '#fdf2e9';
-                    stockEl.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> 僅剩: ${stock}`;
-                } else {
-                    stockEl.style.color = '#27ae60';
-                    stockEl.style.backgroundColor = '#e8f8f5';
-                    stockEl.innerHTML = `<i class="fa-solid fa-box-open"></i> 庫存剩下: ${stock}`;
-                }
-
-                // 促銷特價顯示邏輯
-                const priceEl = item.querySelector('.menu-item-price');
-                if (priceEl) {
-                    if (!priceEl.dataset.originalPrice) {
-                        const origText = priceEl.innerText.trim();
-                        const numMatch = origText.match(/\d+/);
-                        if (numMatch) {
-                            priceEl.dataset.originalPrice = numMatch[0];
-                        }
-                    }
-                    const originalPrice = parseInt(priceEl.dataset.originalPrice, 10);
-                    const promoPrice = statusSettings[pName]?.promoPrice;
-                    
-                    let saleBadge = imageContainer.querySelector('.sale-badge');
-                    if (promoPrice && promoPrice < originalPrice) {
-                        priceEl.innerHTML = `<span style="text-decoration: line-through; color: #95a5a6; font-size: 0.9rem; margin-right: 5px;">NT$ ${originalPrice}</span><span style="color: #e74c3c; font-weight: bold; font-size: 1.15rem;">NT$ ${promoPrice}</span>`;
-                        
-                        if (!saleBadge && !isDelisted && !isSoldOut) {
-                            saleBadge = document.createElement('div');
-                            saleBadge.className = 'sale-badge';
-                            saleBadge.style = 'position: absolute; top: 10px; right: 10px; background: linear-gradient(135deg, #ff416c, #ff4b2b); color: white; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; z-index: 5; box-shadow: 0 4px 8px rgba(255, 65, 108, 0.4); border: 1px solid rgba(255,255,255,0.2); pointer-events: none; animation: pulse-sale 2s infinite;';
-                            saleBadge.innerHTML = `<i class="fa-solid fa-fire"></i> SALE`;
-                            imageContainer.style.position = 'relative';
-                            imageContainer.appendChild(saleBadge);
-                        }
-                    } else {
-                        priceEl.innerHTML = `NT$ ${originalPrice}`;
-                        if (saleBadge) saleBadge.remove();
-                    }
-                    
-                    // 如果商品已下架或已完售，應移除 SALE 徽章以免干擾畫面
-                    if ((isDelisted || isSoldOut) && saleBadge) {
-                        saleBadge.remove();
-                    }
-                }
-            });
-
-            // 將特價商品排列在最上面
-            document.querySelectorAll('.menu-grid').forEach(grid => {
-                const items = Array.from(grid.querySelectorAll('.menu-item'));
-                
-                // 先給每個 item 標記一個初始 index，便於穩定排序
-                items.forEach((item, index) => {
-                    if (item.dataset.originalIndex === undefined) {
-                        item.dataset.originalIndex = index;
-                    }
-                });
-
-                items.sort((a, b) => {
-                    const nameA = a.querySelector('.menu-item-name')?.innerText.trim() || '';
-                    const nameB = b.querySelector('.menu-item-name')?.innerText.trim() || '';
-                    
-                    const priceElA = a.querySelector('.menu-item-price');
-                    const priceElB = b.querySelector('.menu-item-price');
-                    const origA = priceElA ? (parseInt(priceElA.dataset.originalPrice, 10) || 0) : 0;
-                    const origB = priceElB ? (parseInt(priceElB.dataset.originalPrice, 10) || 0) : 0;
-                    
-                    const promoA = parseInt(statusSettings[nameA]?.promoPrice, 10) || 0;
-                    const promoB = parseInt(statusSettings[nameB]?.promoPrice, 10) || 0;
-                    
-                    const isDelistedA = statusSettings[nameA] && statusSettings[nameA].status === 'delisted';
-                    const isDelistedB = statusSettings[nameB] && statusSettings[nameB].status === 'delisted';
-                    const stockA = inventory[nameA] !== undefined ? inventory[nameA] : 100;
-                    const stockB = inventory[nameB] !== undefined ? inventory[nameB] : 100;
-                    const isSoldOutA = stockA <= 0;
-                    const isSoldOutB = stockB <= 0;
-                    
-                    // 只有未下架且未售罄的促銷特價才是「有效特價」
-                    const isSaleActiveA = (promoA && promoA < origA && !isDelistedA && !isSoldOutA) ? 1 : 0;
-                    const isSaleActiveB = (promoB && promoB < origB && !isDelistedB && !isSoldOutB) ? 1 : 0;
-                    
-                    if (isSaleActiveA !== isSaleActiveB) {
-                        return isSaleActiveB - isSaleActiveA; // 特價商品排前面
-                    }
-                    
-                    // 如果兩者特價狀態相同，則再判斷是否可售 (未下架且未售罄的排在前面)
-                    const isAvailableA = (!isDelistedA && !isSoldOutA) ? 1 : 0;
-                    const isAvailableB = (!isDelistedB && !isSoldOutB) ? 1 : 0;
-                    if (isAvailableA !== isAvailableB) {
-                        return isAvailableB - isAvailableA;
-                    }
-                    
-                    // 最後保持原有順序
-                    return parseInt(a.dataset.originalIndex, 10) - parseInt(b.dataset.originalIndex, 10);
-                });
-                
-                // 重新放入 DOM
-                items.forEach(item => grid.appendChild(item));
-            });
-        }
-        
-        // Execute on load
-        updateCartBadge();
-        updateProductStatus();
-
-        const searchInput = document.getElementById('searchInput');
-        if(searchInput) {
-            searchInput.addEventListener('input', function() {
-                const keyword = this.value.trim().toLowerCase();
-                const menuItems = document.querySelectorAll('.menu-item');
-                const noResultMsg = document.getElementById('no-result-msg');
-                let hasResult = false;
-                
-                if (keyword.length > 0) {
-                    const firstMenuSection = document.querySelector('.menu-section');
-                    const offsetPosition = firstMenuSection.getBoundingClientRect().top + window.pageYOffset - 80;
-                    if(Math.abs(window.pageYOffset - offsetPosition) > 200) { window.scrollTo({ top: offsetPosition, behavior: "smooth" }); }
-                }
-
-                menuItems.forEach(item => {
-                    if (item.querySelector('.menu-item-name').innerText.toLowerCase().includes(keyword)) {
-                        item.style.display = 'flex'; hasResult = true;
-                    } else { item.style.display = 'none'; }
-                });
-
-                noResultMsg.style.display = (keyword.length > 0 && !hasResult) ? 'block' : 'none';
-            });
-        }
-
-        const navbarToggle = document.getElementById('navbarToggle');
-        const navbarMenu = document.getElementById('navbarMenu');
-        navbarToggle.addEventListener('click', () => { navbarMenu.classList.toggle('active'); });
-
-        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, observerOptions);
-        document.querySelectorAll('.menu-item').forEach((card, index) => setTimeout(() => observer.observe(card), index * 50));
-        
-        document.documentElement.style.scrollBehavior = 'smooth';
-    </script>
-</body>
-</html>
+</body></html>
